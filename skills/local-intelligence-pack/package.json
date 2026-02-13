@@ -1,0 +1,30 @@
+{
+  "name": "local-intelligence-pack",
+  "version": "1.0.0",
+  "description": "A skill pack for OpenClaw providing local intelligence capabilities like place search and file system access.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "keywords": [
+    "openclaw",
+    "ai",
+    "skill",
+    "local",
+    "intelligence"
+  ],
+  "author": "Gemini CLI",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-location": "^3.0.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.11.7",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  }
+}
