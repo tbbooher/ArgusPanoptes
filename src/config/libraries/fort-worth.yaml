@@ -1,0 +1,28 @@
+id: fort-worth
+name: Fort Worth Library
+vendor: polaris
+region: Tarrant County
+catalogUrl: https://fwpl.polarislibrary.com/Polaris/
+enabled: true
+
+branches:
+  - id: "fort-worth:central"
+    name: Central Library
+    code: central
+    city: Fort Worth
+  - id: "fort-worth:east-berry"
+    name: East Berry Branch
+    code: east-berry
+    city: Fort Worth
+  - id: "fort-worth:southwest-regional"
+    name: Southwest Regional Library
+    code: southwest-regional
+    city: Fort Worth
+
+adapters:
+  - protocol: polaris_papi
+    baseUrl: https://fwpl.polarislibrary.com
+    timeoutMs: 10000
+    maxConcurrency: 2
+    clientKeyEnvVar: POLARIS_FORT_WORTH_KEY
+    clientSecretEnvVar: POLARIS_FORT_WORTH_SECRET

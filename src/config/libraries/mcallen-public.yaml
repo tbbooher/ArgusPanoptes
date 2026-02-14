@@ -1,0 +1,22 @@
+id: mcallen-public
+name: McAllen Public Library
+vendor: tlc
+region: Hidalgo County
+catalogUrl: https://mpl.tlcdelivers.com/
+enabled: true
+
+branches:
+  - id: "mcallen-public:main"
+    name: Main Library
+    code: main
+    city: McAllen
+  - id: "mcallen-public:palm-view"
+    name: Palm View Branch Library
+    code: palm-view
+    city: McAllen
+
+adapters:
+  - protocol: web_scrape
+    baseUrl: https://mpl.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2

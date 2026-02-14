@@ -1,0 +1,26 @@
+id: san-antonio-public
+name: San Antonio Public Library
+vendor: bibliocommons
+region: Bexar County
+catalogUrl: https://sanantonio.bibliocommons.com/
+enabled: true
+
+branches:
+  - id: "san-antonio-public:central"
+    name: Central Library
+    code: central
+    city: San Antonio
+  - id: "san-antonio-public:brook-hollow"
+    name: Brook Hollow Branch Library
+    code: brook-hollow
+    city: San Antonio
+  - id: "san-antonio-public:landa"
+    name: Landa Branch Library
+    code: landa
+    city: San Antonio
+
+adapters:
+  - protocol: bibliocommons_scrape
+    baseUrl: https://sanantonio.bibliocommons.com
+    timeoutMs: 10000
+    maxConcurrency: 2

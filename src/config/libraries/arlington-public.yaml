@@ -1,0 +1,28 @@
+id: arlington-public
+name: Arlington Public Library
+vendor: polaris
+region: Tarrant County
+catalogUrl: http://polarisweb.arlingtonlibrary.org/polaris/
+enabled: true
+
+branches:
+  - id: "arlington-public:george-w-hawkes"
+    name: George W. Hawkes Downtown Library
+    code: george-w-hawkes
+    city: Arlington
+  - id: "arlington-public:east"
+    name: East Branch Library
+    code: east
+    city: Arlington
+  - id: "arlington-public:southeast"
+    name: Southeast Branch Library
+    code: southeast
+    city: Arlington
+
+adapters:
+  - protocol: polaris_papi
+    baseUrl: http://polarisweb.arlingtonlibrary.org
+    timeoutMs: 10000
+    maxConcurrency: 2
+    clientKeyEnvVar: POLARIS_ARLINGTON_KEY
+    clientSecretEnvVar: POLARIS_ARLINGTON_SECRET

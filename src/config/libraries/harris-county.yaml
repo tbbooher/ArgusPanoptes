@@ -1,0 +1,30 @@
+id: harris-county
+name: Harris County Public Library
+vendor: sirsi_dynix
+region: Harris County
+catalogUrl: https://hcpl2.ent.sirsi.net/client/en_US/default/
+enabled: true
+
+branches:
+  - id: "harris-county:barbara-bush"
+    name: Barbara Bush Branch Library
+    code: barbara-bush
+    city: Spring
+  - id: "harris-county:baldwin-boettcher"
+    name: Baldwin Boettcher Branch Library
+    code: baldwin-boettcher
+    city: Humble
+  - id: "harris-county:cy-fair"
+    name: Cy-Fair Branch Library
+    code: cy-fair
+    city: Cypress
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://hcpl2.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2
+  - protocol: bibliocommons_scrape
+    baseUrl: https://hcpl.bibliocommons.com
+    timeoutMs: 10000
+    maxConcurrency: 2

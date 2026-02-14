@@ -1,0 +1,26 @@
+id: el-paso-public
+name: El Paso Public Library
+vendor: sirsi_dynix
+region: El Paso County
+catalogUrl: https://elpasopl.ent.sirsi.net/client/en_US/default/
+enabled: true
+
+branches:
+  - id: "el-paso-public:main"
+    name: Main Library
+    code: main
+    city: El Paso
+  - id: "el-paso-public:armijo"
+    name: Armijo Branch Library
+    code: armijo
+    city: El Paso
+  - id: "el-paso-public:dorpool"
+    name: Dorpool Branch Library
+    code: dorpool
+    city: El Paso
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://elpasopl.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,26 @@
+id: houston-public
+name: Houston Public Library
+vendor: sirsi_dynix
+region: Harris County
+catalogUrl: https://halan.sdp.sirsi.net/client/en_US/hou/
+enabled: true
+
+branches:
+  - id: "houston-public:central"
+    name: Central Library
+    code: central
+    city: Houston
+  - id: "houston-public:bracewell"
+    name: Bracewell Neighborhood Library
+    code: bracewell
+    city: Houston
+  - id: "houston-public:heights"
+    name: Heights Neighborhood Library
+    code: heights
+    city: Houston
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://halan.sdp.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,26 @@
+id: plano-public
+name: Plano Public Library
+vendor: sirsi_dynix
+region: Collin County
+catalogUrl: https://plano.ent.sirsi.net/client/en_US/default/
+enabled: true
+
+branches:
+  - id: "plano-public:haggard"
+    name: Haggard Library
+    code: haggard
+    city: Plano
+  - id: "plano-public:davis"
+    name: Davis Library
+    code: davis
+    city: Plano
+  - id: "plano-public:parr"
+    name: Parr Library
+    code: parr
+    city: Plano
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://plano.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

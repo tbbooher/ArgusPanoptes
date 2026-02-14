@@ -1,0 +1,22 @@
+id: laredo-public
+name: Laredo Public Library
+vendor: sirsi_dynix
+region: Webb County
+catalogUrl: https://lar.ent.sirsi.net/client/en_US/default/
+enabled: true
+
+branches:
+  - id: "laredo-public:main"
+    name: Main Library
+    code: main
+    city: Laredo
+  - id: "laredo-public:bruni"
+    name: Bruni Branch Library
+    code: bruni
+    city: Laredo
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://lar.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

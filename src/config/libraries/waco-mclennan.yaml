@@ -1,0 +1,22 @@
+id: waco-mclennan
+name: Waco-McLennan County Library
+vendor: tlc
+region: McLennan County
+catalogUrl: https://waco.tlcdelivers.com/
+enabled: true
+
+branches:
+  - id: "waco-mclennan:central"
+    name: Central Library
+    code: central
+    city: Waco
+  - id: "waco-mclennan:south-waco"
+    name: South Waco Branch Library
+    code: south-waco
+    city: Waco
+
+adapters:
+  - protocol: web_scrape
+    baseUrl: https://waco.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2
