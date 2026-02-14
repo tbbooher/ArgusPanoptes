@@ -1,0 +1,28 @@
+id: fort-bend-county
+name: Fort Bend County Libraries
+vendor: polaris
+region: Fort Bend County
+catalogUrl: https://catalog.fortbendlibraries.gov/polaris/
+enabled: true
+
+branches:
+  - id: "fort-bend-county:george-memorial"
+    name: George Memorial Library
+    code: george-memorial
+    city: Richmond
+  - id: "fort-bend-county:sugar-land"
+    name: Sugar Land Branch Library
+    code: sugar-land
+    city: Sugar Land
+  - id: "fort-bend-county:missouri-city"
+    name: Missouri City Branch Library
+    code: missouri-city
+    city: Missouri City
+
+adapters:
+  - protocol: polaris_papi
+    baseUrl: https://catalog.fortbendlibraries.gov
+    timeoutMs: 10000
+    maxConcurrency: 2
+    clientKeyEnvVar: POLARIS_FORT_BEND_KEY
+    clientSecretEnvVar: POLARIS_FORT_BEND_SECRET

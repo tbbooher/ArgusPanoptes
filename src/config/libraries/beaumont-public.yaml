@@ -1,0 +1,22 @@
+id: beaumont-public
+name: Beaumont Public Library
+vendor: sirsi_dynix
+region: Jefferson County
+catalogUrl: https://beaupl.ent.sirsi.net/client/en_US/default/
+enabled: true
+
+branches:
+  - id: "beaumont-public:theodore-johns"
+    name: Theodore Johns Library
+    code: theodore-johns
+    city: Beaumont
+  - id: "beaumont-public:tyrrell-historical"
+    name: Tyrrell Historical Library
+    code: tyrrell-historical
+    city: Beaumont
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://beaupl.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

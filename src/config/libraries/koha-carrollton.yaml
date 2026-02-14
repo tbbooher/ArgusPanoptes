@@ -1,0 +1,22 @@
+id: koha-carrollton
+name: Carrollton Public Library
+vendor: koha
+region: Dallas County
+catalogUrl: https://koha.carrolltontx.gov/
+enabled: true
+
+branches:
+  - id: "koha-carrollton:josey-ranch-lake"
+    name: Josey Ranch Lake Library
+    code: josey-ranch-lake
+    city: Carrollton
+  - id: "koha-carrollton:hebron-josey"
+    name: Hebron & Josey Branch Library
+    code: hebron-josey
+    city: Carrollton
+
+adapters:
+  - protocol: koha_sru
+    baseUrl: https://koha.carrolltontx.gov/cgi-bin/koha/svc/sru
+    timeoutMs: 10000
+    maxConcurrency: 2

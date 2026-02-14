@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "lib": ["ES2022"],
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "isolatedModules": true,
+    "paths": {
+      "@core/*": ["./src/core/*"],
+      "@adapters/*": ["./src/adapters/*"],
+      "@config/*": ["./src/config/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@orchestrator/*": ["./src/orchestrator/*"],
+      "@cache/*": ["./src/cache/*"],
+      "@api/*": ["./src/api/*"],
+      "@logging/*": ["./src/logging/*"],
+      "@metrics/*": ["./src/metrics/*"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "test"]
+}

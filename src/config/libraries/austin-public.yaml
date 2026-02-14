@@ -1,0 +1,26 @@
+id: austin-public
+name: Austin Public Library
+vendor: bibliocommons
+region: Travis County
+catalogUrl: https://austin.bibliocommons.com/
+enabled: true
+
+branches:
+  - id: "austin-public:central"
+    name: Central Library
+    code: central
+    city: Austin
+  - id: "austin-public:manchaca-road"
+    name: Manchaca Road Branch
+    code: manchaca-road
+    city: Austin
+  - id: "austin-public:north-village"
+    name: North Village Branch
+    code: north-village
+    city: Austin
+
+adapters:
+  - protocol: bibliocommons_scrape
+    baseUrl: https://austin.bibliocommons.com
+    timeoutMs: 10000
+    maxConcurrency: 2

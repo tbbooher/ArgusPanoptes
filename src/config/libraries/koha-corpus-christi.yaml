@@ -1,0 +1,22 @@
+id: koha-corpus-christi
+name: Corpus Christi Public Library
+vendor: koha
+region: Nueces County
+catalogUrl: https://koha.cctexas.com/
+enabled: true
+
+branches:
+  - id: "koha-corpus-christi:la-retama"
+    name: La Retama Central Library
+    code: la-retama
+    city: Corpus Christi
+  - id: "koha-corpus-christi:janet-f-harte"
+    name: Janet F. Harte Branch
+    code: janet-f-harte
+    city: Corpus Christi
+
+adapters:
+  - protocol: koha_sru
+    baseUrl: https://koha.cctexas.com/cgi-bin/koha/svc/sru
+    timeoutMs: 10000
+    maxConcurrency: 2

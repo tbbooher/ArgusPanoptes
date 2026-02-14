@@ -1,0 +1,18 @@
+id: koha-cedar-park
+name: Cedar Park Public Library
+vendor: koha
+region: Williamson County
+catalogUrl: https://library.cedarparktexas.gov/
+enabled: true
+
+branches:
+  - id: "koha-cedar-park:main"
+    name: Cedar Park Public Library
+    code: main
+    city: Cedar Park
+
+adapters:
+  - protocol: koha_sru
+    baseUrl: https://koha.cedarparktexas.gov/cgi-bin/koha/svc/sru
+    timeoutMs: 10000
+    maxConcurrency: 2
