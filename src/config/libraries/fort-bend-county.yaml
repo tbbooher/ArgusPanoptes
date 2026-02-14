@@ -3,7 +3,7 @@ name: Fort Bend County Libraries
 vendor: polaris
 region: Fort Bend County
 catalogUrl: https://catalog.fortbendlibraries.gov/polaris/
-enabled: true
+enabled: false
 
 branches:
   - id: "fort-bend-county:george-memorial"

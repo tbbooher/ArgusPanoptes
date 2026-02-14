@@ -3,7 +3,7 @@ name: McAllen Public Library
 vendor: tlc
 region: Hidalgo County
 catalogUrl: https://mpl.tlcdelivers.com/
-enabled: true
+enabled: false
 
 branches:
   - id: "mcallen-public:main"

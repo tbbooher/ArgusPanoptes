@@ -3,7 +3,7 @@ name: Arlington Public Library
 vendor: polaris
 region: Tarrant County
 catalogUrl: http://polarisweb.arlingtonlibrary.org/polaris/
-enabled: true
+enabled: false
 
 branches:
   - id: "arlington-public:george-w-hawkes"

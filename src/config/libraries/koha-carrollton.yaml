@@ -17,6 +17,6 @@ branches:
 
 adapters:
   - protocol: koha_sru
-    baseUrl: https://koha.carrolltontx.gov/cgi-bin/koha/svc/sru
+    baseUrl: https://koha.carrolltontx.gov
     timeoutMs: 10000
     maxConcurrency: 2

@@ -1,12 +1,15 @@
 // ---------------------------------------------------------------------------
-// Bun/OpenClaw entry point (export `fetch` + `port`).
+// Node.js HTTP server entrypoint (for deployment).
 // ---------------------------------------------------------------------------
 
+import { serve } from "@hono/node-server";
 import { buildApp } from "./app.js";
 
+const port = Number(process.env["PORT"] ?? 3000);
 const app = await buildApp();
 
-export default {
-  port: Number(process.env["PORT"] ?? 3000),
+serve({
   fetch: app.fetch,
-};
+  port,
+});
+

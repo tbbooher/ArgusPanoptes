@@ -17,6 +17,6 @@ branches:
 
 adapters:
   - protocol: koha_sru
-    baseUrl: https://koha.cctexas.com/cgi-bin/koha/svc/sru
+    baseUrl: https://koha.cctexas.com
     timeoutMs: 10000
     maxConcurrency: 2

@@ -8,6 +8,10 @@ import { parseISBN } from "../../domain/isbn/isbn.js";
 import { ISBNValidationError } from "../../core/errors.js";
 import type { SearchCoordinator } from "../../orchestrator/search-coordinator.js";
 import type pino from "pino";
+import { resolveISBN13sFromTitle } from "../../domain/metadata/openlibrary.js";
+import { ResultAggregator } from "../../orchestrator/result-aggregator.js";
+import { resolveISBN13sFromGoogleBooks } from "../../domain/metadata/googlebooks.js";
+import type { ISBN13 } from "../../core/types.js";
 
 /** Dependencies required by search routes. */
 export interface SearchRouteDeps {
@@ -24,6 +28,7 @@ export interface SearchRouteDeps {
  */
 export function searchRoutes(deps: SearchRouteDeps): Hono {
   const app = new Hono();
+  const aggregator = new ResultAggregator();
 
   /**
    * In-memory store for async search results.
@@ -81,6 +86,166 @@ export function searchRoutes(deps: SearchRouteDeps): Hono {
     );
 
     return c.json(result);
+  });
+
+  // ── GET /search/title?title=&author= ────────────────────────────────
+
+  app.get("/title", async (c) => {
+    const title = (c.req.query("title") ?? "").trim();
+    const author = (c.req.query("author") ?? "").trim() || undefined;
+    const maxIsbnsToSearchRaw = (c.req.query("maxIsbns") ?? "").trim();
+    const maxIsbnsToSearch = Math.max(
+      1,
+      Math.min(25, Number.parseInt(maxIsbnsToSearchRaw || "10", 10) || 10),
+    );
+
+    if (!title) {
+      return c.json(
+        { error: "Missing required query parameter: title", type: "validation_error" },
+        400,
+      );
+    }
+
+    const searchId = crypto.randomUUID();
+    const startedAt = new Date().toISOString();
+
+    // 1. Resolve candidate ISBNs from title/author
+    const resolveErrors: string[] = [];
+
+    let googleResolved: Awaited<
+      ReturnType<typeof resolveISBN13sFromGoogleBooks>
+    > | null = null;
+    try {
+      googleResolved = await resolveISBN13sFromGoogleBooks({
+        title,
+        author,
+        maxResults: 20,
+        maxIsbns: 25,
+        timeoutMs: 8000,
+      });
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e);
+      resolveErrors.push(`googlebooks: ${msg}`);
+      deps.logger.warn({ title, author, err: msg }, "googlebooks resolve failed");
+    }
+
+    let openLibraryResolved: Awaited<
+      ReturnType<typeof resolveISBN13sFromTitle>
+    > | null = null;
+    try {
+      openLibraryResolved = await resolveISBN13sFromTitle({
+        title,
+        author,
+        limitDocs: 10,
+        maxWorks: 5,
+        limitEditionsPerWork: 20,
+        maxIsbns: 25,
+        timeoutMs: 8000,
+      });
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e);
+      resolveErrors.push(`openlibrary: ${msg}`);
+      deps.logger.warn({ title, author, err: msg }, "openlibrary resolve failed");
+    }
+
+    const allIsbn13s = Array.from(
+      new Set<ISBN13>([
+        ...(googleResolved?.isbn13s ?? []),
+        ...(openLibraryResolved?.isbn13s ?? []),
+      ]),
+    );
+
+    const isbn13s = allIsbn13s.slice(0, maxIsbnsToSearch);
+
+    const candidates = {
+      isbn13sAll: allIsbn13s,
+      isbn13sSearched: isbn13s,
+      sources: {
+        googlebooks: googleResolved ? googleResolved.isbn13s.length : 0,
+        openlibrary: openLibraryResolved ? openLibraryResolved.isbn13s.length : 0,
+      },
+      resolveErrors,
+      skippedPreview: [
+        ...((googleResolved?.skipped as unknown[]) ?? []),
+        ...((openLibraryResolved?.skipped as unknown[]) ?? []),
+      ].slice(0, 10),
+    };
+
+    if (isbn13s.length === 0 && resolveErrors.length) {
+      return c.json(
+        { error: `Failed to resolve ISBNs for title search: ${resolveErrors.join("; ")}`, type: "upstream_error" },
+        502,
+      );
+    }
+
+    if (isbn13s.length === 0) {
+      const completedAt = new Date().toISOString();
+      return c.json({
+        searchId,
+        query: { title, author },
+        candidates,
+        startedAt,
+        completedAt,
+        searches: [],
+        holdings: [],
+        errors: [],
+        isPartial: false,
+      });
+    }
+
+    // 2. Search each ISBN (capped) and merge results.
+    const searches: Array<{
+      isbn13: string;
+      systemsSearched: number;
+      systemsSucceeded: number;
+      systemsFailed: number;
+      systemsTimedOut: number;
+      holdingsCount: number;
+      errorsCount: number;
+      isPartial: boolean;
+      fromCache: boolean;
+    }> = [];
+
+    const mergedHoldings: SearchResult["holdings"] = [];
+    const mergedErrors: Array<SearchResult["errors"][number] & { isbn13: string }> = [];
+    let anyPartial = false;
+
+    // Keep this conservative: each ISBN search fans out across systems.
+    for (const isbn13 of isbn13s) {
+      const r = await deps.searchCoordinator.search(isbn13, `${searchId}:${isbn13}`);
+
+      searches.push({
+        isbn13,
+        systemsSearched: r.systemsSearched,
+        systemsSucceeded: r.systemsSucceeded,
+        systemsFailed: r.systemsFailed,
+        systemsTimedOut: r.systemsTimedOut,
+        holdingsCount: r.holdings.length,
+        errorsCount: r.errors.length,
+        isPartial: r.isPartial,
+        fromCache: r.fromCache,
+      });
+
+      mergedHoldings.push(...r.holdings);
+      for (const e of r.errors) mergedErrors.push({ ...e, isbn13 });
+      anyPartial = anyPartial || r.isPartial;
+    }
+
+    // 3. Deduplicate merged holdings across ISBNs.
+    const aggregated = aggregator.aggregate(isbn13s[0], mergedHoldings);
+
+    const completedAt = new Date().toISOString();
+    return c.json({
+      searchId,
+      query: { title, author },
+      candidates,
+      startedAt,
+      completedAt,
+      searches,
+      holdings: aggregated.holdings,
+      errors: mergedErrors,
+      isPartial: anyPartial,
+    });
   });
 
   // ── POST /search ─────────────────────────────────────────────────────

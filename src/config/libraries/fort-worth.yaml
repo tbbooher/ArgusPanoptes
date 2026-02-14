@@ -3,7 +3,7 @@ name: Fort Worth Library
 vendor: polaris
 region: Tarrant County
 catalogUrl: https://fwpl.polarislibrary.com/Polaris/
-enabled: true
+enabled: false
 
 branches:
   - id: "fort-worth:central"

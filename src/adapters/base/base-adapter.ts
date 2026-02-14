@@ -190,6 +190,7 @@ export abstract class BaseAdapter implements LibraryCatalogAdapter {
     // Available
     if (
       lower === "available" ||
+      lower === "checked in" ||
       lower === "in" ||
       lower === "in library" ||
       lower === "on shelf" ||
@@ -215,7 +216,8 @@ export abstract class BaseAdapter implements LibraryCatalogAdapter {
     if (
       lower === "in transit" ||
       lower === "transit" ||
-      lower === "in-transit"
+      lower === "in-transit" ||
+      lower.startsWith("in transit ")
     ) {
       return "in_transit";
     }
@@ -225,7 +227,8 @@ export abstract class BaseAdapter implements LibraryCatalogAdapter {
       lower === "on hold" ||
       lower === "hold" ||
       lower === "on holdshelf" ||
-      lower === "hold shelf"
+      lower === "hold shelf" ||
+      lower.startsWith("on hold ")
     ) {
       return "on_hold";
     }
