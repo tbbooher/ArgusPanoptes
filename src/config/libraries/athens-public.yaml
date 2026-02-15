@@ -3,7 +3,7 @@ name: Clyde Wells Memorial Library
 vendor: koha
 region: Henderson County
 catalogUrl: https://athens.aspendiscovery.org/
-enabled: false  # Aspen Discovery front-end blocked by Cloudflare WAF
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch
 
 branches:
   - id: "athens-public:main"
@@ -12,7 +12,7 @@ branches:
     city: Athens
 
 adapters:
-  - protocol: aspen_discovery_api
+  - protocol: playwright_scrape
     baseUrl: https://athens.aspendiscovery.org
-    timeoutMs: 15000
-    maxConcurrency: 2
+    timeoutMs: 30000
+    maxConcurrency: 1

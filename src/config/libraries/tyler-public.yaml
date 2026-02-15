@@ -3,7 +3,7 @@ name: Tyler Public Library
 vendor: innovative
 region: Smith County
 catalogUrl: https://tyler.aspendiscovery.org/
-enabled: false  # Aspen Discovery front-end blocked by Cloudflare WAF
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch
 
 branches:
   - id: "tyler-public:main"
@@ -12,7 +12,7 @@ branches:
     city: Tyler
 
 adapters:
-  - protocol: aspen_discovery_api
+  - protocol: playwright_scrape
     baseUrl: https://tyler.aspendiscovery.org
-    timeoutMs: 15000
-    maxConcurrency: 2
+    timeoutMs: 30000
+    maxConcurrency: 1

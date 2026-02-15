@@ -1,0 +1,18 @@
+id: desoto-public
+name: DeSoto Public Library
+vendor: koha
+region: Dallas County
+catalogUrl: https://desototx.bywatersolutions.com
+enabled: false  # Koha-only (no Aspen Discovery); ByWater Cloudflare WAF blocks server access (Best Southwest consortium)
+
+branches:
+  - id: "desoto-public:main"
+    name: DeSoto Public Library
+    code: main
+    city: DeSoto
+
+adapters:
+  - protocol: koha_sru
+    baseUrl: https://desototx.bywatersolutions.com
+    timeoutMs: 15000
+    maxConcurrency: 2

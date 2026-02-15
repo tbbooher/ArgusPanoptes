@@ -1,0 +1,18 @@
+id: watauga-public
+name: Watauga Public Library
+vendor: aspen_discovery
+region: Tarrant County
+catalogUrl: https://catalog.wataugatx.org
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch (MetroShare consortium)
+
+branches:
+  - id: "watauga-public:main"
+    name: Watauga Public Library
+    code: main
+    city: Watauga
+
+adapters:
+  - protocol: playwright_scrape
+    baseUrl: https://catalog.wataugatx.org
+    timeoutMs: 30000
+    maxConcurrency: 1

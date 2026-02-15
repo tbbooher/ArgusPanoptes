@@ -39,6 +39,8 @@ import { AspenDiscoveryAdapter } from "./adapters/aspen/aspen-discovery-adapter.
 import { AtriumScrapeAdapter } from "./adapters/atriuum/atriuum-scrape-adapter.js";
 import { SpydusScrapeAdapter } from "./adapters/spydus/spydus-scrape-adapter.js";
 import { TlcApiAdapter } from "./adapters/tlc/tlc-api-adapter.js";
+import { PlaywrightAdapter } from "./adapters/playwright/playwright-adapter.js";
+import { BrowserPool } from "./adapters/playwright/browser-pool.js";
 
 // ── Config ─────────────────────────────────────────────────────────────────
 
@@ -145,6 +147,9 @@ function createAdapterForConfig(
     case AdapterProtocol.TLC_API:
       return new TlcApiAdapter(system, adapterConfig, logger);
 
+    case AdapterProtocol.PLAYWRIGHT_SCRAPE:
+      return new PlaywrightAdapter(system, adapterConfig, logger);
+
     case AdapterProtocol.WEB_SCRAPE:
       return new WebScraperAdapter(system, adapterConfig, logger);
 
@@ -237,7 +242,14 @@ export async function buildApp(): Promise<Hono> {
     rateLimitConfig: config.rateLimit,
   });
 
-  // 8. Log startup summary
+  // 8. Graceful shutdown: close Playwright browser pool on process exit
+  const shutdownBrowser = async () => {
+    await BrowserPool.getInstance().shutdown();
+  };
+  process.on("SIGTERM", shutdownBrowser);
+  process.on("SIGINT", shutdownBrowser);
+
+  // 9. Log startup summary
   logger.info(
     {
       port: config.port,

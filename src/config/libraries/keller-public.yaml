@@ -1,0 +1,18 @@
+id: keller-public
+name: Keller Public Library
+vendor: aspen_discovery
+region: Tarrant County
+catalogUrl: https://librarycatalog.cityofkeller.com
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch (MetroShare consortium)
+
+branches:
+  - id: "keller-public:main"
+    name: Keller Public Library
+    code: main
+    city: Keller
+
+adapters:
+  - protocol: playwright_scrape
+    baseUrl: https://librarycatalog.cityofkeller.com
+    timeoutMs: 30000
+    maxConcurrency: 1

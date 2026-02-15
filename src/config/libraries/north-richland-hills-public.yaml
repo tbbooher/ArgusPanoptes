@@ -3,7 +3,7 @@ name: North Richland Hills Public Library
 vendor: koha
 region: Tarrant County
 catalogUrl: https://nrhtx.bywatersolutions.com/
-enabled: false  # Koha/ByWater blocked by Cloudflare WAF
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch
 
 branches:
   - id: "north-richland-hills-public:main"
@@ -12,7 +12,7 @@ branches:
     city: North Richland Hills
 
 adapters:
-  - protocol: aspen_discovery_api
+  - protocol: playwright_scrape
     baseUrl: https://nrhtx.bywatersolutions.com
-    timeoutMs: 15000
-    maxConcurrency: 2
+    timeoutMs: 30000
+    maxConcurrency: 1

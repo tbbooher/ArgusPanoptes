@@ -1,0 +1,18 @@
+id: hurst-public
+name: Hurst Public Library
+vendor: sirsi_dynix
+region: Tarrant County
+catalogUrl: https://hrst.ent.sirsi.net/client/en_US/default
+enabled: true
+
+branches:
+  - id: "hurst-public:main"
+    name: Hurst Public Library
+    code: main
+    city: Hurst
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://hrst.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

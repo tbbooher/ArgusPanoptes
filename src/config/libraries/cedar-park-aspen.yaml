@@ -3,9 +3,7 @@ name: Cedar Park Public Library (Aspen Discovery)
 vendor: aspen_discovery
 region: Williamson County
 catalogUrl: https://cedarparktx.aspendiscovery.org
-# Disabled: needs IP whitelisting from the library for API access.
-# Cedar Park also has a Koha SRU adapter (koha-cedar-park.yaml).
-enabled: false
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch
 
 branches:
   - id: "cedar-park-aspen:main"
@@ -14,7 +12,7 @@ branches:
     city: Cedar Park
 
 adapters:
-  - protocol: aspen_discovery_api
+  - protocol: playwright_scrape
     baseUrl: https://cedarparktx.aspendiscovery.org
-    timeoutMs: 10000
-    maxConcurrency: 2
+    timeoutMs: 30000
+    maxConcurrency: 1

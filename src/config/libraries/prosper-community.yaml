@@ -1,0 +1,18 @@
+id: prosper-community
+name: Prosper Community Library
+vendor: aspen_discovery
+region: Collin County
+catalogUrl: https://catalog.prospertx.gov
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch
+
+branches:
+  - id: "prosper-community:main"
+    name: Prosper Community Library
+    code: main
+    city: Prosper
+
+adapters:
+  - protocol: playwright_scrape
+    baseUrl: https://catalog.prospertx.gov
+    timeoutMs: 30000
+    maxConcurrency: 1

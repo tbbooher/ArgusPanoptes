@@ -1,0 +1,18 @@
+id: grapevine-public
+name: Grapevine Public Library
+vendor: aspen_discovery
+region: Tarrant County
+catalogUrl: https://grapevine.aspendiscovery.org
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch
+
+branches:
+  - id: "grapevine-public:main"
+    name: Grapevine Public Library
+    code: main
+    city: Grapevine
+
+adapters:
+  - protocol: playwright_scrape
+    baseUrl: https://grapevine.aspendiscovery.org
+    timeoutMs: 30000
+    maxConcurrency: 1

@@ -1,0 +1,18 @@
+id: little-elm-public
+name: Little Elm Public Library
+vendor: koha
+region: Denton County
+catalogUrl: https://littleelm.bywatersolutions.com
+enabled: false  # Koha-only (no Aspen Discovery); ByWater Cloudflare WAF blocks server access
+
+branches:
+  - id: "little-elm-public:main"
+    name: Little Elm Public Library
+    code: main
+    city: Little Elm
+
+adapters:
+  - protocol: koha_sru
+    baseUrl: https://littleelm.bywatersolutions.com
+    timeoutMs: 15000
+    maxConcurrency: 2

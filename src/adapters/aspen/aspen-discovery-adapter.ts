@@ -20,56 +20,14 @@ import type {
 } from "../../core/types.js";
 import { AdapterConnectionError, AdapterParseError } from "../../core/errors.js";
 import { BaseAdapter } from "../base/base-adapter.js";
-
-/** Shape of a record returned by SearchAPI. */
-interface AspenSearchRecord {
-  id: string;
-  title_display?: string;
-  title?: string;
-  author_display?: string;
-  author?: string;
-  isbn?: string[];
-  format?: string[];
-}
-
-/** Shape of SearchAPI JSON response. */
-interface AspenSearchResponse {
-  result?: {
-    success?: boolean;
-    totalResults?: number;
-    recordCount?: number;
-    records?: AspenSearchRecord[];
-  };
-  success?: boolean;
-  totalResults?: number;
-  recordCount?: number;
-  records?: AspenSearchRecord[];
-}
-
-/** Shape of a single item from ItemAPI. */
-interface AspenItemRecord {
-  itemId?: string;
-  locationCode?: string;
-  location?: string;
-  locationName?: string;
-  callNumber?: string;
-  shelfLocation?: string;
-  statusFull?: string;
-  status?: string;
-  available?: boolean;
-  dueDate?: string;
-  holdable?: boolean;
-  numHolds?: number;
-  format?: string;
-  collection?: string;
-}
-
-/** Shape of ItemAPI JSON response. */
-interface AspenItemResponse {
-  result?: AspenItemRecord[] | { items?: AspenItemRecord[] };
-  items?: AspenItemRecord[];
-  success?: boolean;
-}
+import {
+  parseSearchRecords,
+  parseItemRecords,
+  type AspenSearchRecord,
+  type AspenSearchResponse,
+  type AspenItemRecord,
+  type AspenItemResponse,
+} from "./aspen-response-parser.js";
 
 export class AspenDiscoveryAdapter extends BaseAdapter {
   private readonly catalogBaseUrl: string;
@@ -171,11 +129,7 @@ export class AspenDiscoveryAdapter extends BaseAdapter {
       );
     }
 
-    // Aspen responses vary: records may be at data.result.records or data.records
-    const records =
-      data?.result?.records ?? data?.records ?? [];
-
-    return records;
+    return parseSearchRecords(data);
   }
 
   private async getItemAvailability(
@@ -200,14 +154,7 @@ export class AspenDiscoveryAdapter extends BaseAdapter {
       }
 
       const data = (await response.json()) as AspenItemResponse;
-
-      // Items may be at data.result (array), data.result.holdings, data.result.items, or data.items
-      if (Array.isArray(data?.result)) return data.result;
-      if (Array.isArray((data?.result as any)?.holdings)) return (data.result as any).holdings;
-      if (Array.isArray((data?.result as any)?.items)) return (data.result as any).items;
-      if (Array.isArray(data?.items)) return data.items;
-
-      return [];
+      return parseItemRecords(data);
     } catch {
       // Non-fatal: fall back to record-level holding
       this.logger.warn({ recordId }, "Failed to fetch item availability");

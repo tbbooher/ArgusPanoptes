@@ -1,0 +1,18 @@
+id: cedar-hill-public
+name: Traphene Hickman Public Library
+vendor: koha
+region: Dallas County
+catalogUrl: https://traphenehickmanlibrary.bywatersolutions.com
+enabled: false  # Koha-only (no Aspen Discovery); ByWater Cloudflare WAF blocks server access (Best Southwest consortium)
+
+branches:
+  - id: "cedar-hill-public:main"
+    name: Traphene Hickman Public Library
+    code: main
+    city: Cedar Hill
+
+adapters:
+  - protocol: koha_sru
+    baseUrl: https://traphenehickmanlibrary.bywatersolutions.com
+    timeoutMs: 15000
+    maxConcurrency: 2

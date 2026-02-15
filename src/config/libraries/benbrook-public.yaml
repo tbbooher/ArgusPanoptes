@@ -1,0 +1,18 @@
+id: benbrook-public
+name: Benbrook Public Library
+vendor: aspen_discovery
+region: Tarrant County
+catalogUrl: https://discover.benbrooklibrary.org
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch (MetroShare consortium)
+
+branches:
+  - id: "benbrook-public:main"
+    name: Benbrook Public Library
+    code: main
+    city: Benbrook
+
+adapters:
+  - protocol: playwright_scrape
+    baseUrl: https://discover.benbrooklibrary.org
+    timeoutMs: 30000
+    maxConcurrency: 1

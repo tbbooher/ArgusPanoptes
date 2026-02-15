@@ -59,6 +59,7 @@ export const AdapterProtocol = {
   APOLLO_API: "apollo_api",
   SPYDUS_SCRAPE: "spydus_scrape",
   TLC_API: "tlc_api",
+  PLAYWRIGHT_SCRAPE: "playwright_scrape",
   WEB_SCRAPE: "web_scrape",
 } as const;
 export type AdapterProtocol =

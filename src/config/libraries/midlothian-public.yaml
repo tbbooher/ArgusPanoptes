@@ -1,0 +1,18 @@
+id: midlothian-public
+name: A.H. Meadows Public Library
+vendor: aspen_discovery
+region: Ellis County
+catalogUrl: https://midlothian.aspendiscovery.org
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch
+
+branches:
+  - id: "midlothian-public:main"
+    name: A.H. Meadows Public Library
+    code: main
+    city: Midlothian
+
+adapters:
+  - protocol: playwright_scrape
+    baseUrl: https://midlothian.aspendiscovery.org
+    timeoutMs: 30000
+    maxConcurrency: 1

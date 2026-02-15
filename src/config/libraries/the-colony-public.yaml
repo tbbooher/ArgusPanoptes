@@ -1,0 +1,18 @@
+id: the-colony-public
+name: The Colony Public Library
+vendor: aspen_discovery
+region: Denton County
+catalogUrl: https://tcpl.aspendiscovery.org
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch
+
+branches:
+  - id: "the-colony-public:main"
+    name: The Colony Public Library
+    code: main
+    city: The Colony
+
+adapters:
+  - protocol: playwright_scrape
+    baseUrl: https://tcpl.aspendiscovery.org
+    timeoutMs: 30000
+    maxConcurrency: 1

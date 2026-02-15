@@ -3,9 +3,7 @@ name: McKinney Public Library
 vendor: aspen_discovery
 region: Collin County
 catalogUrl: https://mckinney.aspendiscovery.org
-# Disabled: Cloudflare is blocking API requests (HTTP 403).
-# May need IP whitelisting from the library.
-enabled: false
+enabled: true  # Cloudflare WAF bypassed via Playwright browser-context fetch
 
 branches:
   - id: "mckinney-public:john-roy"
@@ -18,7 +16,7 @@ branches:
     city: McKinney
 
 adapters:
-  - protocol: aspen_discovery_api
+  - protocol: playwright_scrape
     baseUrl: https://mckinney.aspendiscovery.org
-    timeoutMs: 10000
-    maxConcurrency: 2
+    timeoutMs: 30000
+    maxConcurrency: 1

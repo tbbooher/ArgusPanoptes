@@ -45,6 +45,7 @@ export const AdapterConfigSchema = z.object({
     "atriuum_scrape",
     "spydus_scrape",
     "tlc_api",
+    "playwright_scrape",
     "web_scrape",
   ]),
   baseUrl: z.string().url(),
