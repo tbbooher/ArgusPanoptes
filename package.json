@@ -16,9 +16,15 @@
     "validate:json": "tsx src/scripts/validate-systems.ts --json",
     "playwright:install": "npx playwright install chromium",
     "scan": "tsx src/scripts/catalog-scan/index.ts",
-    "scan:dry": "tsx src/scripts/catalog-scan/index.ts --dry-run"
+    "scan:dry": "tsx src/scripts/catalog-scan/index.ts --dry-run",
+    "report:setup": "bash src/scripts/report/setup.sh",
+    "report:generate": "bash src/scripts/report/generate-report.sh",
+    "categorize": "tsx src/scripts/categorize/index.ts",
+    "categorize:dry": "tsx src/scripts/categorize/index.ts --dry-run",
+    "categorize:review": "tsx src/scripts/categorize/review-report.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.74.0",
     "@hono/node-server": "^1.19.9",
     "@natlibfi/marc-record": "^10.0.0",
     "bottleneck": "^2.19.5",
@@ -28,8 +34,8 @@
     "isbn3": "^1.1.51",
     "lru-cache": "^11.0.0",
     "p-limit": "^6.1.0",
-    "pg": "^8.13.0",
     "p-retry": "^6.2.0",
+    "pg": "^8.13.0",
     "pino": "^9.5.0",
     "playwright-core": "^1.58.2",
     "yaml": "^2.6.0",

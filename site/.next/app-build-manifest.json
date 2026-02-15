@@ -1,0 +1,97 @@
+{
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/chunks/app/_not-found/page-1b252292a0114159.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/css/0243012a88ef0924.css",
+      "static/chunks/619-f072ac750404f9da.js",
+      "static/chunks/909-1113908ee5250e8e.js",
+      "static/chunks/493-98b64a1b4029c367.js",
+      "static/chunks/app/layout-6d89517a40fde7ef.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/chunks/938-93b2f1fb0d4a8a74.js",
+      "static/chunks/765-7e1be3d05da009d9.js",
+      "static/chunks/app/page-885e21cb07ed361a.js"
+    ],
+    "/books/page": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/chunks/619-f072ac750404f9da.js",
+      "static/chunks/909-1113908ee5250e8e.js",
+      "static/chunks/app/books/page-50cd17c374b56cd5.js"
+    ],
+    "/about/page": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/chunks/app/about/page-f3c0864e0509d174.js"
+    ],
+    "/categories/[slug]/page": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/chunks/619-f072ac750404f9da.js",
+      "static/chunks/909-1113908ee5250e8e.js",
+      "static/chunks/app/categories/[slug]/page-84e50f963b0f5f14.js"
+    ],
+    "/libraries/page": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/chunks/619-f072ac750404f9da.js",
+      "static/chunks/909-1113908ee5250e8e.js",
+      "static/chunks/app/libraries/page-7f1e6944dc24f230.js"
+    ],
+    "/map/page": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/chunks/app/map/page-dea7a12262323484.js"
+    ],
+    "/categories/page": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/chunks/619-f072ac750404f9da.js",
+      "static/chunks/938-93b2f1fb0d4a8a74.js",
+      "static/chunks/app/categories/page-ed5d5c51bbb62c06.js"
+    ],
+    "/libraries/[systemId]/page": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/chunks/619-f072ac750404f9da.js",
+      "static/chunks/app/libraries/[systemId]/page-1668c01b95138b85.js"
+    ],
+    "/books/[isbn13]/page": [
+      "static/chunks/webpack-d85714679e3a9643.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-091853b4155593e2.js",
+      "static/chunks/main-app-8b72bc9f1a27cf49.js",
+      "static/chunks/619-f072ac750404f9da.js",
+      "static/chunks/app/books/[isbn13]/page-c4060e4feb283d63.js"
+    ]
+  }
+}

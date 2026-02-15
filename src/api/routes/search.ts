@@ -193,7 +193,17 @@ export function searchRoutes(deps: SearchRouteDeps): Hono {
       });
     }
 
-    // 2. Search each ISBN (capped) and merge results.
+    // 2. Search all ISBNs concurrently — each search already respects
+    //    per-host concurrency limits, so parallelising here is safe and
+    //    dramatically reduces wall-clock time (from N×30 s to ~30 s).
+    const settled = await Promise.allSettled(
+      isbn13s.map((isbn13) =>
+        deps.searchCoordinator
+          .search(isbn13, `${searchId}:${isbn13}`)
+          .then((r) => ({ isbn13, r })),
+      ),
+    );
+
     const searches: Array<{
       isbn13: string;
       systemsSearched: number;
@@ -210,9 +220,13 @@ export function searchRoutes(deps: SearchRouteDeps): Hono {
     const mergedErrors: Array<SearchResult["errors"][number] & { isbn13: string }> = [];
     let anyPartial = false;
 
-    // Keep this conservative: each ISBN search fans out across systems.
-    for (const isbn13 of isbn13s) {
-      const r = await deps.searchCoordinator.search(isbn13, `${searchId}:${isbn13}`);
+    for (const outcome of settled) {
+      if (outcome.status === "rejected") {
+        deps.logger.warn({ searchId, err: String(outcome.reason) }, "isbn search rejected");
+        anyPartial = true;
+        continue;
+      }
+      const { isbn13, r } = outcome.value;
 
       searches.push({
         isbn13,

@@ -1,4 +1,9 @@
-FROM node:22-alpine AS build
+# ═══════════════════════════════════════════════════════════════════════
+# Combined Dockerfile: Hono backend + Next.js report site
+# ═══════════════════════════════════════════════════════════════════════
+
+# ── Stage 1: Build Hono backend ──────────────────────────────────────
+FROM node:22-alpine AS hono-build
 
 WORKDIR /app
 
@@ -8,20 +13,28 @@ RUN npm ci
 COPY tsconfig.json vitest.config.ts ./
 COPY src ./src
 
-# Build TypeScript and copy runtime YAML config next to compiled output.
 RUN npm run build && mkdir -p dist/config && cp -R src/config/* dist/config/
 
+# ── Stage 2: Build Next.js site ─────────────────────────────────────
+FROM node:22-alpine AS site-build
+
+WORKDIR /app
+
+COPY site/package.json site/package-lock.json site/.npmrc ./
+RUN npm ci
+
+COPY site/tsconfig.json site/next.config.mjs site/tailwind.config.ts site/postcss.config.mjs ./
+COPY site/src ./src
+COPY site/public ./public
+
+RUN npm run build
+
+# ── Stage 3: Runtime ─────────────────────────────────────────────────
 FROM node:22-slim AS runtime
 
 ENV NODE_ENV=production
 
-WORKDIR /app
-
-COPY package.json package-lock.json ./
-RUN npm ci --omit=dev && npm cache clean --force
-
-# Install Chromium + deps for Playwright (Cloudflare WAF bypass).
-# Uses Debian packages — playwright-core connects via CHROMIUM_PATH env var.
+# Install Chromium for Playwright (Cloudflare WAF bypass)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
     fonts-liberation \
@@ -35,12 +48,29 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV CHROMIUM_PATH=/usr/bin/chromium
 
-COPY --from=build /app/dist ./dist
+# ── Hono backend ─────────────────────────────────────────────────────
+WORKDIR /app/backend
+
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev && npm cache clean --force
+
+COPY --from=hono-build /app/dist ./dist
+
+# ── Next.js site ─────────────────────────────────────────────────────
+WORKDIR /app/site
+
+COPY --from=site-build /app/.next/standalone ./
+COPY --from=site-build /app/.next/static ./.next/static
+COPY --from=site-build /app/public ./public
+
+# ── Startup script ───────────────────────────────────────────────────
+WORKDIR /app
+
+COPY start.sh ./
+RUN chmod +x start.sh
 
 USER node
 
 EXPOSE 3000
 
-ENV PORT=3000
-
-CMD ["node", "dist/node.js"]
+CMD ["./start.sh"]

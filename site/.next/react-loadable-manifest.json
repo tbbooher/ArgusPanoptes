@@ -1,0 +1,29 @@
+{
+  "app/books/[isbn13]/BookMap.tsx -> @/components/map/MiniMap": {
+    "id": 38269,
+    "files": [
+      "static/css/55693049b062c6a3.css",
+      "static/chunks/d0deef33.a515038d95242dd3.js",
+      "static/chunks/269.fb690e320070fe8e.js"
+    ]
+  },
+  "app/libraries/[systemId]/LibraryMap.tsx -> @/components/map/MiniMap": {
+    "id": 38269,
+    "files": [
+      "static/css/55693049b062c6a3.css",
+      "static/chunks/d0deef33.a515038d95242dd3.js",
+      "static/chunks/269.fb690e320070fe8e.js"
+    ]
+  },
+  "app/map/MapClient.tsx -> @/components/map/FullMap": {
+    "id": 81075,
+    "files": [
+      "static/css/d7df5ee9dfd3b5f3.css",
+      "static/css/55693049b062c6a3.css",
+      "static/chunks/d0deef33.a515038d95242dd3.js",
+      "static/chunks/619-f072ac750404f9da.js",
+      "static/chunks/717.9b89832186db9275.js",
+      "static/chunks/75.34226fa23709b9f9.js"
+    ]
+  }
+}

@@ -5,3 +5,5 @@ dist/
 .env.local
 .DS_Store
 coverage/
+src/scripts/report/output/
+src/scripts/report/.venv/

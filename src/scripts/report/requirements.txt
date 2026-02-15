@@ -1,0 +1,4 @@
+matplotlib>=3.8
+numpy>=1.26
+Jinja2>=3.1
+Shapely>=2.0

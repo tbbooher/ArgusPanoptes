@@ -1,0 +1,89 @@
+% ── Fonts (XeLaTeX) ──────────────────────────────────────────────────────────
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+
+% ── Typography ───────────────────────────────────────────────────────────────
+\usepackage{microtype}
+
+% ── Page geometry ────────────────────────────────────────────────────────────
+\usepackage[
+  letterpaper,
+  top=1in,
+  bottom=1in,
+  inner=1in,
+  outer=1in,
+]{geometry}
+
+% ── Tables ───────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+
+% ── Graphics ─────────────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\graphicspath{{../figures/}}
+
+% ── Colors ───────────────────────────────────────────────────────────────────
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+
+\definecolor{TXBlue}{HTML}{2563EB}
+\definecolor{TXRed}{HTML}{DC2626}
+\definecolor{TXGreen}{HTML}{059669}
+\definecolor{TXPurple}{HTML}{7C3AED}
+\definecolor{BoxBG}{HTML}{F8FAFC}
+\definecolor{BoxBorder}{HTML}{E2E8F0}
+
+% ── Boxes & callouts ────────────────────────────────────────────────────────
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{statbox}[1][]{%
+  enhanced,
+  colback=BoxBG,
+  colframe=BoxBorder,
+  boxrule=0.5pt,
+  arc=3pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  fonttitle=\sffamily\bfseries,
+  #1
+}
+
+\newtcolorbox{profilebox}[1][]{%
+  enhanced,
+  colback=BoxBG,
+  colframe=TXBlue,
+  boxrule=0.5pt,
+  arc=2pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fonttitle=\sffamily\small\bfseries,
+  coltitle=TXBlue,
+  #1
+}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────────────
+\usepackage[
+  colorlinks=true,
+  linkcolor=TXBlue,
+  urlcolor=TXBlue,
+  citecolor=TXBlue,
+  bookmarks=true,
+  bookmarksnumbered=true,
+]{hyperref}
+
+% ── Memoir chapter/page styles ───────────────────────────────────────────────
+\chapterstyle{veelo}
+\pagestyle{ruled}
+\setsecnumdepth{subsection}
+
+% ── Layout ───────────────────────────────────────────────────────────────────
+\usepackage{multicol}
+
+% ── Misc ─────────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=*}
+
+% Compact longtable spacing
+\setlength{\LTpre}{4pt}
+\setlength{\LTpost}{4pt}

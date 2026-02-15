@@ -1,0 +1,57 @@
+\documentclass[11pt,letterpaper,openany,oneside]{memoir}
+
+\input{preamble}
+
+\begin{document}
+
+% ── Title page ───────────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\vspace*{1.5cm}
+\begin{center}
+{\sffamily\Huge\bfseries What's on the Shelves?}\\[0.5em]
+{\sffamily\Large Harmful Books in Texas Public Libraries:\\A Data-Driven Survey of 260 Systems}\\[1em]
+{\sffamily\large\color{gray} {{ report_date }}}
+\end{center}
+\vspace{0.8cm}
+\begin{center}
+\begin{statbox}[width=0.85\textwidth]
+\centering
+\sffamily
+{\large\bfseries {{ stats.booksScanned }}} harmful titles searched \quad\textbullet\quad
+{\large\bfseries {{ stats.booksFound }}} found statewide\\[0.3em]
+{\large\bfseries {{ stats.systemCount }}} library systems \quad\textbullet\quad
+{\large\bfseries {{ total_copies | format_number }}} copies on shelves
+\end{statbox}
+\end{center}
+\vspace{1.5cm}
+\begin{center}
+\parbox{0.75\textwidth}{\small\itshape
+This report documents the results of a systematic survey of 260 Texas public library systems. Every holding was confirmed by querying each library's own public catalog. The data is factual and verifiable. It is offered so that parents, trustees, and community members can see exactly what their local library carries---and decide for themselves what, if anything, to do about it.}
+\end{center}
+\vfill
+\begin{center}
+\small\color{gray}
+Research and data collection by Tim Booher
+\end{center}
+\clearpage
+
+% ── Table of contents ───────────────────────────────────────────────────────
+\pagenumbering{roman}
+\tableofcontents*
+\clearpage
+
+% ── Main matter ──────────────────────────────────────────────────────────────
+\pagenumbering{arabic}
+
+\input{executive_summary}
+
+\input{analytics}
+
+\input{library_profiles}
+
+% ── Appendix ─────────────────────────────────────────────────────────────────
+\appendix
+
+\input{appendix}
+
+\end{document}

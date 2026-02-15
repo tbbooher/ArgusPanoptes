@@ -1,0 +1,15 @@
+\chapter{Titles Not Found in Any Texas Library}
+
+The following {{ not_found | length }} titles from the survey were not found in any of the {{ stats.systemCount }} Texas library systems searched. This does not necessarily mean they have never been held---they may have been weeded from collections, may exist in systems whose catalogs were not accessible at the time of the survey, or may never have been acquired by Texas libraries. The list is included for completeness.
+
+\begin{longtable}{@{}p{0.40\textwidth}p{0.22\textwidth}cp{0.20\textwidth}@{}}
+\toprule
+\textbf{Title} & \textbf{Author(s)} & \textbf{Year} & \textbf{Publisher} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+{% for book in not_found %}
+{{ book.title | latex_escape | truncate_text(50) }} & {{ book.authors | join_authors | latex_escape | truncate_text(25) }} & {{ book.year if book.year else "---" }} & {{ book.publisher | latex_escape | truncate_text(22) if book.publisher else "---" }} \\
+{% endfor %}
+\end{longtable}

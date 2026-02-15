@@ -1,8 +1,9 @@
 // ---------------------------------------------------------------------------
 // Integration tests for AtriumScrapeAdapter.
 //
-// Mocks global fetch to return realistic HTML, then verifies that holdings
-// are correctly parsed from Atriuum/BookSystems OPAC pages.
+// Mocks global fetch to return realistic Atriuum mobile HTML, then verifies
+// that holdings are correctly parsed from the SearchMobile and FullDispMobile
+// pages.
 // ---------------------------------------------------------------------------
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
@@ -50,51 +51,92 @@ function createSilentLogger() {
   return pino({ level: "silent" });
 }
 
-/** HTML with a copy/holdings table (typical Atriuum record detail). */
-function createHtmlWithCopiesTable(): string {
+/** Mobile search page with one IN result and one OUT result. */
+function createMobileSearchWithResults(): string {
   return `<!DOCTYPE html>
 <html>
-<head><title>Item Details</title></head>
-<body>
-  <table class="copies-table">
-    <tr><th>Location</th><th>Call Number</th><th>Status</th></tr>
-    <tr>
-      <td>Main Library</td>
-      <td>FIC SMI</td>
-      <td>Available</td>
-    </tr>
-    <tr>
-      <td>West Branch</td>
-      <td>FIC SMI</td>
-      <td>Checked Out</td>
-    </tr>
-  </table>
-</body>
-</html>`;
-}
-
-/** HTML with no results. */
-function createHtmlNoResults(): string {
-  return `<!DOCTYPE html>
-<html>
-<head><title>Search Results</title></head>
-<body>
-  <div id="results">
-    <p>No results found.</p>
+<body class='ui-body-c' data-startpageid='atriuum-mobile-summarysearch'>
+  <div data-role='content' class='atriuum-mobile-summarysearch'>
+    <div id="ajaxSearchResultsDiv" style='text-align: center;'>
+      <div id='searchSummary_1' class='itemResultsDiv itemStateIN' data-role='collapsible'>
+        <h1>Test Book Title / Test Author.</h1>
+        <table width="100%" cellspacing="0">
+          <tr>
+            <td style="text-align:center;vertical-align:top;width:90px;">
+              <div id='dustJacketSummary_0' index='0' itemid='12345'
+                   isbn='9780306406157' materialtypecode='1'></div>
+            </td>
+            <td align='left' valign='top'>
+              <table valign='top'>
+                <tr><td><a id="TitleLink_1" href="#">Test Book</a></td></tr>
+                <tr><td><span id="author0">by Test Author</span></td></tr>
+                <tr><td><span id="callnumber0">FIC TST</span></td></tr>
+              </table>
+            </td>
+            <td align='right' valign='top'>
+              <b><span id="ItemStatus_1">IN</span></b>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id='searchSummary_2' class='itemResultsDiv itemStateOUT' data-role='collapsible'>
+        <h1>Another Book / Other Author.</h1>
+        <table width="100%" cellspacing="0">
+          <tr>
+            <td style="text-align:center;vertical-align:top;width:90px;">
+              <div id='dustJacketSummary_1' index='1' itemid='12346'
+                   isbn='9780306406157' materialtypecode='1'></div>
+            </td>
+            <td align='left' valign='top'>
+              <table valign='top'>
+                <tr><td><a id="TitleLink_2" href="#">Another Book</a></td></tr>
+                <tr><td><span id="author1">by Other Author</span></td></tr>
+                <tr><td><span id="callnumber1">FIC OTH</span></td></tr>
+              </table>
+            </td>
+            <td align='right' valign='top'>
+              <b><span id="ItemStatus_2">OUT</span></b>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </body>
 </html>`;
 }
 
-/** HTML with searchResult class items. */
-function createHtmlWithSearchResults(): string {
+/** Mobile search page with no results. */
+function createMobileSearchNoResults(): string {
   return `<!DOCTYPE html>
 <html>
-<body>
-  <div class="searchResult">
-    <span class="branch">Main Library</span>
-    <span class="callnumber">FIC DOE</span>
-    <span class="status">Available</span>
+<body class='ui-body-c' data-startpageid='atriuum-mobile-summarysearch'>
+  <div data-role='content' class='atriuum-mobile-summarysearch'>
+    <div id="ajaxSearchResultsDiv" style='text-align: center;'>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+/** Full display page with copy-level details. */
+function createFullDisplayWithCopies(): string {
+  return `<!DOCTYPE html>
+<html>
+<body class='ui-body-c' data-startpageid='atriuum-mobile-fulldetails'>
+  <div data-role='content' class='atriuum-mobile-fulldetails'>
+    <div id='ajaxSearchResultsDiv'>
+      <input class='copiesInfo' type='hidden' name='copies_1' value=''
+             callnumber='FIC TST'
+             location='Main Library'
+             sublocation='Adult Fiction Section'
+             status='In' />
+      <input class='copiesInfo' type='hidden' name='copies_2' value=''
+             callnumber='FIC TST'
+             location='Main Library'
+             sublocation='Young Adult Section'
+             status='Out' />
+    </div>
   </div>
 </body>
 </html>`;
@@ -116,9 +158,9 @@ describe("AtriumScrapeAdapter", () => {
     vi.restoreAllMocks();
   });
 
-  it("parses copies table into BookHolding objects", async () => {
+  it("parses mobile search results with IN and OUT items", async () => {
     mockFetch.mockResolvedValueOnce(
-      new Response(createHtmlWithCopiesTable(), {
+      new Response(createMobileSearchWithResults(), {
         status: 200,
         headers: { "Content-Type": "text/html" },
       }),
@@ -133,19 +175,19 @@ describe("AtriumScrapeAdapter", () => {
     const h1 = result.holdings[0];
     expect(h1.isbn).toBe(TEST_ISBN);
     expect(h1.systemId).toBe("atriuum-test");
-    expect(h1.branchName).toBe("Main Library");
-    expect(h1.branchId).toBe("atriuum-test:main");
-    expect(h1.callNumber).toBe("FIC SMI");
+    expect(h1.callNumber).toBe("FIC TST");
     expect(h1.status).toBe("available");
+    expect(h1.rawStatus).toBe("IN");
 
     const h2 = result.holdings[1];
-    expect(h2.branchName).toBe("West Branch");
+    expect(h2.callNumber).toBe("FIC OTH");
     expect(h2.status).toBe("checked_out");
+    expect(h2.rawStatus).toBe("OUT");
   });
 
   it("returns empty holdings for no-results page", async () => {
     mockFetch.mockResolvedValueOnce(
-      new Response(createHtmlNoResults(), {
+      new Response(createMobileSearchNoResults(), {
         status: 200,
         headers: { "Content-Type": "text/html" },
       }),
@@ -157,26 +199,9 @@ describe("AtriumScrapeAdapter", () => {
     expect(result.holdings).toHaveLength(0);
   });
 
-  it("parses searchResult-class items", async () => {
+  it("constructs the correct SearchMobile URL", async () => {
     mockFetch.mockResolvedValueOnce(
-      new Response(createHtmlWithSearchResults(), {
-        status: 200,
-        headers: { "Content-Type": "text/html" },
-      }),
-    );
-
-    const adapter = new AtriumScrapeAdapter(TEST_SYSTEM, TEST_CONFIG, createSilentLogger());
-    const result = await adapter.search(TEST_ISBN, TEST_SYSTEM);
-
-    expect(result.holdings).toHaveLength(1);
-    expect(result.holdings[0].branchName).toBe("Main Library");
-    expect(result.holdings[0].callNumber).toBe("FIC DOE");
-    expect(result.holdings[0].status).toBe("available");
-  });
-
-  it("constructs the correct search URL", async () => {
-    mockFetch.mockResolvedValueOnce(
-      new Response(createHtmlNoResults(), {
+      new Response(createMobileSearchNoResults(), {
         status: 200,
         headers: { "Content-Type": "text/html" },
       }),
@@ -187,7 +212,7 @@ describe("AtriumScrapeAdapter", () => {
 
     const calledUrl = mockFetch.mock.calls[0][0] as string;
     expect(calledUrl).toBe(
-      "https://test.booksys.net/opac/test/search?q=9780306406157&searchBy=keyword",
+      "https://test.booksys.net/opac/test/SearchMobile?SF0=9780306406157&ST0=I&mode=mobile",
     );
   });
 
@@ -200,7 +225,7 @@ describe("AtriumScrapeAdapter", () => {
     };
 
     mockFetch.mockResolvedValueOnce(
-      new Response(createHtmlNoResults(), {
+      new Response(createMobileSearchNoResults(), {
         status: 200,
         headers: { "Content-Type": "text/html" },
       }),
@@ -239,5 +264,23 @@ describe("AtriumScrapeAdapter", () => {
     expect(health.healthy).toBe(true);
     expect(health.systemId).toBe("atriuum-test");
     expect(health.protocol).toBe("atriuum_scrape");
+  });
+
+  it("extracts ISBN from dust jacket div when different from search ISBN", async () => {
+    const htmlWithDifferentIsbn = createMobileSearchWithResults()
+      .replace("isbn='9780306406157'", "isbn='9781234567890'");
+
+    mockFetch.mockResolvedValueOnce(
+      new Response(htmlWithDifferentIsbn, {
+        status: 200,
+        headers: { "Content-Type": "text/html" },
+      }),
+    );
+
+    const adapter = new AtriumScrapeAdapter(TEST_SYSTEM, TEST_CONFIG, createSilentLogger());
+    const result = await adapter.search(TEST_ISBN, TEST_SYSTEM);
+
+    // First result should use the ISBN from the dust jacket div
+    expect(result.holdings[0].isbn).toBe("9781234567890");
   });
 });

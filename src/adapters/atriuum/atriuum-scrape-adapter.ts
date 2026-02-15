@@ -2,15 +2,22 @@
 // AtriumScrapeAdapter – HTML scraping adapter for Atriuum (Book Systems)
 // OPAC catalogs hosted on booksys.net.
 //
-// Atriuum OPACs use server-rendered HTML with search URLs like:
-//   https://{library}.booksys.net/opac/{code}/search?q={isbn}&searchBy=keyword
+// Atriuum OPACs are Dart/Flutter SPAs but expose a legacy jQuery Mobile
+// interface at /SearchMobile and /FullDispMobile with server-rendered HTML.
 //
-// The adapter expects `config.extra.libraryCode` and `config.extra.opacCode`
-// to construct URLs, or falls back to parsing from `config.baseUrl`.
+// Search flow:
+//   1. GET {baseUrl}/SearchMobile?SF0={isbn}&ST0=I&mode=mobile
+//      → returns search results with .itemResultsDiv elements
+//   2. Each result has an itemid; GET FullDispMobile?itemid={id}&mode=mobile
+//      → has hidden .copiesInfo inputs with location/sublocation/callnumber/status
+//
+// For efficiency we extract holdings from the search results page directly
+// (call number from #callnumber{N}, status from .itemState{IN|OUT} class).
+// If there are results, we fetch the first item's full details for copy-level
+// information (location, sublocation).
 // ---------------------------------------------------------------------------
 
 import * as cheerio from "cheerio";
-import type { AnyNode } from "domhandler";
 import type { Logger } from "pino";
 
 import type {
@@ -21,7 +28,7 @@ import type {
   ISBN13,
   LibrarySystem,
 } from "../../core/types.js";
-import { AdapterConnectionError, AdapterParseError } from "../../core/errors.js";
+import { AdapterConnectionError } from "../../core/errors.js";
 import { BaseAdapter } from "../base/base-adapter.js";
 
 export class AtriumScrapeAdapter extends BaseAdapter {
@@ -38,19 +45,19 @@ export class AtriumScrapeAdapter extends BaseAdapter {
     isbn: ISBN13,
     signal?: AbortSignal,
   ): Promise<BookHolding[]> {
-    // Atriuum supports multiple search URL patterns depending on version.
-    // Try the standard keyword search URL first.
     const searchUrl = this.buildSearchUrl(isbn);
-    this.logger.debug({ url: searchUrl }, "Fetching Atriuum OPAC search page");
+    this.logger.debug({ url: searchUrl }, "Fetching Atriuum mobile search page");
 
-    const response = await fetch(searchUrl, {
+    const fetchOpts = {
       signal: signal ?? AbortSignal.timeout(this.config.timeoutMs),
       headers: {
         Accept: "text/html",
         "User-Agent":
           "Mozilla/5.0 (compatible; BookFinder/1.0; +https://bookfinder.example.com)",
       },
-    });
+    };
+
+    const response = await fetch(searchUrl, fetchOpts);
 
     if (!response.ok) {
       throw new AdapterConnectionError(
@@ -61,15 +68,26 @@ export class AtriumScrapeAdapter extends BaseAdapter {
     }
 
     const html = await response.text();
-    return this.parseSearchResults(html, isbn);
+    const holdings = this.parseSearchResults(html, isbn);
+
+    // If the search page found results, try to enrich with copy-level details
+    // from the first result's full display page.
+    if (holdings.length === 0) {
+      // Try fetching the full details for the first item to get copy info
+      const $ = cheerio.load(html);
+      const firstItemId = $(".itemResultsDiv").first().find("[itemid]").attr("itemid");
+      if (firstItemId) {
+        return this.fetchCopyDetails(firstItemId, isbn, fetchOpts);
+      }
+    }
+
+    return holdings;
   }
 
   // ── Health check ────────────────────────────────────────────────────────
 
   protected async executeHealthCheck(): Promise<AdapterHealthStatus> {
     try {
-      // Atriuum OPACs serve SPAs at /opac/{code}/index.html — the bare
-      // directory path returns 404, so we probe index.html explicitly.
       const probeUrl = `${this.catalogBaseUrl}/index.html`;
       const response = await fetch(probeUrl, {
         signal: AbortSignal.timeout(this.config.timeoutMs),
@@ -105,143 +123,145 @@ export class AtriumScrapeAdapter extends BaseAdapter {
   // ── Private helpers ─────────────────────────────────────────────────────
 
   private buildSearchUrl(isbn: ISBN13): string {
-    // Config can override the search URL template via extra.searchUrlTemplate
     const template = this.config.extra?.searchUrlTemplate as string | undefined;
     if (template) {
       return template.replace("{isbn}", isbn);
     }
 
-    // Default: keyword search on the base URL
-    return `${this.catalogBaseUrl}/search?q=${isbn}&searchBy=keyword`;
+    // Legacy mobile interface: ISBN search (ST0=I)
+    return `${this.catalogBaseUrl}/SearchMobile?SF0=${isbn}&ST0=I&mode=mobile`;
   }
 
+  /**
+   * Parse the SearchMobile results page.
+   *
+   * Each search result is a .itemResultsDiv with:
+   *   - class itemStateIN or itemStateOUT
+   *   - #callnumber{N} span with call number
+   *   - #ItemStatus_{N} span with status text
+   *   - dust jacket div with isbn attribute
+   */
   private parseSearchResults(html: string, isbn: ISBN13): BookHolding[] {
     const $ = cheerio.load(html);
     const holdings: BookHolding[] = [];
 
-    // Atriuum OPAC uses various markup patterns. Try common selectors.
+    const resultDivs = $(".itemResultsDiv");
+    if (resultDivs.length === 0) return holdings;
 
-    // Pattern 1: Table-based results with .item-row or tr elements
-    const resultRows = $(
-      ".searchResult, .result-item, .item-row, " +
-      "table.results tr, #searchResults tr, " +
-      ".opac-result, .record-detail",
-    );
+    resultDivs.each((_index, element) => {
+      const $el = $(element);
 
-    if (resultRows.length > 0) {
-      resultRows.each((_index, element) => {
-        const $el = $(element);
-        const holding = this.extractHoldingFromElement($, $el, isbn);
-        if (holding) holdings.push(holding);
+      // Status from class: itemStateIN = available, itemStateOUT = checked out
+      const classes = $el.attr("class") || "";
+      let rawStatus = "unknown";
+      if (classes.includes("itemStateIN")) rawStatus = "In";
+      else if (classes.includes("itemStateOUT")) rawStatus = "Out";
+
+      // Also check the ItemStatus span for more detail
+      const statusSpan = $el.find("[id^='ItemStatus_']").text().trim();
+      if (statusSpan) rawStatus = statusSpan;
+
+      // Call number
+      const callNumber =
+        $el.find("[id^='callnumber']").text().trim() || null;
+
+      // ISBN from dust jacket div
+      const resultIsbn =
+        ($el.find("[isbn]").attr("isbn") as string) || isbn;
+
+      const branchName = this.system.name;
+      const branchInfo = this.system.branches[0];
+
+      holdings.push({
+        isbn: (resultIsbn || isbn) as ISBN13,
+        systemId: this.systemId,
+        branchId: (branchInfo?.id ?? branchName) as BranchId,
+        systemName: this.system.name,
+        branchName: branchInfo?.name ?? branchName,
+        callNumber,
+        status: this.normalizeStatus(rawStatus),
+        materialType: "book",
+        dueDate: null,
+        holdCount: null,
+        copyCount: null,
+        catalogUrl: this.catalogBaseUrl,
+        collection: "",
+        volume: null,
+        rawStatus,
+        fingerprint: this.generateFingerprint([
+          this.systemId,
+          resultIsbn || isbn,
+          branchName,
+          callNumber,
+        ]),
       });
-    }
-
-    // Pattern 2: Copy/item availability tables within a single record view
-    // (Sometimes a search for an ISBN goes straight to the record detail page)
-    if (holdings.length === 0) {
-      const copyRows = $(
-        ".copies-table tr, .holdings-table tr, " +
-        "#copies tr, #holdings tr, " +
-        "table.copies tr, table.holdings tr",
-      );
-
-      copyRows.each((_index, element) => {
-        const $el = $(element);
-        // Skip header rows
-        if ($el.find("th").length > 0) return;
-
-        const cells = $el.find("td");
-        if (cells.length < 2) return;
-
-        const branchName = $(cells[0]).text().trim() || "Unknown";
-        const callNumber = cells.length > 1 ? $(cells[1]).text().trim() : null;
-        const rawStatus = cells.length > 2 ? $(cells[2]).text().trim() : "";
-
-        const branchInfo = this.system.branches.find(
-          (b) =>
-            b.name.toLowerCase() === branchName.toLowerCase() ||
-            b.code.toLowerCase() === branchName.toLowerCase(),
-        );
-
-        holdings.push({
-          isbn,
-          systemId: this.systemId,
-          branchId: (branchInfo?.id ?? branchName) as BranchId,
-          systemName: this.system.name,
-          branchName: branchInfo?.name ?? branchName,
-          callNumber: callNumber || null,
-          status: this.normalizeStatus(rawStatus),
-          materialType: "book",
-          dueDate: null,
-          holdCount: null,
-          copyCount: null,
-          catalogUrl: this.catalogBaseUrl,
-          collection: "",
-          volume: null,
-          rawStatus,
-          fingerprint: this.generateFingerprint([
-            this.systemId,
-            isbn,
-            branchName,
-            callNumber,
-          ]),
-        });
-      });
-    }
+    });
 
     return holdings;
   }
 
-  private extractHoldingFromElement(
-    $: cheerio.CheerioAPI,
-    $el: cheerio.Cheerio<AnyNode>,
+  /**
+   * Fetch the FullDispMobile page for copy-level details.
+   *
+   * The page has hidden .copiesInfo inputs with attributes:
+   *   location, sublocation, callnumber, status
+   */
+  private async fetchCopyDetails(
+    itemId: string,
     isbn: ISBN13,
-  ): BookHolding | null {
-    // Try various selectors that Atriuum OPACs use
-    const branchName =
-      $el.find(".branch, .location, .library, td:nth-child(1)").first().text().trim() ||
-      "Unknown";
-    const rawStatus =
-      $el.find(".status, .availability, .avail, td:nth-child(3)").first().text().trim() ||
-      "";
-    const callNumber =
-      $el.find(".callnumber, .call-number, td:nth-child(2)").first().text().trim() ||
-      null;
+    fetchOpts: RequestInit,
+  ): Promise<BookHolding[]> {
+    const url = `${this.catalogBaseUrl}/FullDispMobile?itemid=${itemId}&mode=mobile`;
+    this.logger.debug({ url }, "Fetching Atriuum full display for copy details");
 
-    // Skip rows that look like headers or are empty
-    if (!branchName || branchName === "Unknown") {
-      const text = $el.text().trim();
-      if (!text || text.length < 5) return null;
-    }
+    const response = await fetch(url, fetchOpts);
+    if (!response.ok) return [];
 
-    const branchInfo = this.system.branches.find(
-      (b) =>
-        b.name.toLowerCase() === branchName.toLowerCase() ||
-        b.code.toLowerCase() === branchName.toLowerCase(),
-    );
+    const html = await response.text();
+    const $ = cheerio.load(html);
+    const holdings: BookHolding[] = [];
 
-    return {
-      isbn,
-      systemId: this.systemId,
-      branchId: (branchInfo?.id ?? branchName) as BranchId,
-      systemName: this.system.name,
-      branchName: branchInfo?.name ?? branchName,
-      callNumber,
-      status: this.normalizeStatus(rawStatus),
-      materialType: "book",
-      dueDate: null,
-      holdCount: null,
-      copyCount: null,
-      catalogUrl: this.catalogBaseUrl,
-      collection: "",
-      volume: null,
-      rawStatus,
-      fingerprint: this.generateFingerprint([
-        this.systemId,
+    const copies = $("input.copiesInfo");
+    if (copies.length === 0) return holdings;
+
+    copies.each((_index, element) => {
+      const $el = $(element);
+      const location = $el.attr("location") || this.system.name;
+      const sublocation = $el.attr("sublocation") || "";
+      const callNumber = $el.attr("callnumber") || null;
+      const rawStatus = $el.attr("status") || "unknown";
+
+      const branchInfo = this.system.branches.find(
+        (b) =>
+          b.name.toLowerCase() === location.toLowerCase() ||
+          b.code.toLowerCase() === location.toLowerCase(),
+      );
+
+      holdings.push({
         isbn,
-        branchName,
+        systemId: this.systemId,
+        branchId: (branchInfo?.id ?? location) as BranchId,
+        systemName: this.system.name,
+        branchName: branchInfo?.name ?? location,
         callNumber,
-      ]),
-    };
+        status: this.normalizeStatus(rawStatus),
+        materialType: "book",
+        dueDate: null,
+        holdCount: null,
+        copyCount: null,
+        catalogUrl: this.catalogBaseUrl,
+        collection: sublocation,
+        volume: null,
+        rawStatus,
+        fingerprint: this.generateFingerprint([
+          this.systemId,
+          isbn,
+          location,
+          callNumber,
+        ]),
+      });
+    });
+
+    return holdings;
   }
 }

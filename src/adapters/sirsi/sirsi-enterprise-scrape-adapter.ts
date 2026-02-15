@@ -67,9 +67,14 @@ function parseCatalogContext(system: LibrarySystem): { locale: string; friendly:
 }
 
 function extractSdCsrf(html: string): string {
-  const m = html.match(/var __sdcsrf\s*=\s*\"([a-f0-9-]+)\"/i);
+  // Match multiple declaration forms:
+  //   var __sdcsrf = "..."
+  //   window.__sdcsrf = "..."
+  //   const __sdcsrf = "..."
+  //   let __sdcsrf = "..."
+  //   __sdcsrf = "..."
+  const m = html.match(/__sdcsrf\s*=\s*["']([a-f0-9-]+)["']/i);
   if (!m) {
-    // The caller will wrap this into the correct AdapterParseError with system/protocol.
     throw new Error("Sirsi: missing __sdcsrf token");
   }
   return m[1];

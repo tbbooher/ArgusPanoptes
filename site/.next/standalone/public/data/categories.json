@@ -1,0 +1,116 @@
+[
+  {
+    "slug": "young_adult",
+    "label": "Young Adult (12-18)",
+    "type": "audience",
+    "count": 592
+  },
+  {
+    "slug": "lgbtq_identity",
+    "label": "LGBTQ+ Identity & Relationships",
+    "type": "topic",
+    "count": 464
+  },
+  {
+    "slug": "sex_education",
+    "label": "Sex Education & Sexuality",
+    "type": "topic",
+    "count": 209
+  },
+  {
+    "slug": "social_justice",
+    "label": "Social Justice & Equity",
+    "type": "topic",
+    "count": 191
+  },
+  {
+    "slug": "gender_identity",
+    "label": "Gender Identity & Expression",
+    "type": "topic",
+    "count": 148
+  },
+  {
+    "slug": "mental_health",
+    "label": "Mental Health & Suicide",
+    "type": "topic",
+    "count": 118
+  },
+  {
+    "slug": "violence_and_abuse",
+    "label": "Violence, Abuse & Trauma",
+    "type": "topic",
+    "count": 105
+  },
+  {
+    "slug": "middle_grade",
+    "label": "Middle Grade (8-12)",
+    "type": "audience",
+    "count": 97
+  },
+  {
+    "slug": "race_and_racism",
+    "label": "Race, Racism & Racial Justice",
+    "type": "topic",
+    "count": 96
+  },
+  {
+    "slug": "family_and_divorce",
+    "label": "Family Structures & Divorce",
+    "type": "topic",
+    "count": 93
+  },
+  {
+    "slug": "political_activism",
+    "label": "Political Activism & Protest",
+    "type": "topic",
+    "count": 86
+  },
+  {
+    "slug": "adult",
+    "label": "Adult (18+)",
+    "type": "audience",
+    "count": 84
+  },
+  {
+    "slug": "religious_viewpoints",
+    "label": "Religious Viewpoints & Criticism",
+    "type": "topic",
+    "count": 46
+  },
+  {
+    "slug": "young_children",
+    "label": "Young Children (0-8)",
+    "type": "audience",
+    "count": 45
+  },
+  {
+    "slug": "death_and_grief",
+    "label": "Death, Grief & End of Life",
+    "type": "topic",
+    "count": 40
+  },
+  {
+    "slug": "body_image",
+    "label": "Body Image & Eating Disorders",
+    "type": "topic",
+    "count": 36
+  },
+  {
+    "slug": "drug_and_alcohol",
+    "label": "Drugs, Alcohol & Substance Use",
+    "type": "topic",
+    "count": 19
+  },
+  {
+    "slug": "witchcraft_and_occult",
+    "label": "Witchcraft, Occult & Supernatural",
+    "type": "topic",
+    "count": 12
+  },
+  {
+    "slug": "profanity_and_language",
+    "label": "Profanity & Explicit Language",
+    "type": "topic",
+    "count": 10
+  }
+]

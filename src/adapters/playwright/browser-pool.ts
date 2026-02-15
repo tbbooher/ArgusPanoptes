@@ -28,6 +28,9 @@ export class BrowserPool {
   private readonly headless: boolean;
   private launchPromise: Promise<Browser> | null = null;
 
+  /** Waiters queued when pool is full. Resolved when a page is released. */
+  private readonly waitQueue: Array<() => void> = [];
+
   private constructor(options: BrowserPoolOptions = {}) {
     this.maxPages = options.maxPages ?? DEFAULT_MAX_PAGES;
     // Allow CHROMIUM_PATH env var to override (set by Docker image).
@@ -51,13 +54,14 @@ export class BrowserPool {
   /**
    * Acquire an isolated page (new BrowserContext + Page).
    * Launches the browser on first call.
-   * Throws if max concurrent pages reached.
+   * Waits if pool is full (instead of throwing).
    */
   async acquirePage(): Promise<{ page: Page; context: BrowserContext }> {
-    if (this.activePages >= this.maxPages) {
-      throw new Error(
-        `BrowserPool: max concurrent pages (${this.maxPages}) reached`,
-      );
+    // If at capacity, wait until a page is released
+    while (this.activePages >= this.maxPages) {
+      await new Promise<void>((resolve) => {
+        this.waitQueue.push(resolve);
+      });
     }
 
     const browser = await this.ensureBrowser();
@@ -79,6 +83,10 @@ export class BrowserPool {
       // Context may already be closed
     }
     this.activePages = Math.max(0, this.activePages - 1);
+
+    // Wake up the next waiter, if any
+    const next = this.waitQueue.shift();
+    if (next) next();
   }
 
   /** Shut down the browser instance. */

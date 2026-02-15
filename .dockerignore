@@ -3,10 +3,13 @@ dist
 .git
 .gitignore
 npm-debug.log*
-Dockerfile
 .dockerignore
 test
 skills
 PLAN.md
 README.md
 
+# Site build artifacts (source is needed for Docker build)
+site/node_modules
+site/.next
+site/.dockerignore

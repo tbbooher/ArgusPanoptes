@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fbooks\u002F[isbn13]","\u002Fcategories\u002F[slug]","\u002Flibraries\u002F[systemId]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

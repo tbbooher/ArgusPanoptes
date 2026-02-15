@@ -1,0 +1,12 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/page": "/",
+  "/books/page": "/books",
+  "/about/page": "/about",
+  "/categories/[slug]/page": "/categories/[slug]",
+  "/libraries/page": "/libraries",
+  "/map/page": "/map",
+  "/categories/page": "/categories",
+  "/libraries/[systemId]/page": "/libraries/[systemId]",
+  "/books/[isbn13]/page": "/books/[isbn13]"
+}

@@ -16,17 +16,23 @@ export interface DbConnectOptions {
 }
 
 export function createPool(opts: DbConnectOptions): pg.Pool {
-  if (opts.connectionString) {
-    return new pg.Pool({ connectionString: opts.connectionString, max: 3 });
-  }
-  return new pg.Pool({
-    host: opts.host ?? "localhost",
-    port: opts.port ?? 5432,
-    database: opts.database ?? "argus",
-    user: opts.user,
-    password: opts.password,
-    max: 3,
+  const poolOpts: pg.PoolConfig = opts.connectionString
+    ? { connectionString: opts.connectionString, max: 8 }
+    : {
+        host: opts.host ?? "localhost",
+        port: opts.port ?? 5432,
+        database: opts.database ?? "argus",
+        user: opts.user,
+        password: opts.password,
+        max: 8,
+      };
+  const pool = new pg.Pool(poolOpts);
+  // Prevent unhandled 'error' events from crashing the process.
+  // Dead connections are automatically removed and replaced by the pool.
+  pool.on("error", (err) => {
+    console.error("Postgres pool background error:", err.message);
   });
+  return pool;
 }
 
 export async function initSchema(pool: pg.Pool): Promise<void> {

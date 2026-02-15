@@ -1,0 +1,12 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
+  "/books/page": "app/books/page.js",
+  "/about/page": "app/about/page.js",
+  "/categories/[slug]/page": "app/categories/[slug]/page.js",
+  "/libraries/page": "app/libraries/page.js",
+  "/map/page": "app/map/page.js",
+  "/categories/page": "app/categories/page.js",
+  "/libraries/[systemId]/page": "app/libraries/[systemId]/page.js",
+  "/books/[isbn13]/page": "app/books/[isbn13]/page.js"
+}

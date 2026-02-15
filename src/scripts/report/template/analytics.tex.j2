@@ -1,0 +1,124 @@
+\chapter{Detailed Analysis}
+
+This chapter examines the data from multiple angles: which library systems hold the most harmful titles, which books appear most frequently, how holdings are distributed across large and small systems, and what the availability numbers reveal about actual circulation.
+
+%% ── Top Systems ─────────────────────────────────────────────────────────────
+\section{Library Systems with the Deepest Collections}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{top_systems_bar.pdf}
+\caption{The 25 Texas library systems holding the most titles from the survey list.}
+\label{fig:top-systems}
+\end{figure}
+
+Houston Public Library dominates the ranking with {{ top_systems[0].booksHeld }} titles and {{ top_systems[0].totalCopies | format_number }} copies---nearly a quarter of the entire survey list. Waco-McLennan County follows with {{ top_systems[1].booksHeld }}, then Plano ({{ top_systems[2].booksHeld }}), Wichita Falls ({{ top_systems[3].booksHeld }}), and McAllen ({{ top_systems[4].booksHeld }}). The top five systems alone account for {{ top5_copies | format_number }} copies of harmful material, the majority cataloged for juvenile or young-adult readers.
+
+The list is not limited to the state's largest metros. Mid-sized cities like Waco, Wichita Falls, Killeen, and Beaumont appear alongside Dallas-area suburbs, suggesting that acquisition of these titles is driven by professional orthodoxy that overrides the values of the communities these libraries are supposed to serve.
+
+%% ── Top Books ───────────────────────────────────────────────────────────────
+\section{Most Widely Held Titles}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{top_books_bar.pdf}
+\caption{The 25 titles found in the most library systems across Texas.}
+\label{fig:top-books}
+\end{figure}
+
+\emph{{ '{' }}{{ top_books[0].title | latex_escape }}{{ '}' }} leads with {{ top_books[0].systemCount }} systems---over half of all systems with any holdings at all. The most widely circulated titles include graphic novels with LGBTQ+ themes (\emph{Cemetery Boys}, \emph{The Magic Fish}, \emph{Laura Dean Keeps Breaking Up With Me}), transgender-focused children's books (\emph{George}, \emph{When Aidan became a brother}, \emph{I Am Jazz!}), and titles with explicit sexual content (\emph{Middlesex}, \emph{Gender Queer}).
+
+A title appearing in 50 or more independent library systems does not arrive there by accident. The uniformity points to a pipeline of common upstream influences---professional review journals, bulk purchasing catalogs, and American Library Association recommended lists---that effectively override local judgment and push this material into communities across the state. A full investigation of these acquisition dynamics is beyond the scope of this report but would repay serious scrutiny.
+
+%% ── Distribution Analysis ───────────────────────────────────────────────────
+\section{How Holdings Are Distributed}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{books_per_system_hist.pdf}
+\caption{Most library systems hold only a handful of surveyed titles; a smaller number hold extensive collections.}
+\label{fig:books-per-system}
+\end{figure}
+
+The distribution is heavily skewed. The majority of systems ({{ tier3 | length }} of {{ stats.systemCount }}) hold fewer than 5 of the surveyed titles---typically small-town libraries that acquired one or two widely promoted books. A middle tier of {{ tier2 | length }} systems holds 5--19 titles. But the {{ tier1 | length }} Tier~1 systems holding 20 or more titles account for the vast majority of total copies statewide. This concentration means that parents in a few dozen communities bear the greatest burden of monitoring what their children encounter on library shelves.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{systems_per_book_hist.pdf}
+\caption{Many titles appear in only a few systems, while a core group of the most harmful books is nearly ubiquitous.}
+\label{fig:systems-per-book}
+\end{figure}
+
+On the book side, most titles appear in fewer than 10 systems. But a core group of approximately 30--40 titles has achieved near-universal distribution, appearing in 20 or more systems each. These are the books most likely to be encountered by a child walking into any mid-sized Texas library.
+
+%% ── Vendor Breakdown ────────────────────────────────────────────────────────
+\section{Large Systems vs.\ Small Systems}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.65\textwidth]{vendor_breakdown.pdf}
+\caption{Texas library systems by type. The majority are small-town and rural libraries; a smaller number of large urban and suburban systems hold the deepest collections.}
+\label{fig:vendor-breakdown}
+\end{figure}
+
+The landscape of Texas public libraries is dominated by small-town and rural systems---facilities serving communities of a few thousand people, typically with a single branch and limited budgets. These make up the majority of the 260 systems surveyed. A smaller number of large urban systems---Houston, Dallas, San Antonio, Austin---hold the deepest collections of harmful material, often with dozens of copies distributed across multiple branches. Growing suburban systems in communities like Round Rock, McKinney, and Flower Mound occupy a middle ground, serving the fast-growing communities where parents are most actively engaged in holding their libraries accountable.
+
+%% ── Availability ────────────────────────────────────────────────────────────
+\section{Availability and Circulation}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{availability_bar.pdf}
+\caption{Availability rates for the top 25 systems. Low availability (red) suggests copies are frequently checked out; high availability (green) means copies sit on shelves.}
+\label{fig:availability}
+\end{figure}
+
+Availability data offers an indirect but alarming measure of actual circulation. When a large share of a system's copies are checked out, it means these books are actively being read---not merely acquired and gathering dust on shelves. Conversely, high availability rates may indicate recent acquisitions, low demand, or reference-only holdings. Note that some systems (notably Houston) do not publish real-time availability information; these figures should be interpreted with caution rather than taken as evidence that every copy is checked out.
+
+%% ── Found vs Not Found ─────────────────────────────────────────────────────
+\section{What Texas Libraries Did Not Acquire}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.48\textwidth]{found_vs_notfound.pdf}
+\caption{Roughly half the surveyed titles were not found in any Texas public library.}
+\label{fig:found-notfound}
+\end{figure}
+
+Of the {{ stats.booksScanned }} titles searched, {{ stats.booksNotFound }} ({{ "%.0f" | format(100.0 - found_pct) }}\%) were not found in any of the 260 systems scanned. Many of these are older or more obscure titles that never achieved wide distribution. The full list appears in the Appendix. The fact that roughly half the surveyed list was \emph{not} acquired proves that librarians are perfectly capable of saying no---which makes their decision to stock the other {{ stats.booksFound }} titles a deliberate choice to expose children to this material.
+
+%% ── Collection Depth ────────────────────────────────────────────────────────
+\section{Collection Depth vs.\ Copy Count}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{copies_scatter.pdf}
+\caption{Each dot is a library system. Systems in the upper right hold many titles \emph{and} multiple copies of each---indicating systematic collection-building rather than incidental acquisition.}
+\label{fig:copies-scatter}
+\end{figure}
+
+The scatter plot separates systems that acquired a few titles incidentally from those that built substantial collections. Houston Public Library, with {{ top_systems[0].booksHeld }} titles and {{ top_systems[0].totalCopies | format_number }} copies, occupies a category of its own. A cluster of 10--15 systems in the mid-range---Waco, Plano, McAllen, Wichita Falls, Killeen---shows a pattern of intentional collection development around these themes, with both breadth (many distinct titles) and depth (multiple copies per title).
+
+%% ── Metro Insets ────────────────────────────────────────────────────────────
+\section{Metropolitan Detail}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{dfw_inset_map.pdf}
+\caption{Dallas--Fort Worth metroplex. Major collections in Plano, Garland, Dallas, and Denton.}
+\label{fig:dfw-inset}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{houston_inset_map.pdf}
+\caption{Houston metro area. Houston Public Library's collection dominates, but Pasadena, Sugar Land, and League City also hold significant numbers of harmful titles.}
+\label{fig:houston-inset}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{texas_availability_map.pdf}
+\caption{Statewide availability rates. Green indicates copies on shelves; red indicates copies frequently checked out.}
+\label{fig:availability-map}
+\end{figure}

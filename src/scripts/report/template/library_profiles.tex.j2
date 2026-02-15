@@ -1,0 +1,83 @@
+\chapter{Library Profiles}
+\label{ch:profiles}
+
+This chapter documents the specific holdings of every library system in which at least one surveyed title was found. The {{ stats.systemCount }} systems are grouped into three tiers by collection depth: Tier~1 (20 or more titles) receives a complete book-by-book inventory; Tier~2 (5--19 titles) receives a summary listing; Tier~3 (1--4 titles) is listed in compact form. A parent in Plano should be able to find, in these pages, exactly which harmful titles sit on the shelves of the Plano Public Library, and a trustee in Wichita Falls should be able to see how that system's acquisitions compare with peer institutions.
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% TIER 1: Full profiles (20+ books)
+%% ═══════════════════════════════════════════════════════════════════════════
+
+{% if tier1 %}
+\section{Tier 1 --- Major Collections (20+ titles)}
+
+These {{ tier1 | length }} library systems each hold 20 or more titles from the survey and represent the most significant concentrations of harmful material in the state. Each system receives a full profile with a complete book-by-book inventory.
+
+{% for sys in tier1 %}
+\subsection{{ '{' }}{{ sys.systemName | latex_escape }}{{ '}' }}
+
+\begin{profilebox}[title={{ '{' }}{{ sys.systemName | latex_escape }}{{ '}' }}]
+\small
+\begin{tabular}{@{}ll@{\qquad}ll@{}}
+\textbf{City:} & {{ sys.city | latex_escape if sys.city else "---" }} &
+\textbf{County:} & {{ sys.region | latex_escape }} \\
+\textbf{Harmful titles held:} & {{ sys.booksHeld }} &
+\textbf{Total copies:} & {{ sys.totalCopies }} \\
+\textbf{Currently available:} & {{ sys.totalAvailable }} & & \\
+\end{tabular}
+\end{profilebox}
+
+\begin{longtable}{@{}p{0.45\textwidth}p{0.22\textwidth}rrr@{}}
+\toprule
+\textbf{Title} & \textbf{Author(s)} & \textbf{Copies} & \textbf{Avail.} & \textbf{Branches} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+{% for book in sys.books %}
+{{ book.title | latex_escape | truncate_text(55) }} & {{ book.authors | join_authors | latex_escape | truncate_text(25) }} & {{ book.copies }} & {{ book.available }} & {{ book.branches }} \\
+{% endfor %}
+\end{longtable}
+
+{% endfor %}
+{% endif %}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% TIER 2: Summary table (5–19 books)
+%% ═══════════════════════════════════════════════════════════════════════════
+
+{% if tier2 %}
+\section{Tier 2 --- Moderate Collections (5--19 titles)}
+
+These {{ tier2 | length }} systems hold between 5 and 19 surveyed titles. While not as extensive as Tier~1, these collections still represent a meaningful presence of harmful material---particularly in smaller communities where the library may be the only public institution providing books to children.
+
+\begin{longtable}{@{}p{0.25\textwidth}p{0.13\textwidth}rrp{0.3\textwidth}@{}}
+\toprule
+\textbf{System} & \textbf{County} & \textbf{Titles} & \textbf{Copies} & \textbf{Top Titles Held} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+{% for sys in tier2 %}
+{{ sys.systemName | latex_escape | truncate_text(30) }} & {{ sys.region | latex_escape | truncate_text(15) }} & {{ sys.booksHeld }} & {{ sys.totalCopies }} & {{ sys.topTitles | latex_escape }} \\
+{% endfor %}
+\end{longtable}
+{% endif %}
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% TIER 3: Compact list (1–4 books)
+%% ═══════════════════════════════════════════════════════════════════════════
+
+{% if tier3 %}
+\section{Tier 3 --- Minimal Holdings (1--4 titles)}
+
+The remaining {{ tier3 | length }} systems hold between 1 and 4 surveyed titles. In most cases these are small-town and rural libraries that acquired one or two widely promoted books---often award winners pushed into their collections through bulk purchasing programs. Even a single harmful title on the shelf matters, because in a small town the public library may be the only place a child encounters this material.
+
+\begin{multicols}{2}
+\small
+\begin{itemize}[nosep]
+{% for sys in tier3 %}
+\item \textbf{{ '{' }}{{ sys.systemName | latex_escape | truncate_text(30) }}{{ '}' }} ({{ sys.region | latex_escape }}) --- {{ sys.booksHeld }} title{{ 's' if sys.booksHeld != 1 else '' }}
+{% endfor %}
+\end{itemize}
+\end{multicols}
+{% endif %}

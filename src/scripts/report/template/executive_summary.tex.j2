@@ -1,0 +1,74 @@
+\chapter{Executive Summary}
+
+Of {{ stats.booksScanned }} books identified by parents and advocacy groups across the country as sexually explicit, age-inappropriate, or ideologically harmful to children, nearly half---{{ stats.booksFound }} titles, totaling {{ total_copies | format_number }} copies---sit on the shelves of Texas public libraries today. This report is the first systematic accounting of where they are.
+
+We queried the public-facing catalogs of 260 Texas library systems. The search is comprehensive: every holding reported here was confirmed by the library's own catalog, not inferred or estimated. This report replaces vague assurances from library administrators with hard data.
+
+\subsection*{A Note on Scope}
+
+This report does not argue that every harmful book should be removed from every library. It does not argue that public libraries should refrain from carrying controversial material for adult readers. It argues something narrower and, we believe, more important: that parents have a right to know what is on the shelves of the institutions to which they send their children, and that the data, presented clearly, speaks for itself.
+
+\section{What We Found}
+
+\begin{statbox}[title={Key Numbers}]
+\begin{itemize}
+  \item \textbf{{ '{' }}{{ stats.booksFound }}{{ '}' }} of {{ stats.booksScanned }} searched titles ({{ found_pct }}\%) are currently held by at least one Texas public library.
+  \item These {{ stats.booksFound }} titles account for \textbf{{ '{' }}{{ total_copies | format_number }}{{ '}' }} physical copies spread across \textbf{{ '{' }}{{ stats.systemCount }}{{ '}' }} library systems---representing {{ stats.holdingsCount | format_number }} individual catalog holdings.
+  \item The most widely held title, \emph{{ '{' }}{{ top_book.title | latex_escape }}{{ '}' }}, appears in \textbf{{ '{' }}{{ top_book.systemCount }}{{ '}' }} separate library systems with {{ top_book.totalCopies }} copies statewide.
+  \item \textbf{{ '{' }}{{ top_system.systemName | latex_escape }}{{ '}' }} holds the largest collection of these titles at \textbf{{ '{' }}{{ top_system.booksHeld }}{{ '}' }} books ({{ top_system.totalCopies | format_number }} copies).
+  \item {{ stats.booksNotFound }} titles ({{ "%.1f" | format(100.0 - found_pct) }}\%) were not found in any Texas library we could reach---proof that librarians \emph{can} exercise selection judgment, which makes the decision to stock the other {{ stats.booksFound }} titles all the more indefensible.
+\end{itemize}
+\end{statbox}
+
+\section{Thematic Breakdown}
+
+The {{ stats.booksScanned }} books in this survey fall into several overlapping categories of concern. Title-based keyword analysis identified the following thematic clusters among all surveyed titles:
+
+\begin{statbox}
+\small
+\begin{tabular}{@{}lrrp{0.45\textwidth}@{}}
+\toprule
+\textbf{Category} & \textbf{Titles} & \textbf{Holdings} & \textbf{Most Widely Held Examples} \\
+\midrule
+{% for cat_name, cat in themes.items() %}
+{% if cat.count > 0 %}
+{{ cat_name | latex_escape }} & {{ cat.count }} & {{ cat.total_holdings }} & {% for ex in cat.examples[:2] %}{{ ex | latex_escape | truncate_text(35) }}{% if not loop.last %}; {% endif %}{% endfor %} \\
+{% endif %}
+{% endfor %}
+\bottomrule
+\end{tabular}
+\end{statbox}
+
+\noindent Gender identity and LGBTQ+ titles account for the largest share of holdings, both in the number of distinct titles and in the breadth of their distribution across systems. Sexuality education titles---several of which contain material that would be considered explicit by any conventional standard, and which are cataloged for readers as young as seven---appear in dozens of systems. Titles addressing abortion and racial politics constitute a smaller but persistent presence.
+
+\section{Where the Books Are}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{texas_overview_map.pdf}
+\caption{Statewide distribution of harmful books across {{ stats.systemCount }} Texas library systems. Larger, darker dots indicate deeper collections of surveyed titles.}
+\label{fig:overview-map}
+\end{figure}
+
+The geographic pattern is striking but unsurprising. The largest concentrations cluster in the major urban centers---Houston, Dallas--Fort Worth, Austin, and San Antonio---where large, well-funded library systems have built deep collections around these themes. But the reach extends well beyond the cities:
+
+\begin{itemize}
+  \item \textbf{Houston metro}: {{ houston_systems | length }} systems holding a combined {{ houston_books }} title-instances, led by Houston Public Library ({{ top_system.booksHeld }} titles, {{ top_system.totalCopies | format_number }} copies).
+  \item \textbf{DFW metroplex}: {{ dfw_systems | length }} systems with {{ dfw_books }} title-instances. Plano, Garland, Dallas, and Denton carry deep collections.
+  \item \textbf{Central Texas}: Waco-McLennan County (103 titles) and Killeen (75) stand out in a region where many parents would not expect to find this material.
+  \item \textbf{South Texas}: McAllen (96 titles) and Brownsville (74) hold extensive collections along the Rio Grande Valley.
+  \item \textbf{Rural Texas}: Even small-town libraries---systems serving communities of a few thousand people---hold between 1 and 15 of these titles. {{ tier3 | length }} systems hold 4 or fewer, typically award-winning titles that arrived through bulk purchasing programs.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{texas_coverage_choropleth.pdf}
+\caption{County-level heat map. Darker shading indicates more harmful titles held by library systems in that county.}
+\label{fig:choropleth}
+\end{figure}
+
+\section{What the Data Shows}
+
+These are not obscure titles gathering dust. The {{ stats.booksFound }} books found in this survey account for {{ total_copies | format_number }} copies actively cataloged across the state. Many are children's picture books, middle-grade novels, and young-adult fiction---genres aimed squarely at minors. \emph{Gender Queer}, a graphic memoir depicting oral sex between minors, appears in 24 systems. \emph{Sex is a funny word}, a sex-education book targeting children as young as seven, appears in 24 systems. \emph{It feels good to be yourself}, a picture book pushing gender-identity ideology on preschoolers, appears in 25 systems. These are not edge cases; they are the products of a systematic effort to normalize sexually explicit and ideologically radical material in children's sections of Texas public libraries.
+
+Each library profile in Chapter~\ref{ch:profiles} lists every harmful title that system holds, so that parents and community members can see exactly what is available at their local library and make informed decisions about how to engage with their library boards.

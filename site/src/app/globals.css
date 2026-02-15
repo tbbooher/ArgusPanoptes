@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-950 text-gray-100;
+  }
+  :root.light body,
+  .light body {
+    @apply bg-white text-gray-900;
+  }
+}
+
+/* Leaflet fixes for dark mode */
+.dark .leaflet-control-zoom a {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  border-color: #374151;
+}
+
+.dark .leaflet-popup-content-wrapper {
+  background-color: #1f2937;
+  color: #e5e7eb;
+}
+
+.dark .leaflet-popup-tip {
+  background-color: #1f2937;
+}

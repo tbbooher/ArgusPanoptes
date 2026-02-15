@@ -126,6 +126,9 @@ export function createApp(deps: AppDependencies): Hono {
         align-items: center;
         margin-top: 14px;
       }
+      .search.title-mode {
+        grid-template-columns: 2fr 1fr auto auto;
+      }
 
       input[type="text"]{
         width: 100%;
@@ -197,7 +200,7 @@ export function createApp(deps: AppDependencies): Hono {
       pre code { font-family: var(--mono); font-size: 12px; color: #d6deeb; }
 
       @media (max-width: 720px) {
-        .search { grid-template-columns: 1fr; }
+        .search, .search.title-mode { grid-template-columns: 1fr; }
         button { width: 100%; }
         .kv { grid-template-columns: 110px 1fr; }
       }
@@ -333,24 +336,12 @@ export function createApp(deps: AppDependencies): Hono {
         }
 
         if (errors.length) {
-          const eCard = document.createElement('div');
-          eCard.className = 'card';
-          eCard.innerHTML =
-            '<div style="font-weight:720; margin-bottom:8px;">Errors</div>' +
-            '<div class="sub">Some systems failed. Results may be incomplete.</div>' +
-            '<div style="margin-top:10px; display:grid; gap:8px;">' +
-              errors.map((e) => (
-                \`<div class="item">
-                  <div class="itemTop">
-                    <div><span style="font-weight:650;">\${esc(e.systemName || e.systemId)}</span></div>
-                    <div class="status unknown">\${esc(e.errorType || 'error')}</div>
-                  </div>
-                  <div class="sub" style="margin-top:6px; font-family: var(--mono);">\${esc(e.protocol || '')}</div>
-                  <div style="margin-top:6px;">\${esc(e.message || '')}</div>
-                </div>\`
-              )).join('') +
-            '</div>';
-          resultsEl.appendChild(eCard);
+          // Count unique systems that failed (same system across ISBNs = 1)
+          const seenSystems = new Set();
+          for (const e of errors) seenSystems.add(e.systemId || e.systemName || '');
+          const failCount = seenSystems.size;
+          // Append a note to the summary pill instead of a separate error card
+          summaryEl.textContent += \` | \${failCount} system\${failCount === 1 ? '' : 's'} unavailable\`;
         }
 
         if (!holdings.length) return;
@@ -459,12 +450,14 @@ export function createApp(deps: AppDependencies): Hono {
         summaryEl.style.display = 'none';
 
         if (mode === 'title') {
+          form.classList.add('title-mode');
           isbnEl.value = '';
           isbnEl.placeholder = 'Title, e.g. The Communist Manifesto';
           isbnEl.inputMode = 'text';
           authorEl.style.display = '';
           exampleBtn.textContent = 'Example';
         } else {
+          form.classList.remove('title-mode');
           authorEl.value = '';
           authorEl.style.display = 'none';
           isbnEl.placeholder = 'ISBN-10 or ISBN-13 (digits or hyphens), e.g. 9780143127741';
