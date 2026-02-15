@@ -34,6 +34,11 @@ import { PolarisApiAdapter } from "./adapters/polaris/polaris-adapter.js";
 import { WebScraperAdapter } from "./adapters/scraper/web-scraper-adapter.js";
 import { BiblioCommonsScrapeAdapter } from "./adapters/scraper/bibliocommons-adapter.js";
 import { SirsiEnterpriseScrapeAdapter } from "./adapters/sirsi/sirsi-enterprise-scrape-adapter.js";
+import { ApolloAdapter } from "./adapters/apollo/apollo-adapter.js";
+import { AspenDiscoveryAdapter } from "./adapters/aspen/aspen-discovery-adapter.js";
+import { AtriumScrapeAdapter } from "./adapters/atriuum/atriuum-scrape-adapter.js";
+import { SpydusScrapeAdapter } from "./adapters/spydus/spydus-scrape-adapter.js";
+import { TlcApiAdapter } from "./adapters/tlc/tlc-api-adapter.js";
 
 // ── Config ─────────────────────────────────────────────────────────────────
 
@@ -124,6 +129,21 @@ function createAdapterForConfig(
 
     case AdapterProtocol.BIBLIOCOMMONS_SCRAPE:
       return new BiblioCommonsScrapeAdapter(system, adapterConfig, logger);
+
+    case AdapterProtocol.APOLLO_API:
+      return new ApolloAdapter(system, adapterConfig, logger);
+
+    case AdapterProtocol.ASPEN_DISCOVERY_API:
+      return new AspenDiscoveryAdapter(system, adapterConfig, logger);
+
+    case AdapterProtocol.ATRIUUM_SCRAPE:
+      return new AtriumScrapeAdapter(system, adapterConfig, logger);
+
+    case AdapterProtocol.SPYDUS_SCRAPE:
+      return new SpydusScrapeAdapter(system, adapterConfig, logger);
+
+    case AdapterProtocol.TLC_API:
+      return new TlcApiAdapter(system, adapterConfig, logger);
 
     case AdapterProtocol.WEB_SCRAPE:
       return new WebScraperAdapter(system, adapterConfig, logger);

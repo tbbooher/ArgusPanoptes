@@ -45,20 +45,24 @@ export class ResultAggregator {
     // 1. Deduplicate by fingerprint
     const deduped = this.deduplicateByFingerprint(rawHoldings);
 
-    // 2. Group by system
-    const bySystem = this.groupBySystem(deduped);
+    // 2. Remove WorldCat holdings for systems that have direct adapter results
+    const afterCrossSourceDedup =
+      this.deduplicateWorldCatOverlap(deduped);
 
-    // 3. Build per-system summaries
+    // 3. Group by system
+    const bySystem = this.groupBySystem(afterCrossSourceDedup);
+
+    // 4. Build per-system summaries
     const systems: SystemAvailabilitySummary[] = [];
 
     for (const [systemId, holdings] of bySystem) {
       systems.push(this.buildSystemSummary(systemId, holdings));
     }
 
-    // 4. Sort by available copies descending
+    // 5. Sort by available copies descending
     systems.sort((a, b) => b.availableCopies - a.availableCopies);
 
-    // 5. Compute totals
+    // 6. Compute totals
     let totalCopies = 0;
     let totalAvailable = 0;
     for (const sys of systems) {
@@ -66,10 +70,48 @@ export class ResultAggregator {
       totalAvailable += sys.availableCopies;
     }
 
-    return { systems, holdings: deduped, totalCopies, totalAvailable };
+    return {
+      systems,
+      holdings: afterCrossSourceDedup,
+      totalCopies,
+      totalAvailable,
+    };
   }
 
   // ── Private helpers ────────────────────────────────────────────────────
+
+  /**
+   * Remove WorldCat holdings for systems that already have direct adapter
+   * results.  WorldCat only provides "status unknown" so direct results
+   * (with real-time availability) are always preferred.
+   *
+   * A holding is considered a WorldCat entry if its `rawStatus` contains
+   * the marker string set by the WorldCat adapter.
+   */
+  private deduplicateWorldCatOverlap(holdings: BookHolding[]): BookHolding[] {
+    // Collect systemIds that have at least one non-WorldCat holding.
+    const directSystemIds = new Set<LibrarySystemId>();
+    for (const h of holdings) {
+      if (!this.isWorldCatHolding(h)) {
+        directSystemIds.add(h.systemId);
+      }
+    }
+
+    // If no direct results at all, keep everything.
+    if (directSystemIds.size === 0) {
+      return holdings;
+    }
+
+    // Drop WorldCat holdings whose mapped systemId overlaps with a
+    // directly-queried system.
+    return holdings.filter(
+      (h) => !this.isWorldCatHolding(h) || !directSystemIds.has(h.systemId),
+    );
+  }
+
+  private isWorldCatHolding(h: BookHolding): boolean {
+    return h.rawStatus.includes("WorldCat holdings");
+  }
 
   private deduplicateByFingerprint(holdings: BookHolding[]): BookHolding[] {
     const seen = new Set<string>();

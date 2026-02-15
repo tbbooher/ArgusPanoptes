@@ -78,8 +78,27 @@ interface WorldCatHoldingRecord {
 export class WorldCatAdapter extends BaseAdapter {
   private cachedToken: OAuthToken | null = null;
 
+  /**
+   * Maps OCLC institution symbols (e.g. "TXH") to our library system IDs
+   * (e.g. "houston-public").  When a mapping exists, the holding is stamped
+   * with the direct system's ID so the ResultAggregator can detect overlap
+   * and prefer direct adapter results over WorldCat's "status unknown" entries.
+   */
+  private readonly institutionSymbolMap: ReadonlyMap<string, LibrarySystemId>;
+
   constructor(system: LibrarySystem, config: AdapterConfig, logger: Logger) {
     super(system, { ...config, protocol: "oclc_worldcat" }, logger);
+
+    const rawMap = (config.extra?.institutionSymbolMap ?? {}) as Record<
+      string,
+      string
+    >;
+    this.institutionSymbolMap = new Map(
+      Object.entries(rawMap).map(([symbol, id]) => [
+        symbol,
+        id as LibrarySystemId,
+      ]),
+    );
   }
 
   // ── Search ──────────────────────────────────────────────────────────────
@@ -283,29 +302,35 @@ export class WorldCatAdapter extends BaseAdapter {
       return [];
     }
 
-    return holdingsData.briefRecords.map((holding) => ({
-      isbn,
-      systemId: this.systemId,
-      branchId: (holding.institutionSymbol ?? "unknown") as BranchId,
-      systemName: holding.institutionName ?? this.system.name,
-      branchName: holding.branchName ?? holding.institutionName ?? "Unknown",
-      callNumber: holding.callNumber ?? null,
-      status: "unknown" as const,
-      materialType: "book" as const,
-      dueDate: null,
-      holdCount: null,
-      copyCount: null,
-      catalogUrl: this.system.catalogUrl,
-      collection: holding.shelvingLocation ?? "",
-      volume: null,
-      rawStatus: "WorldCat holdings - real-time status unavailable",
-      fingerprint: this.generateFingerprint([
-        "worldcat",
+    return holdingsData.briefRecords.map((holding) => {
+      const symbol = holding.institutionSymbol ?? "unknown";
+      const mappedSystemId =
+        this.institutionSymbolMap.get(symbol) ?? this.systemId;
+
+      return {
         isbn,
-        holding.institutionSymbol,
-        oclcNumber,
-      ]),
-    }));
+        systemId: mappedSystemId,
+        branchId: symbol as BranchId,
+        systemName: holding.institutionName ?? this.system.name,
+        branchName: holding.branchName ?? holding.institutionName ?? "Unknown",
+        callNumber: holding.callNumber ?? null,
+        status: "unknown" as const,
+        materialType: "book" as const,
+        dueDate: null,
+        holdCount: null,
+        copyCount: null,
+        catalogUrl: this.system.catalogUrl,
+        collection: holding.shelvingLocation ?? "",
+        volume: null,
+        rawStatus: "WorldCat holdings - real-time status unavailable",
+        fingerprint: this.generateFingerprint([
+          "worldcat",
+          isbn,
+          symbol,
+          oclcNumber,
+        ]),
+      };
+    });
   }
 
   // ── Credential helpers ──────────────────────────────────────────────────

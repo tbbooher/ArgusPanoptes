@@ -3,7 +3,7 @@
 // discovery layers.  Wraps the existing parseBiblioCommonsResults() parser.
 //
 // BiblioCommons search URLs follow a predictable pattern:
-//   https://<subdomain>.bibliocommons.com/v2/search?query=<isbn>&searchType=isbn
+//   https://<subdomain>.bibliocommons.com/search?query=<isbn>&searchType=isbn
 // ---------------------------------------------------------------------------
 
 import type { Logger } from "pino";
@@ -40,7 +40,7 @@ export class BiblioCommonsScrapeAdapter extends BaseAdapter {
     isbn: ISBN13,
     signal?: AbortSignal,
   ): Promise<BookHolding[]> {
-    const searchUrl = `${this.catalogBaseUrl}/v2/search?query=${isbn}&searchType=isbn`;
+    const searchUrl = `${this.catalogBaseUrl}/search?query=${isbn}&searchType=isbn`;
 
     this.logger.debug({ url: searchUrl }, "fetching BiblioCommons search page");
 
@@ -69,7 +69,7 @@ export class BiblioCommonsScrapeAdapter extends BaseAdapter {
 
   protected async executeHealthCheck(): Promise<AdapterHealthStatus> {
     const probeIsbn = "9780061120084";
-    const probeUrl = `${this.catalogBaseUrl}/v2/search?query=${probeIsbn}&searchType=isbn`;
+    const probeUrl = `${this.catalogBaseUrl}/search?query=${probeIsbn}&searchType=isbn`;
 
     try {
       const response = await fetch(probeUrl, {

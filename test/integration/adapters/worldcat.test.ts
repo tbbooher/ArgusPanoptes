@@ -284,6 +284,92 @@ describe("WorldCatAdapter", () => {
     );
   });
 
+  it("maps institution symbols to system IDs when institutionSymbolMap is configured", async () => {
+    const configWithMap: AdapterConfig = {
+      ...TEST_CONFIG,
+      extra: {
+        institutionSymbolMap: {
+          TXA: "austin-public",
+          TXH: "houston-public",
+        },
+      },
+    };
+
+    // Token
+    mockFetch.mockResolvedValueOnce(
+      new Response(JSON.stringify(createTokenResponse()), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+    // Bib search
+    mockFetch.mockResolvedValueOnce(
+      new Response(JSON.stringify(createBibSearchResponse()), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+    // Holdings
+    mockFetch.mockResolvedValueOnce(
+      new Response(JSON.stringify(createHoldingsResponse()), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+
+    const adapter = new WorldCatAdapter(TEST_SYSTEM, configWithMap, createSilentLogger());
+    const result = await adapter.search(TEST_ISBN, TEST_SYSTEM);
+
+    expect(result.holdings).toHaveLength(2);
+    // TXA mapped to austin-public
+    expect(result.holdings[0].systemId).toBe("austin-public");
+    // TXH mapped to houston-public
+    expect(result.holdings[1].systemId).toBe("houston-public");
+  });
+
+  it("uses default systemId for unmapped institution symbols", async () => {
+    const configWithMap: AdapterConfig = {
+      ...TEST_CONFIG,
+      extra: {
+        institutionSymbolMap: {
+          TXA: "austin-public",
+          // TXH is NOT in the map
+        },
+      },
+    };
+
+    // Token
+    mockFetch.mockResolvedValueOnce(
+      new Response(JSON.stringify(createTokenResponse()), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+    // Bib search
+    mockFetch.mockResolvedValueOnce(
+      new Response(JSON.stringify(createBibSearchResponse()), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+    // Holdings
+    mockFetch.mockResolvedValueOnce(
+      new Response(JSON.stringify(createHoldingsResponse()), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+
+    const adapter = new WorldCatAdapter(TEST_SYSTEM, configWithMap, createSilentLogger());
+    const result = await adapter.search(TEST_ISBN, TEST_SYSTEM);
+
+    expect(result.holdings).toHaveLength(2);
+    // TXA mapped
+    expect(result.holdings[0].systemId).toBe("austin-public");
+    // TXH unmapped, falls back to adapter's own systemId
+    expect(result.holdings[1].systemId).toBe("worldcat-test");
+  });
+
   it("handles holdings endpoint returning non-200 gracefully", async () => {
     // Token
     mockFetch.mockResolvedValueOnce(

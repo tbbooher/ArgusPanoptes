@@ -54,6 +54,11 @@ export const AdapterProtocol = {
   SIRSI_SYMWS: "sirsi_symws",
   SIRSI_ENTERPRISE_SCRAPE: "sirsi_enterprise_scrape",
   BIBLIOCOMMONS_SCRAPE: "bibliocommons_scrape",
+  ASPEN_DISCOVERY_API: "aspen_discovery_api",
+  ATRIUUM_SCRAPE: "atriuum_scrape",
+  APOLLO_API: "apollo_api",
+  SPYDUS_SCRAPE: "spydus_scrape",
+  TLC_API: "tlc_api",
   WEB_SCRAPE: "web_scrape",
 } as const;
 export type AdapterProtocol =

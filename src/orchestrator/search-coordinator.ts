@@ -309,8 +309,12 @@ export class SearchCoordinator {
     }
 
     try {
+      // Key limiter by hostname (not systemId) so systems sharing a host
+      // (e.g. Pasadena + Montgomery County + Harris County on hcpl2.ent.sirsi.net)
+      // are collectively rate-limited per-server.
+      const hostKey = this.extractHostname(adapterConfig.baseUrl);
       const adapterResult = await this.hostLimiter.run(
-        systemId as string,
+        hostKey,
         () =>
           withRetry(
             () => {
@@ -396,6 +400,18 @@ export class SearchCoordinator {
       this.circuitBreakers.set(key, cb);
     }
     return cb;
+  }
+
+  /**
+   * Extract hostname from a URL for use as the per-host limiter key.
+   * Falls back to the full string if URL parsing fails.
+   */
+  private extractHostname(url: string): string {
+    try {
+      return new URL(url).hostname;
+    } catch {
+      return url;
+    }
   }
 
   private classifyError(

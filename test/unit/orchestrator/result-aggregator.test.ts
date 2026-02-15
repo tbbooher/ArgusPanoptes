@@ -241,4 +241,99 @@ describe("ResultAggregator", () => {
     const result = aggregator.aggregate(ISBN, [h]);
     expect(result.totalCopies).toBe(1);
   });
+
+  // ── WorldCat cross-source deduplication ─────────────────────────────
+
+  describe("WorldCat cross-source dedup", () => {
+    const WORLDCAT_RAW_STATUS =
+      "WorldCat holdings - real-time status unavailable";
+
+    it("removes WorldCat holdings when direct results exist for the same systemId", () => {
+      const direct = makeHolding({
+        systemId: "houston-public" as LibrarySystemId,
+        fingerprint: "fp-direct-1",
+        rawStatus: "Available",
+        status: "available" as ItemStatus,
+      });
+      const worldcat = makeHolding({
+        systemId: "houston-public" as LibrarySystemId,
+        fingerprint: "fp-wc-1",
+        rawStatus: WORLDCAT_RAW_STATUS,
+        status: "unknown" as ItemStatus,
+      });
+
+      const result = aggregator.aggregate(ISBN, [direct, worldcat]);
+      expect(result.holdings).toHaveLength(1);
+      expect(result.holdings[0].fingerprint).toBe("fp-direct-1");
+    });
+
+    it("keeps WorldCat holdings for systems without direct results", () => {
+      const directHouston = makeHolding({
+        systemId: "houston-public" as LibrarySystemId,
+        fingerprint: "fp-direct-1",
+        rawStatus: "Available",
+      });
+      const worldcatRural = makeHolding({
+        systemId: "worldcat-texas" as LibrarySystemId,
+        fingerprint: "fp-wc-rural",
+        rawStatus: WORLDCAT_RAW_STATUS,
+        status: "unknown" as ItemStatus,
+        systemName: "Small Town Library",
+      });
+
+      const result = aggregator.aggregate(ISBN, [directHouston, worldcatRural]);
+      expect(result.holdings).toHaveLength(2);
+      const sysIds = result.systems.map((s) => s.systemId);
+      expect(sysIds).toContain("houston-public");
+      expect(sysIds).toContain("worldcat-texas");
+    });
+
+    it("keeps all WorldCat holdings when no direct results exist", () => {
+      const wc1 = makeHolding({
+        systemId: "worldcat-texas" as LibrarySystemId,
+        fingerprint: "fp-wc-1",
+        rawStatus: WORLDCAT_RAW_STATUS,
+      });
+      const wc2 = makeHolding({
+        systemId: "worldcat-texas" as LibrarySystemId,
+        fingerprint: "fp-wc-2",
+        rawStatus: WORLDCAT_RAW_STATUS,
+      });
+
+      const result = aggregator.aggregate(ISBN, [wc1, wc2]);
+      expect(result.holdings).toHaveLength(2);
+    });
+
+    it("handles mixed direct and WorldCat for multiple systems", () => {
+      const directHouston = makeHolding({
+        systemId: "houston-public" as LibrarySystemId,
+        fingerprint: "fp-d-hou",
+        rawStatus: "Available",
+      });
+      const wcHouston = makeHolding({
+        systemId: "houston-public" as LibrarySystemId,
+        fingerprint: "fp-wc-hou",
+        rawStatus: WORLDCAT_RAW_STATUS,
+      });
+      const wcAustin = makeHolding({
+        systemId: "austin-public" as LibrarySystemId,
+        fingerprint: "fp-wc-aus",
+        rawStatus: WORLDCAT_RAW_STATUS,
+        systemName: "Austin Public Library",
+      });
+
+      const result = aggregator.aggregate(ISBN, [
+        directHouston,
+        wcHouston,
+        wcAustin,
+      ]);
+
+      // WorldCat Houston dropped (direct exists), WorldCat Austin kept
+      expect(result.holdings).toHaveLength(2);
+      const fps = result.holdings.map((h) => h.fingerprint);
+      expect(fps).toContain("fp-d-hou");
+      expect(fps).toContain("fp-wc-aus");
+      expect(fps).not.toContain("fp-wc-hou");
+    });
+  });
 });
