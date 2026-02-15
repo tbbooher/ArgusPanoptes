@@ -1,0 +1,18 @@
+id: roma-public
+name: "Starr County Library Consortium"
+vendor: apollo
+region: Starr County
+catalogUrl: https://roma.biblionix.com
+enabled: true
+
+branches:
+  - id: "roma-public:main"
+    name: "Starr County Library Consortium"
+    code: main
+    city: Roma
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://roma.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

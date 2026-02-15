@@ -1,0 +1,18 @@
+id: ballinger-public
+name: "Carnegie Library of Ballinger"
+vendor: apollo
+region: Runnels County
+catalogUrl: https://ballinger.biblionix.com
+enabled: true
+
+branches:
+  - id: "ballinger-public:main"
+    name: "Carnegie Library of Ballinger"
+    code: main
+    city: Ballinger
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://ballinger.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

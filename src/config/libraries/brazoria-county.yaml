@@ -1,0 +1,62 @@
+id: brazoria-county
+name: Brazoria County Library System
+vendor: spydus
+region: Brazoria County
+catalogUrl: https://mybcls.spydus.com/cgi-bin/spydus.exe/MSGTRN/OPAC/HOME
+enabled: true
+
+branches:
+  - id: "brazoria-county:alvin"
+    name: Alvin Branch Library
+    code: ALV
+    city: Alvin
+  - id: "brazoria-county:angleton"
+    name: Angleton Branch Library
+    code: ANG
+    city: Angleton
+  - id: "brazoria-county:brazoria"
+    name: Brazoria Branch Library
+    code: BRA
+    city: Brazoria
+  - id: "brazoria-county:clute"
+    name: Clute Branch Library
+    code: CLU
+    city: Clute
+  - id: "brazoria-county:danbury"
+    name: Danbury Branch Library
+    code: DAN
+    city: Danbury
+  - id: "brazoria-county:freeport"
+    name: Freeport Branch Library
+    code: FRE
+    city: Freeport
+  - id: "brazoria-county:lake-jackson"
+    name: Lake Jackson Branch Library
+    code: LAK
+    city: Lake Jackson
+  - id: "brazoria-county:manvel"
+    name: Manvel Branch Library
+    code: MAN
+    city: Manvel
+  - id: "brazoria-county:pearland"
+    name: Pearland Tom Reid Branch Library
+    code: PEA
+    city: Pearland
+  - id: "brazoria-county:sweeny"
+    name: Sweeny Branch Library
+    code: SWE
+    city: Sweeny
+  - id: "brazoria-county:west-columbia"
+    name: West Columbia Branch Library
+    code: WES
+    city: West Columbia
+  - id: "brazoria-county:west-pearland"
+    name: West Pearland Branch Library
+    code: PWS
+    city: Pearland
+
+adapters:
+  - protocol: spydus_scrape
+    baseUrl: https://mybcls.spydus.com
+    timeoutMs: 15000
+    maxConcurrency: 2

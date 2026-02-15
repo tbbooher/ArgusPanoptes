@@ -1,0 +1,18 @@
+id: dripping-springs-public
+name: "Dripping Springs Community Library"
+vendor: apollo
+region: Hays County
+catalogUrl: https://drippingsprings.biblionix.com
+enabled: true
+
+branches:
+  - id: "dripping-springs-public:main"
+    name: "Dripping Springs Community Library"
+    code: main
+    city: Dripping Springs
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://drippingsprings.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

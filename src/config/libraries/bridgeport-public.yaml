@@ -1,0 +1,18 @@
+id: bridgeport-public
+name: "Bridgeport Public Library"
+vendor: apollo
+region: Wise County
+catalogUrl: https://bridgeport.biblionix.com
+enabled: true
+
+branches:
+  - id: "bridgeport-public:main"
+    name: "Bridgeport Public Library"
+    code: main
+    city: Bridgeport
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://bridgeport.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

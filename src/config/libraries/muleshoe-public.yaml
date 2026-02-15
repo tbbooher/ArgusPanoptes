@@ -1,0 +1,18 @@
+id: muleshoe-public
+name: "Muleshoe Area Public Library"
+vendor: apollo
+region: Bailey County
+catalogUrl: https://muleshoe.biblionix.com
+enabled: true
+
+branches:
+  - id: "muleshoe-public:main"
+    name: "Muleshoe Area Public Library"
+    code: main
+    city: Muleshoe
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://muleshoe.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

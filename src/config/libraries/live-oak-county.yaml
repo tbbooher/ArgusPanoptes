@@ -1,0 +1,18 @@
+id: live-oak-county
+name: "Live Oak County Library"
+vendor: apollo
+region: Live Oak County
+catalogUrl: https://liveoak.biblionix.com
+enabled: true
+
+branches:
+  - id: "live-oak-county:main"
+    name: "Live Oak County Library"
+    code: main
+    city: George West
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://liveoak.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

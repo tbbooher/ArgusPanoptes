@@ -1,0 +1,26 @@
+id: tom-green-county
+name: Tom Green County Library System
+vendor: tlc
+region: Tom Green County
+catalogUrl: https://tgclibrary.tlcdelivers.com/
+enabled: true
+
+branches:
+  - id: "tom-green-county:stephens-central"
+    name: Stephens Central Library
+    code: stephens-central
+    city: San Angelo
+  - id: "tom-green-county:angelo-west"
+    name: Angelo West Branch
+    code: angelo-west
+    city: San Angelo
+  - id: "tom-green-county:north-angelo"
+    name: North Angelo Branch
+    code: north-angelo
+    city: San Angelo
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: https://tgclibrary.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2

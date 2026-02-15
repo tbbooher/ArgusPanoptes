@@ -1,0 +1,18 @@
+id: los-fresnos-public
+name: "Ethel L. Whipple Memorial Library"
+vendor: apollo
+region: Cameron County
+catalogUrl: https://losfresnos.biblionix.com
+enabled: true
+
+branches:
+  - id: "los-fresnos-public:main"
+    name: "Ethel L. Whipple Memorial Library"
+    code: main
+    city: Los Fresnos
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://losfresnos.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: mount-pleasant-public
+name: "Mount Pleasant Public Library"
+vendor: apollo
+region: Titus County
+catalogUrl: https://mountpleasant.biblionix.com
+enabled: true
+
+branches:
+  - id: "mount-pleasant-public:main"
+    name: "Mount Pleasant Public Library"
+    code: main
+    city: Mount Pleasant
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://mountpleasant.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

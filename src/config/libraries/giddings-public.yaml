@@ -1,0 +1,18 @@
+id: giddings-public
+name: "Giddings Public Library"
+vendor: apollo
+region: Lee County
+catalogUrl: https://giddingspubliclibrary.biblionix.com
+enabled: true
+
+branches:
+  - id: "giddings-public:main"
+    name: "Giddings Public Library"
+    code: main
+    city: Giddings
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://giddingspubliclibrary.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

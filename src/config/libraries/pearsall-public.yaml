@@ -1,0 +1,18 @@
+id: pearsall-public
+name: Pearsall Public Library
+vendor: atriuum
+region: Frio County
+catalogUrl: https://pearsall.booksys.net/opac/ppl/
+enabled: true
+
+branches:
+  - id: "pearsall-public:main"
+    name: Pearsall Public Library
+    code: ppl
+    city: Pearsall
+
+adapters:
+  - protocol: atriuum_scrape
+    baseUrl: https://pearsall.booksys.net/opac/ppl
+    timeoutMs: 15000
+    maxConcurrency: 2

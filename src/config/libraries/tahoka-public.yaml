@@ -1,0 +1,18 @@
+id: tahoka-public
+name: "City-County Library of Tahoka"
+vendor: apollo
+region: Lynn County
+catalogUrl: https://tahoka.biblionix.com
+enabled: true
+
+branches:
+  - id: "tahoka-public:main"
+    name: "City-County Library of Tahoka"
+    code: main
+    city: Tahoka
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://tahoka.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

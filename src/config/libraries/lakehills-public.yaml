@@ -1,0 +1,18 @@
+id: lakehills-public
+name: "Lakehills Area Library"
+vendor: apollo
+region: Bandera County
+catalogUrl: https://lakehills.biblionix.com
+enabled: true
+
+branches:
+  - id: "lakehills-public:main"
+    name: "Lakehills Area Library"
+    code: main
+    city: Lakehills
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://lakehills.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

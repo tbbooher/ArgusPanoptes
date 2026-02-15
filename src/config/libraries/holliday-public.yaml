@@ -1,0 +1,18 @@
+id: holliday-public
+name: "Holliday Public Library"
+vendor: apollo
+region: Archer County
+catalogUrl: https://holliday.biblionix.com
+enabled: true
+
+branches:
+  - id: "holliday-public:main"
+    name: "Holliday Public Library"
+    code: main
+    city: Holliday
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://holliday.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

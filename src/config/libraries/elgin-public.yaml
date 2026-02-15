@@ -1,0 +1,18 @@
+id: elgin-public
+name: "Elgin Public Library"
+vendor: apollo
+region: Bastrop County
+catalogUrl: https://elgin.biblionix.com
+enabled: true
+
+branches:
+  - id: "elgin-public:main"
+    name: "Elgin Public Library"
+    code: main
+    city: Elgin
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://elgin.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

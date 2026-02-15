@@ -1,0 +1,18 @@
+id: real-county
+name: "Real County Public Library"
+vendor: apollo
+region: Real County
+catalogUrl: https://real.biblionix.com
+enabled: true
+
+branches:
+  - id: "real-county:main"
+    name: "Real County Public Library"
+    code: main
+    city: Leakey
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://real.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

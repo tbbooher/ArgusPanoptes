@@ -3,7 +3,7 @@ name: Waco-McLennan County Library
 vendor: tlc
 region: McLennan County
 catalogUrl: https://waco.tlcdelivers.com/
-enabled: false
+enabled: true
 
 branches:
   - id: "waco-mclennan:central"
@@ -16,7 +16,7 @@ branches:
     city: Waco
 
 adapters:
-  - protocol: web_scrape
+  - protocol: tlc_api
     baseUrl: https://waco.tlcdelivers.com
     timeoutMs: 10000
     maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: bridge-city-public
+name: "Bridge City Public Library"
+vendor: apollo
+region: Orange County
+catalogUrl: https://bridgecity.biblionix.com
+enabled: true
+
+branches:
+  - id: "bridge-city-public:main"
+    name: "Bridge City Public Library"
+    code: main
+    city: Bridge City
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://bridgecity.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

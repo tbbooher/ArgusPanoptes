@@ -1,0 +1,18 @@
+id: marathon-public
+name: "Marathon Public Library"
+vendor: apollo
+region: Brewster County
+catalogUrl: https://marathon.biblionix.com
+enabled: true
+
+branches:
+  - id: "marathon-public:main"
+    name: "Marathon Public Library"
+    code: main
+    city: Marathon
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://marathon.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: texas-city-public
+name: Moore Memorial Public Library
+vendor: sirsi_dynix
+region: Galveston County
+catalogUrl: https://moor.ent.sirsi.net/client/en_US/library/
+enabled: true
+
+branches:
+  - id: "texas-city-public:main"
+    name: Moore Memorial Public Library
+    code: main
+    city: Texas City
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://moor.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

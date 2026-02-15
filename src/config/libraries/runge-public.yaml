@@ -1,0 +1,18 @@
+id: runge-public
+name: "Runge Public Library"
+vendor: apollo
+region: Karnes County
+catalogUrl: https://runge.biblionix.com
+enabled: true
+
+branches:
+  - id: "runge-public:main"
+    name: "Runge Public Library"
+    code: main
+    city: Runge
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://runge.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

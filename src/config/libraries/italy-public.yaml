@@ -1,0 +1,18 @@
+id: italy-public
+name: "S.M. Dunlap Library"
+vendor: apollo
+region: Ellis County
+catalogUrl: https://smdunlap.biblionix.com
+enabled: true
+
+branches:
+  - id: "italy-public:main"
+    name: "S.M. Dunlap Library"
+    code: main
+    city: Italy
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://smdunlap.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

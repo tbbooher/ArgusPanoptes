@@ -1,0 +1,18 @@
+id: waxahachie-public
+name: Nicholas P. Sims Library
+vendor: apollo
+region: Ellis County
+catalogUrl: https://sims.biblionix.com
+enabled: true
+
+branches:
+  - id: "waxahachie-public:main"
+    name: Nicholas P. Sims Library
+    code: main
+    city: Waxahachie
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://sims.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

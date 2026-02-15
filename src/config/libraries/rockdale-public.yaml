@@ -1,0 +1,18 @@
+id: rockdale-public
+name: "Lucy Hill Patterson Memorial Library"
+vendor: apollo
+region: Milam County
+catalogUrl: https://rockdale.biblionix.com
+enabled: true
+
+branches:
+  - id: "rockdale-public:main"
+    name: "Lucy Hill Patterson Memorial Library"
+    code: main
+    city: Rockdale
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://rockdale.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

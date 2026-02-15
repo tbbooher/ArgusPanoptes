@@ -1,0 +1,18 @@
+id: wellington-public
+name: "Wellington Public Library"
+vendor: apollo
+region: Collingsworth County
+catalogUrl: https://wellington.biblionix.com
+enabled: true
+
+branches:
+  - id: "wellington-public:main"
+    name: "Wellington Public Library"
+    code: main
+    city: Wellington
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://wellington.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

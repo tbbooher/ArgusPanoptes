@@ -1,0 +1,18 @@
+id: marlin-public
+name: "Marlin Public Library"
+vendor: apollo
+region: Falls County
+catalogUrl: https://marlin.biblionix.com
+enabled: true
+
+branches:
+  - id: "marlin-public:main"
+    name: "Marlin Public Library"
+    code: main
+    city: Marlin
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://marlin.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

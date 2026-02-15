@@ -1,0 +1,18 @@
+id: rio-grande-city-public
+name: "Rio Grande City Public Library"
+vendor: apollo
+region: Starr County
+catalogUrl: https://riograndecity.biblionix.com
+enabled: true
+
+branches:
+  - id: "rio-grande-city-public:main"
+    name: "Rio Grande City Public Library"
+    code: main
+    city: Rio Grande City
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://riograndecity.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: premont-public
+name: "Premont Public Library"
+vendor: apollo
+region: Jim Wells County
+catalogUrl: https://premont.biblionix.com
+enabled: true
+
+branches:
+  - id: "premont-public:main"
+    name: "Premont Public Library"
+    code: main
+    city: Premont
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://premont.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

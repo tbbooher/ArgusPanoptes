@@ -1,0 +1,18 @@
+id: yoakum-county-denver-city
+name: "Yoakum County Cecil Bickley Library"
+vendor: apollo
+region: Yoakum County
+catalogUrl: https://yoakumcountylibrarydenvercity.biblionix.com
+enabled: true
+
+branches:
+  - id: "yoakum-county-denver-city:main"
+    name: "Yoakum County Cecil Bickley Library"
+    code: main
+    city: Denver City
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://yoakumcountylibrarydenvercity.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

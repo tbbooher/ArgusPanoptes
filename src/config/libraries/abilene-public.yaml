@@ -1,0 +1,22 @@
+id: abilene-public
+name: Abilene Public Library
+vendor: sirsi_dynix
+region: Taylor County
+catalogUrl: https://ablc.ent.sirsi.net/client/en_US/apl/
+enabled: true
+
+branches:
+  - id: "abilene-public:main"
+    name: Abilene Public Library
+    code: main
+    city: Abilene
+  - id: "abilene-public:mockingbird"
+    name: Mockingbird Branch Library
+    code: mockingbird
+    city: Abilene
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://ablc.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: coleman-public
+name: "Coleman Public Library"
+vendor: apollo
+region: Coleman County
+catalogUrl: https://coleman.biblionix.com
+enabled: true
+
+branches:
+  - id: "coleman-public:main"
+    name: "Coleman Public Library"
+    code: main
+    city: Coleman
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://coleman.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

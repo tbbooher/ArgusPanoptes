@@ -1,0 +1,18 @@
+id: alexander-memorial
+name: "Alexander Memorial Library"
+vendor: apollo
+region: La Salle County
+catalogUrl: https://alexandermemorial.biblionix.com
+enabled: true
+
+branches:
+  - id: "alexander-memorial:main"
+    name: "Alexander Memorial Library"
+    code: main
+    city: Cotulla
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://alexandermemorial.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

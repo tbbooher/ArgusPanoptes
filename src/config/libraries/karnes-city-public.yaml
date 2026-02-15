@@ -1,0 +1,18 @@
+id: karnes-city-public
+name: "Karnes City Public Library"
+vendor: apollo
+region: Karnes County
+catalogUrl: https://karnescity.biblionix.com
+enabled: true
+
+branches:
+  - id: "karnes-city-public:main"
+    name: "Karnes City Public Library"
+    code: main
+    city: Karnes City
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://karnescity.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

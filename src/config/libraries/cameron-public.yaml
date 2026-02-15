@@ -1,0 +1,18 @@
+id: cameron-public
+name: "Cameron Public Library"
+vendor: apollo
+region: Milam County
+catalogUrl: https://cameron.biblionix.com
+enabled: true
+
+branches:
+  - id: "cameron-public:main"
+    name: "Cameron Public Library"
+    code: main
+    city: Cameron
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://cameron.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

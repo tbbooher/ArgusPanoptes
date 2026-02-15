@@ -1,0 +1,18 @@
+id: mason-county
+name: "Mason County Eckert Memorial Library"
+vendor: apollo
+region: Mason County
+catalogUrl: https://mason.biblionix.com
+enabled: true
+
+branches:
+  - id: "mason-county:main"
+    name: "Mason County Eckert Memorial Library"
+    code: main
+    city: Mason
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://mason.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

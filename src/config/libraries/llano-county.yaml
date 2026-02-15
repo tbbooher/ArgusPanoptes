@@ -1,0 +1,18 @@
+id: llano-county
+name: "Llano County Library System"
+vendor: apollo
+region: Llano County
+catalogUrl: https://llano.biblionix.com
+enabled: true
+
+branches:
+  - id: "llano-county:main"
+    name: "Llano County Library System"
+    code: main
+    city: Llano
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://llano.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

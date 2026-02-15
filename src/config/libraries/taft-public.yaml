@@ -1,0 +1,18 @@
+id: taft-public
+name: Taft Public Library
+vendor: atriuum
+region: San Patricio County
+catalogUrl: https://taftpltx.booksys.net/opac/tpl/
+enabled: true
+
+branches:
+  - id: "taft-public:main"
+    name: Taft Public Library
+    code: main
+    city: Taft
+
+adapters:
+  - protocol: atriuum_scrape
+    baseUrl: https://taftpltx.booksys.net/opac/tpl
+    timeoutMs: 15000
+    maxConcurrency: 2

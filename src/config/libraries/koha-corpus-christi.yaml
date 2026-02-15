@@ -3,7 +3,7 @@ name: Corpus Christi Public Library
 vendor: koha
 region: Nueces County
 catalogUrl: https://koha.cctexas.com/
-enabled: true
+enabled: false
 
 branches:
   - id: "koha-corpus-christi:la-retama"

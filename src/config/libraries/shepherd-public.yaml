@@ -1,0 +1,18 @@
+id: shepherd-public
+name: "Shepherd Public Library"
+vendor: apollo
+region: San Jacinto County
+catalogUrl: https://shepherd.biblionix.com
+enabled: true
+
+branches:
+  - id: "shepherd-public:main"
+    name: "Shepherd Public Library"
+    code: main
+    city: Shepherd
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://shepherd.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

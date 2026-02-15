@@ -1,0 +1,18 @@
+id: woodville-public
+name: "Allan Shivers Library and Museum"
+vendor: apollo
+region: Tyler County
+catalogUrl: https://woodville.biblionix.com
+enabled: true
+
+branches:
+  - id: "woodville-public:main"
+    name: "Allan Shivers Library and Museum"
+    code: main
+    city: Woodville
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://woodville.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

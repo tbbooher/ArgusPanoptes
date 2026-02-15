@@ -3,7 +3,7 @@ name: Carrollton Public Library
 vendor: koha
 region: Dallas County
 catalogUrl: https://koha.carrolltontx.gov/
-enabled: true
+enabled: false
 
 branches:
   - id: "koha-carrollton:josey-ranch-lake"

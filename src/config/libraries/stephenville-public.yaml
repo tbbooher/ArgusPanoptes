@@ -1,0 +1,18 @@
+id: stephenville-public
+name: Stephenville Public Library
+vendor: atriuum
+region: Erath County
+catalogUrl: https://stephenvilletx.booksys.net/opac/spl/
+enabled: true
+
+branches:
+  - id: "stephenville-public:main"
+    name: Stephenville Public Library
+    code: main
+    city: Stephenville
+
+adapters:
+  - protocol: atriuum_scrape
+    baseUrl: https://stephenvilletx.booksys.net/opac/spl
+    timeoutMs: 15000
+    maxConcurrency: 2

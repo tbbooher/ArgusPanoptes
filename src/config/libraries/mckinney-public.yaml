@@ -1,0 +1,24 @@
+id: mckinney-public
+name: McKinney Public Library
+vendor: aspen_discovery
+region: Collin County
+catalogUrl: https://mckinney.aspendiscovery.org
+# Disabled: Cloudflare is blocking API requests (HTTP 403).
+# May need IP whitelisting from the library.
+enabled: false
+
+branches:
+  - id: "mckinney-public:john-roy"
+    name: John and Judy Gay Library
+    code: john-roy
+    city: McKinney
+  - id: "mckinney-public:main"
+    name: McKinney Public Library
+    code: main
+    city: McKinney
+
+adapters:
+  - protocol: aspen_discovery_api
+    baseUrl: https://mckinney.aspendiscovery.org
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: hughes-springs-public
+name: "Hughes Springs Area Public Library"
+vendor: apollo
+region: Cass County
+catalogUrl: https://hsalibrary.biblionix.com
+enabled: true
+
+branches:
+  - id: "hughes-springs-public:main"
+    name: "Hughes Springs Area Public Library"
+    code: main
+    city: Hughes Springs
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://hsalibrary.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: groves-public
+name: "Groves Public Library"
+vendor: apollo
+region: Jefferson County
+catalogUrl: https://groves.biblionix.com
+enabled: true
+
+branches:
+  - id: "groves-public:main"
+    name: "Groves Public Library"
+    code: main
+    city: Groves
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://groves.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

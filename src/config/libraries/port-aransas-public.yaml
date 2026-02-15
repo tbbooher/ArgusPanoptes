@@ -1,0 +1,18 @@
+id: port-aransas-public
+name: "Ellis Memorial Library"
+vendor: apollo
+region: Nueces County
+catalogUrl: https://ellismemorial.biblionix.com
+enabled: true
+
+branches:
+  - id: "port-aransas-public:main"
+    name: "Ellis Memorial Library"
+    code: main
+    city: Port Aransas
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://ellismemorial.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: val-verde-county
+name: "Val Verde County Library"
+vendor: apollo
+region: Val Verde County
+catalogUrl: https://valverde.biblionix.com
+enabled: true
+
+branches:
+  - id: "val-verde-county:main"
+    name: "Val Verde County Library"
+    code: main
+    city: Del Rio
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://valverde.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

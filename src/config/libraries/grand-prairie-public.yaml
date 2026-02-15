@@ -1,0 +1,26 @@
+id: grand-prairie-public
+name: Grand Prairie Public Library System
+vendor: sirsi_dynix
+region: Dallas County
+catalogUrl: https://gp.ent.sirsi.net/client/en_US/library/
+enabled: true
+
+branches:
+  - id: "grand-prairie-public:main"
+    name: Main Library
+    code: main
+    city: Grand Prairie
+  - id: "grand-prairie-public:warmack"
+    name: Betty Warmack Library
+    code: warmack
+    city: Grand Prairie
+  - id: "grand-prairie-public:shotwell"
+    name: Tony Shotwell Library
+    code: shotwell
+    city: Grand Prairie
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://gp.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

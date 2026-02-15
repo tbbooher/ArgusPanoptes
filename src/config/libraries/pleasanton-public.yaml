@@ -1,0 +1,18 @@
+id: pleasanton-public
+name: "Pleasanton Library and Information Center"
+vendor: apollo
+region: Atascosa County
+catalogUrl: https://pleasanton.biblionix.com
+enabled: true
+
+branches:
+  - id: "pleasanton-public:main"
+    name: "Pleasanton Library and Information Center"
+    code: main
+    city: Pleasanton
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://pleasanton.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

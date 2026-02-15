@@ -1,0 +1,50 @@
+id: hidalgo-county
+name: Hidalgo County Library System
+vendor: tlc
+region: Hidalgo County
+catalogUrl: https://hcls.tlcdelivers.com/
+enabled: false
+
+branches:
+  - id: "hidalgo-county:edinburg"
+    name: Dustin Michael Sekula Memorial Library
+    code: edinburg
+    city: Edinburg
+  - id: "hidalgo-county:pharr"
+    name: Pharr Memorial Library
+    code: pharr
+    city: Pharr
+  - id: "hidalgo-county:weslaco"
+    name: Weslaco Public Library
+    code: weslaco
+    city: Weslaco
+  - id: "hidalgo-county:mission"
+    name: Mission Public Library
+    code: mission
+    city: Mission
+  - id: "hidalgo-county:donna"
+    name: Donna Public Library
+    code: donna
+    city: Donna
+  - id: "hidalgo-county:mercedes"
+    name: Dr. Hector P. Garcia Memorial Library
+    code: mercedes
+    city: Mercedes
+  - id: "hidalgo-county:elsa"
+    name: Elsa Public Library
+    code: elsa
+    city: Elsa
+  - id: "hidalgo-county:san-juan"
+    name: San Juan Public Library
+    code: san-juan
+    city: San Juan
+  - id: "hidalgo-county:alamo"
+    name: Alamo Public Library
+    code: alamo
+    city: Alamo
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: https://hcls.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2

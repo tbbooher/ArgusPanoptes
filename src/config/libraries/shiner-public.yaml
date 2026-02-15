@@ -1,0 +1,18 @@
+id: shiner-public
+name: "Mabel C. Fry Public Library"
+vendor: apollo
+region: Lavaca County
+catalogUrl: https://fry.biblionix.com
+enabled: true
+
+branches:
+  - id: "shiner-public:main"
+    name: "Mabel C. Fry Public Library"
+    code: main
+    city: Shiner
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://fry.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

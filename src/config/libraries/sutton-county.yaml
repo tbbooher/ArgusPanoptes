@@ -1,0 +1,18 @@
+id: sutton-county
+name: "Sutton County Public Library"
+vendor: apollo
+region: Sutton County
+catalogUrl: https://suttoncounty.biblionix.com
+enabled: true
+
+branches:
+  - id: "sutton-county:main"
+    name: "Sutton County Public Library"
+    code: main
+    city: Sonora
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://suttoncounty.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

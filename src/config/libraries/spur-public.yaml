@@ -1,0 +1,18 @@
+id: spur-public
+name: "Dickens County Spur Public Library"
+vendor: apollo
+region: Dickens County
+catalogUrl: https://spur.biblionix.com
+enabled: true
+
+branches:
+  - id: "spur-public:main"
+    name: "Dickens County Spur Public Library"
+    code: main
+    city: Spur
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://spur.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

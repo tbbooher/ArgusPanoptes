@@ -1,0 +1,18 @@
+id: dimmit-county
+name: "Dimmit County Public Library"
+vendor: apollo
+region: Dimmit County
+catalogUrl: https://dimmit.biblionix.com
+enabled: true
+
+branches:
+  - id: "dimmit-county:main"
+    name: "Dimmit County Public Library"
+    code: main
+    city: Carrizo Springs
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://dimmit.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

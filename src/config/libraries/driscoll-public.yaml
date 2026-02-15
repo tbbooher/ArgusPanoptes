@@ -1,0 +1,18 @@
+id: driscoll-public
+name: "Driscoll Public Library"
+vendor: apollo
+region: Nueces County
+catalogUrl: https://driscoll.biblionix.com
+enabled: true
+
+branches:
+  - id: "driscoll-public:main"
+    name: "Driscoll Public Library"
+    code: main
+    city: Driscoll
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://driscoll.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

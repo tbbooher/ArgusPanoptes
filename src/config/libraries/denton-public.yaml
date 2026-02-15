@@ -1,0 +1,26 @@
+id: denton-public
+name: Denton Public Library
+vendor: bibliocommons
+region: Denton County
+catalogUrl: https://denton.bibliocommons.com/
+enabled: true
+
+branches:
+  - id: "denton-public:emily-fowler"
+    name: Emily Fowler Central Library
+    code: emily-fowler
+    city: Denton
+  - id: "denton-public:north"
+    name: North Branch Library
+    code: north
+    city: Denton
+  - id: "denton-public:south"
+    name: South Branch Library
+    code: south
+    city: Denton
+
+adapters:
+  - protocol: bibliocommons_scrape
+    baseUrl: https://denton.bibliocommons.com
+    timeoutMs: 10000
+    maxConcurrency: 2

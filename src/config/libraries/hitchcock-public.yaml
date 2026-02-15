@@ -1,0 +1,18 @@
+id: hitchcock-public
+name: "Genevieve Miller Hitchcock Public Library"
+vendor: apollo
+region: Galveston County
+catalogUrl: https://hitchcock.biblionix.com
+enabled: true
+
+branches:
+  - id: "hitchcock-public:main"
+    name: "Genevieve Miller Hitchcock Public Library"
+    code: main
+    city: Hitchcock
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://hitchcock.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

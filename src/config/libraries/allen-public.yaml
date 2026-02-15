@@ -1,0 +1,18 @@
+id: allen-public
+name: "Allen Public Library"
+vendor: apollo
+region: Collin County
+catalogUrl: https://allen.biblionix.com
+enabled: true
+
+branches:
+  - id: "allen-public:main"
+    name: "Allen Public Library"
+    code: main
+    city: Allen
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://allen.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

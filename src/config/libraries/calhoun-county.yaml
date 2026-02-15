@@ -1,0 +1,18 @@
+id: calhoun-county
+name: "Calhoun County Library"
+vendor: apollo
+region: Calhoun County
+catalogUrl: https://calhouncounty.biblionix.com
+enabled: true
+
+branches:
+  - id: "calhoun-county:main"
+    name: "Calhoun County Library"
+    code: main
+    city: Port Lavaca
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://calhouncounty.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

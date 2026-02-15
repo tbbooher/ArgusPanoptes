@@ -1,0 +1,18 @@
+id: onalaska-public
+name: "Coulter Public Library"
+vendor: apollo
+region: Polk County
+catalogUrl: https://coulter.biblionix.com
+enabled: true
+
+branches:
+  - id: "onalaska-public:main"
+    name: "Coulter Public Library"
+    code: main
+    city: Onalaska
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://coulter.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: crosby-county
+name: "Crosby County Library"
+vendor: apollo
+region: Crosby County
+catalogUrl: https://crosbycounty.biblionix.com
+enabled: true
+
+branches:
+  - id: "crosby-county:main"
+    name: "Crosby County Library"
+    code: main
+    city: Crosbyton
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://crosbycounty.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

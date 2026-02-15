@@ -1,0 +1,22 @@
+id: bryan-college-station
+name: Bryan + College Station Public Library
+vendor: tlc
+region: Brazos County
+catalogUrl: https://bcslibrary.tlcdelivers.com/
+enabled: true
+
+branches:
+  - id: "bryan-college-station:larry-ringer"
+    name: Larry J. Ringer Library
+    code: larry-ringer
+    city: College Station
+  - id: "bryan-college-station:clara-mounce"
+    name: Clara B. Mounce Public Library
+    code: clara-mounce
+    city: Bryan
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: https://bcslibrary.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2

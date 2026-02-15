@@ -1,0 +1,18 @@
+id: sweetwater-public
+name: "Sweetwater County-City Library"
+vendor: apollo
+region: Nolan County
+catalogUrl: https://sweetwater.biblionix.com
+enabled: true
+
+branches:
+  - id: "sweetwater-public:main"
+    name: "Sweetwater County-City Library"
+    code: main
+    city: Sweetwater
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://sweetwater.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

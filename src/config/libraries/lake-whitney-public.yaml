@@ -1,0 +1,18 @@
+id: lake-whitney-public
+name: "Lake Whitney Public Library"
+vendor: apollo
+region: Hill County
+catalogUrl: https://lakewhitney.biblionix.com
+enabled: true
+
+branches:
+  - id: "lake-whitney-public:main"
+    name: "Lake Whitney Public Library"
+    code: main
+    city: Whitney
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://lakewhitney.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

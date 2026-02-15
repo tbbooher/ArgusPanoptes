@@ -1,0 +1,18 @@
+id: flatonia-public
+name: "Flatonia Public Library"
+vendor: apollo
+region: Fayette County
+catalogUrl: https://flatonia.biblionix.com
+enabled: true
+
+branches:
+  - id: "flatonia-public:main"
+    name: "Flatonia Public Library"
+    code: main
+    city: Flatonia
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://flatonia.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

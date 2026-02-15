@@ -1,0 +1,18 @@
+id: wichita-falls
+name: Wichita Falls Public Library
+vendor: tlc
+region: Wichita County
+catalogUrl: https://wfpl.tlcdelivers.com/
+enabled: true
+
+branches:
+  - id: "wichita-falls:main"
+    name: Main
+    code: "1"
+    city: Wichita Falls
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: https://wfpl.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2

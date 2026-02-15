@@ -1,0 +1,18 @@
+id: yoakum-county-plains
+name: "Yoakum County Library - Plains"
+vendor: apollo
+region: Yoakum County
+catalogUrl: https://yoakumcountylibraryplains.biblionix.com
+enabled: true
+
+branches:
+  - id: "yoakum-county-plains:main"
+    name: "Yoakum County Library - Plains"
+    code: main
+    city: Plains
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://yoakumcountylibraryplains.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

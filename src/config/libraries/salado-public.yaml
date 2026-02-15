@@ -1,0 +1,18 @@
+id: salado-public
+name: "Salado Public Library"
+vendor: apollo
+region: Bell County
+catalogUrl: https://salado.biblionix.com
+enabled: true
+
+branches:
+  - id: "salado-public:main"
+    name: "Salado Public Library"
+    code: main
+    city: Salado
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://salado.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: edgewood-public
+name: "Edgewood Community Library"
+vendor: apollo
+region: Van Zandt County
+catalogUrl: https://edgewood.biblionix.com
+enabled: true
+
+branches:
+  - id: "edgewood-public:main"
+    name: "Edgewood Community Library"
+    code: main
+    city: Edgewood
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://edgewood.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

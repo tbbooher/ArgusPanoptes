@@ -1,0 +1,18 @@
+id: texarkana-public
+name: Texarkana Public Library
+vendor: sirsi_dynix
+region: Bowie County
+catalogUrl: https://txark.ent.sirsi.net/client/en_US/default
+enabled: true
+
+branches:
+  - id: "texarkana-public:main"
+    name: Texarkana Public Library
+    code: main
+    city: Texarkana
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://txark.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

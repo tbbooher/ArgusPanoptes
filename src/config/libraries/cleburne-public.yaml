@@ -1,0 +1,18 @@
+id: cleburne-public
+name: Cleburne Public Library
+vendor: tlc
+region: Johnson County
+catalogUrl: https://catalog.cleburne.net/
+enabled: true
+
+branches:
+  - id: "cleburne-public:main"
+    name: Cleburne Public Library
+    code: main
+    city: Cleburne
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: https://catalog.cleburne.net
+    timeoutMs: 10000
+    maxConcurrency: 2

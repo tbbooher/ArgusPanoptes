@@ -1,0 +1,18 @@
+id: diboll-public
+name: T.L.L. Temple Memorial Library
+vendor: apollo
+region: Angelina County
+catalogUrl: https://catalog.dibolllibrary.com
+enabled: true
+
+branches:
+  - id: "diboll-public:main"
+    name: T.L.L. Temple Memorial Library
+    code: main
+    city: Diboll
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://catalog.dibolllibrary.com
+    timeoutMs: 10000
+    maxConcurrency: 2

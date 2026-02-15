@@ -1,0 +1,18 @@
+id: rowlett-public
+name: Rowlett Public Library
+vendor: apollo
+region: Dallas County
+catalogUrl: https://rowlett.biblionix.com
+enabled: true
+
+branches:
+  - id: "rowlett-public:main"
+    name: Rowlett Public Library
+    code: main
+    city: Rowlett
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://rowlett.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

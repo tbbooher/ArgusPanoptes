@@ -1,0 +1,18 @@
+id: canyon-area
+name: Canyon Area Library
+vendor: sirsi_dynix
+region: Randall County
+catalogUrl: https://hrlc.ent.sirsi.net/client/en_US/can
+enabled: true
+
+branches:
+  - id: "canyon-area:main"
+    name: Canyon Area Library
+    code: main
+    city: Canyon
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://hrlc.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: port-isabel-public
+name: "Port Isabel Public Library"
+vendor: apollo
+region: Cameron County
+catalogUrl: https://portisabel.biblionix.com
+enabled: true
+
+branches:
+  - id: "port-isabel-public:main"
+    name: "Port Isabel Public Library"
+    code: main
+    city: Port Isabel
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://portisabel.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

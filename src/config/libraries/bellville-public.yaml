@@ -1,0 +1,18 @@
+id: bellville-public
+name: "Bellville Public Library"
+vendor: apollo
+region: Austin County
+catalogUrl: https://bellville.biblionix.com
+enabled: true
+
+branches:
+  - id: "bellville-public:main"
+    name: "Bellville Public Library"
+    code: main
+    city: Bellville
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://bellville.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

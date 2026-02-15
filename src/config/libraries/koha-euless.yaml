@@ -1,0 +1,18 @@
+id: koha-euless
+name: Mary Lib Saleh Euless Public Library
+vendor: koha
+region: Tarrant County
+catalogUrl: https://catalog.eulesstx.gov/
+enabled: false
+
+branches:
+  - id: "koha-euless:main"
+    name: Mary Lib Saleh Euless Public Library
+    code: main
+    city: Euless
+
+adapters:
+  - protocol: koha_sru
+    baseUrl: https://opac.eulesstx.gov
+    timeoutMs: 10000
+    maxConcurrency: 2

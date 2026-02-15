@@ -1,0 +1,18 @@
+id: la-porte-public
+name: La Porte Public Library
+vendor: tlc
+region: Harris County
+catalogUrl: https://laporte.tlcdelivers.com/
+enabled: true
+
+branches:
+  - id: "la-porte-public:main"
+    name: La Porte Public Library
+    code: main
+    city: La Porte
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: https://laporte.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2

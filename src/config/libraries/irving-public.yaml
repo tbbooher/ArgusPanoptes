@@ -1,0 +1,18 @@
+id: irving-public
+name: Irving Public Library
+vendor: polaris
+region: Dallas County
+catalogUrl: https://irving.polarislibrary.com/
+enabled: false
+
+branches:
+  - id: "irving-public:central"
+    name: Central Library
+    code: central
+    city: Irving
+
+adapters:
+  - protocol: polaris_papi
+    baseUrl: https://irving.polarislibrary.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: bellaire-public
+name: Bellaire City Library
+vendor: sirsi_dynix
+region: Harris County
+catalogUrl: https://hcpl2.ent.sirsi.net/client/en_US/bcl
+enabled: true
+
+branches:
+  - id: "bellaire-public:main"
+    name: Bellaire City Library
+    code: main
+    city: Bellaire
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://hcpl2.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

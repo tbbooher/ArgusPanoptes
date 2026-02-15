@@ -1,0 +1,30 @@
+id: lubbock-public
+name: Lubbock Public Library
+vendor: sirsi_dynix
+region: Lubbock County
+catalogUrl: https://lubb.ent.sirsi.net/client/en_US/default
+enabled: true
+
+branches:
+  - id: "lubbock-public:mahon"
+    name: Mahon Library
+    code: mahon
+    city: Lubbock
+  - id: "lubbock-public:godeke"
+    name: Godeke Branch Library
+    code: godeke
+    city: Lubbock
+  - id: "lubbock-public:groves"
+    name: Groves Branch Library
+    code: groves
+    city: Lubbock
+  - id: "lubbock-public:patterson"
+    name: Patterson Branch Library
+    code: patterson
+    city: Lubbock
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://lubb.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

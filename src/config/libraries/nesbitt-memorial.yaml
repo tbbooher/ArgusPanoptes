@@ -1,0 +1,18 @@
+id: nesbitt-memorial
+name: "Nesbitt Memorial Library"
+vendor: apollo
+region: Colorado County
+catalogUrl: https://nesbitt.biblionix.com
+enabled: true
+
+branches:
+  - id: "nesbitt-memorial:main"
+    name: "Nesbitt Memorial Library"
+    code: main
+    city: Columbus
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://nesbitt.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

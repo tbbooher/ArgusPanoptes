@@ -1,0 +1,18 @@
+id: andrews-county
+name: "Andrews County Library"
+vendor: apollo
+region: Andrews County
+catalogUrl: https://andrews.biblionix.com
+enabled: true
+
+branches:
+  - id: "andrews-county:main"
+    name: "Andrews County Library"
+    code: main
+    city: Andrews
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://andrews.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

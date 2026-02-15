@@ -1,0 +1,18 @@
+id: lewisville-public
+name: Lewisville Public Library
+vendor: sirsi_dynix
+region: Denton County
+catalogUrl: https://lewp.ent.sirsi.net/client/en_US/default/
+enabled: true
+
+branches:
+  - id: "lewisville-public:main"
+    name: Lewisville Public Library
+    code: main
+    city: Lewisville
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://lewp.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

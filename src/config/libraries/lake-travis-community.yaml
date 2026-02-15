@@ -1,0 +1,18 @@
+id: lake-travis-community
+name: "Lake Travis Community Library"
+vendor: apollo
+region: Travis County
+catalogUrl: https://laketravis.biblionix.com
+enabled: true
+
+branches:
+  - id: "lake-travis-community:main"
+    name: "Lake Travis Community Library"
+    code: main
+    city: Lakeway
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://laketravis.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: kerrville-public
+name: "Butt-Holdsworth Memorial Library"
+vendor: apollo
+region: Kerr County
+catalogUrl: https://kerrvilletx.biblionix.com
+enabled: true
+
+branches:
+  - id: "kerrville-public:main"
+    name: "Butt-Holdsworth Memorial Library"
+    code: main
+    city: Kerrville
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://kerrvilletx.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

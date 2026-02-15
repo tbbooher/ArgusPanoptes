@@ -1,0 +1,18 @@
+id: luling-public
+name: "JB Nickells Memorial Library"
+vendor: apollo
+region: Caldwell County
+catalogUrl: https://luling.biblionix.com
+enabled: true
+
+branches:
+  - id: "luling-public:main"
+    name: "JB Nickells Memorial Library"
+    code: main
+    city: Luling
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://luling.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,48 @@
+id: worldcat-texas
+name: WorldCat Texas Holdings
+vendor: unknown
+region: Texas
+catalogUrl: https://www.worldcat.org/
+enabled: false
+
+branches:
+  - id: "worldcat-texas:statewide"
+    name: Texas Statewide
+    code: statewide
+    city: Texas
+
+adapters:
+  - protocol: oclc_worldcat
+    baseUrl: https://americas.discovery.api.oclc.org
+    timeoutMs: 15000
+    maxConcurrency: 2
+    clientKeyEnvVar: OCLC_WORLDCAT_KEY
+    clientSecretEnvVar: OCLC_WORLDCAT_SECRET
+    extra:
+      # Map OCLC institution symbols to our library system IDs.
+      # When WorldCat reports a holding for a mapped institution, the
+      # adapter uses the mapped systemId so the result aggregator can
+      # detect overlap with direct adapter results and prefer those.
+      institutionSymbolMap:
+        TXH: houston-public
+        TXH-B: harris-county
+        TXARL: arlington-public
+        TXABP: abilene-public
+        TXAMP: amarillo-public
+        TXAUS: austin-public
+        TXBMT: beaumont-public
+        TXELP: el-paso-public
+        TXFBC: fort-bend-county
+        TXFWL: fort-worth
+        TXG: garland-public
+        TXLRD: laredo-public
+        TXPLP: plano-public
+        TXSAL: san-antonio-public
+        TXCRL: koha-carrollton
+        TXCPK: koha-cedar-park
+        TXCC: koha-corpus-christi
+        TXPAS: pasadena-public
+        TXMCL: montgomery-county
+        TXLGC: league-city
+        TXFRI: frisco-public
+        TXDEN: denton-public

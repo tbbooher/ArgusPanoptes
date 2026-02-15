@@ -1,0 +1,18 @@
+id: belton-public
+name: "Lena Armstrong Public Library"
+vendor: apollo
+region: Bell County
+catalogUrl: https://belton.biblionix.com
+enabled: true
+
+branches:
+  - id: "belton-public:main"
+    name: "Lena Armstrong Public Library"
+    code: main
+    city: Belton
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://belton.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

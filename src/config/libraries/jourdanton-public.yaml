@@ -1,0 +1,18 @@
+id: jourdanton-public
+name: "Jourdanton Community Library"
+vendor: apollo
+region: Atascosa County
+catalogUrl: https://jourdanton.biblionix.com
+enabled: true
+
+branches:
+  - id: "jourdanton-public:main"
+    name: "Jourdanton Community Library"
+    code: main
+    city: Jourdanton
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://jourdanton.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

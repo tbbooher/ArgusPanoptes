@@ -1,0 +1,18 @@
+id: sherman-public
+name: Sherman Public Library (BARR Consortium)
+vendor: tlc
+region: Grayson County
+catalogUrl: https://gcl.tlcdelivers.com/
+enabled: true
+
+branches:
+  - id: "sherman-public:main"
+    name: Sherman Public Library
+    code: sherman
+    city: Sherman
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: https://gcl.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: jackson-county
+name: "Jackson County Memorial Library"
+vendor: apollo
+region: Jackson County
+catalogUrl: https://jackson.biblionix.com
+enabled: true
+
+branches:
+  - id: "jackson-county:main"
+    name: "Jackson County Memorial Library"
+    code: main
+    city: Edna
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://jackson.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

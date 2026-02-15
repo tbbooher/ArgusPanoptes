@@ -1,0 +1,18 @@
+id: rains-county
+name: Rains County Public Library
+vendor: atriuum
+region: Rains County
+catalogUrl: https://rainstx.booksys.net/opac/rainstx/
+enabled: true
+
+branches:
+  - id: "rains-county:main"
+    name: Rains County Public Library
+    code: main
+    city: Emory
+
+adapters:
+  - protocol: atriuum_scrape
+    baseUrl: https://rainstx.booksys.net/opac/rainstx
+    timeoutMs: 15000
+    maxConcurrency: 2

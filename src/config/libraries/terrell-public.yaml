@@ -1,0 +1,18 @@
+id: terrell-public
+name: "Terrell Public Library"
+vendor: apollo
+region: Kaufman County
+catalogUrl: https://terrell.biblionix.com
+enabled: true
+
+branches:
+  - id: "terrell-public:main"
+    name: "Terrell Public Library"
+    code: main
+    city: Terrell
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://terrell.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

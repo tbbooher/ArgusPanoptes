@@ -1,0 +1,26 @@
+id: garland-public
+name: Nicholson Memorial Library System
+vendor: sirsi_dynix
+region: Dallas County
+catalogUrl: https://nm.ent.sirsi.net/client/en_US/default
+enabled: true
+
+branches:
+  - id: "garland-public:central"
+    name: Central Library
+    code: central
+    city: Garland
+  - id: "garland-public:south-garland"
+    name: South Garland Branch Library
+    code: south-garland
+    city: Garland
+  - id: "garland-public:walnut-creek"
+    name: Walnut Creek Branch Library
+    code: walnut-creek
+    city: Garland
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://nm.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

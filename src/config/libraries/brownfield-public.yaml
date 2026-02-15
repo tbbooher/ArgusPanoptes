@@ -1,0 +1,18 @@
+id: brownfield-public
+name: "Kendrick Memorial Library"
+vendor: apollo
+region: Terry County
+catalogUrl: https://brownfield.biblionix.com
+enabled: true
+
+branches:
+  - id: "brownfield-public:main"
+    name: "Kendrick Memorial Library"
+    code: main
+    city: Brownfield
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://brownfield.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

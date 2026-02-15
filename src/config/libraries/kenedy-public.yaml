@@ -1,0 +1,18 @@
+id: kenedy-public
+name: "Kenedy Public Library"
+vendor: apollo
+region: Karnes County
+catalogUrl: https://kenedy.biblionix.com
+enabled: true
+
+branches:
+  - id: "kenedy-public:main"
+    name: "Kenedy Public Library"
+    code: main
+    city: Kenedy
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://kenedy.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

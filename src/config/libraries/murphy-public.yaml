@@ -1,0 +1,18 @@
+id: murphy-public
+name: Murphy Public Library
+vendor: apollo
+region: Collin County
+catalogUrl: https://murphy.biblionix.com
+enabled: true
+
+branches:
+  - id: "murphy-public:main"
+    name: Murphy Public Library
+    code: main
+    city: Murphy
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://murphy.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

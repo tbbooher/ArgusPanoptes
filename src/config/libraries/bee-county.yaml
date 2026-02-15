@@ -1,0 +1,18 @@
+id: bee-county
+name: "Joe Barnhart Bee County Library"
+vendor: apollo
+region: Bee County
+catalogUrl: https://bclib.biblionix.com
+enabled: true
+
+branches:
+  - id: "bee-county:main"
+    name: "Joe Barnhart Bee County Library"
+    code: main
+    city: Beeville
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://bclib.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

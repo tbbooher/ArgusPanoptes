@@ -1,0 +1,18 @@
+id: cochran-county
+name: "Cochran County Love Memorial Library"
+vendor: apollo
+region: Cochran County
+catalogUrl: https://cochran.biblionix.com
+enabled: true
+
+branches:
+  - id: "cochran-county:main"
+    name: "Cochran County Love Memorial Library"
+    code: main
+    city: Morton
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://cochran.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

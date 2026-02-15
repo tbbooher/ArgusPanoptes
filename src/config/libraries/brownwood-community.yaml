@@ -1,0 +1,18 @@
+id: brownwood-community
+name: Brownwood Community Library
+vendor: apollo
+region: Brown County
+catalogUrl: https://brownwood.biblionix.com
+enabled: true
+
+branches:
+  - id: "brownwood-community:main"
+    name: Brownwood Community Library
+    code: main
+    city: Brownwood
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://brownwood.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

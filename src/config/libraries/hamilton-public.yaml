@@ -1,0 +1,18 @@
+id: hamilton-public
+name: "Hamilton Public Library"
+vendor: apollo
+region: Hamilton County
+catalogUrl: https://hamilton.biblionix.com
+enabled: true
+
+branches:
+  - id: "hamilton-public:main"
+    name: "Hamilton Public Library"
+    code: main
+    city: Hamilton
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://hamilton.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: medina-public
+name: "Medina Community Library"
+vendor: apollo
+region: Bandera County
+catalogUrl: https://medina.biblionix.com
+enabled: true
+
+branches:
+  - id: "medina-public:main"
+    name: "Medina Community Library"
+    code: main
+    city: Medina
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://medina.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

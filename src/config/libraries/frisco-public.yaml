@@ -1,0 +1,18 @@
+id: frisco-public
+name: Frisco Public Library
+vendor: bibliocommons
+region: Collin County
+catalogUrl: https://friscolibrary.bibliocommons.com/
+enabled: true
+
+branches:
+  - id: "frisco-public:main"
+    name: Frisco Public Library
+    code: main
+    city: Frisco
+
+adapters:
+  - protocol: bibliocommons_scrape
+    baseUrl: https://friscolibrary.bibliocommons.com
+    timeoutMs: 10000
+    maxConcurrency: 2

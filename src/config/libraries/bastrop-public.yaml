@@ -1,0 +1,18 @@
+id: bastrop-public
+name: "Bastrop Public Library"
+vendor: apollo
+region: Bastrop County
+catalogUrl: https://bastrop.biblionix.com
+enabled: true
+
+branches:
+  - id: "bastrop-public:main"
+    name: "Bastrop Public Library"
+    code: main
+    city: Bastrop
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://bastrop.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

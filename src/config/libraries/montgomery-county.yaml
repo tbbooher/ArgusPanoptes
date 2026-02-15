@@ -1,0 +1,22 @@
+id: montgomery-county
+name: Montgomery County Memorial Library System
+vendor: sirsi_dynix
+region: Montgomery County
+catalogUrl: https://hcpl2.ent.sirsi.net/client/en_US/mcmlweb/
+enabled: true
+
+branches:
+  - id: "montgomery-county:central"
+    name: Central Library
+    code: central
+    city: Conroe
+  - id: "montgomery-county:south-regional"
+    name: South Regional Library
+    code: south-regional
+    city: The Woodlands
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://hcpl2.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

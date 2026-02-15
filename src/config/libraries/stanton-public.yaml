@@ -1,0 +1,18 @@
+id: stanton-public
+name: "Stanton Public Library"
+vendor: apollo
+region: Martin County
+catalogUrl: https://stanton.biblionix.com
+enabled: true
+
+branches:
+  - id: "stanton-public:main"
+    name: "Stanton Public Library"
+    code: main
+    city: Stanton
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://stanton.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

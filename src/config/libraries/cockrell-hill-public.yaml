@@ -1,0 +1,18 @@
+id: cockrell-hill-public
+name: "Cockrell Hill Public Library"
+vendor: apollo
+region: Dallas County
+catalogUrl: https://cockrellhill.biblionix.com
+enabled: true
+
+branches:
+  - id: "cockrell-hill-public:main"
+    name: "Cockrell Hill Public Library"
+    code: main
+    city: Cockrell Hill
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://cockrellhill.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

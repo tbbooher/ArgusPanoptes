@@ -1,0 +1,18 @@
+id: rosenberg-library
+name: Rosenberg Library
+vendor: apollo
+region: Galveston County
+catalogUrl: https://catalog.rosenberg-library.org
+enabled: true
+
+branches:
+  - id: "rosenberg-library:main"
+    name: Rosenberg Library
+    code: main
+    city: Galveston
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://catalog.rosenberg-library.org
+    timeoutMs: 10000
+    maxConcurrency: 2

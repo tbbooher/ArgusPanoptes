@@ -1,0 +1,24 @@
+id: carrollton-aspen
+name: Carrollton Public Library (Aspen Discovery)
+vendor: aspen_discovery
+region: Denton County
+catalogUrl: https://library.cityofcarrollton.com
+# Disabled: Cloudflare WAF blocks server access; needs IP whitelisting.
+# Migrated from Koha (koha-carrollton.yaml) in March 2025.
+enabled: false
+
+branches:
+  - id: "carrollton-aspen:hebron-josey"
+    name: Carrollton Public Library at Hebron & Josey
+    code: hebron-josey
+    city: Carrollton
+  - id: "carrollton-aspen:josey-ranch"
+    name: Josey Ranch Lake Library
+    code: josey-ranch
+    city: Carrollton
+
+adapters:
+  - protocol: aspen_discovery_api
+    baseUrl: https://library.cityofcarrollton.com
+    timeoutMs: 10000
+    maxConcurrency: 2

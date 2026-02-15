@@ -1,0 +1,18 @@
+id: rockwall-county
+name: Rockwall County Library
+vendor: polaris
+region: Rockwall County
+catalogUrl: https://catalog.rockwallcountytexas.com/polaris/
+enabled: false  # Polaris — needs HMAC API keys
+
+branches:
+  - id: "rockwall-county:main"
+    name: Rockwall County Library
+    code: main
+    city: Rockwall
+
+adapters:
+  - protocol: polaris_papi
+    baseUrl: https://catalog.rockwallcountytexas.com
+    timeoutMs: 10000
+    maxConcurrency: 2

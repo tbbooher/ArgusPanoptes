@@ -1,0 +1,18 @@
+id: alpine-public
+name: "Alpine Public Library"
+vendor: apollo
+region: Brewster County
+catalogUrl: https://alpine.biblionix.com
+enabled: true
+
+branches:
+  - id: "alpine-public:main"
+    name: "Alpine Public Library"
+    code: main
+    city: Alpine
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://alpine.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

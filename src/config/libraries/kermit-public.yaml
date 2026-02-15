@@ -1,0 +1,18 @@
+id: kermit-public
+name: "Winkler County Library"
+vendor: apollo
+region: Winkler County
+catalogUrl: https://kermit.biblionix.com
+enabled: true
+
+branches:
+  - id: "kermit-public:main"
+    name: "Winkler County Library"
+    code: main
+    city: Kermit
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://kermit.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

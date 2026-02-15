@@ -1,0 +1,20 @@
+id: san-marcos-public
+name: San Marcos Public Library
+vendor: polaris
+region: San Marcos
+catalogUrl: https://sanmarcos.polarislibrary.com
+enabled: false
+
+branches:
+  - id: "san-marcos-public:main"
+    name: San Marcos Public Library
+    code: main
+    city: San Marcos
+
+adapters:
+  - protocol: polaris_papi
+    baseUrl: https://sanmarcos.polarislibrary.com
+    timeoutMs: 10000
+    maxConcurrency: 2
+    clientKeyEnvVar: SAN_MARCOS_POLARIS_KEY
+    clientSecretEnvVar: SAN_MARCOS_POLARIS_SECRET

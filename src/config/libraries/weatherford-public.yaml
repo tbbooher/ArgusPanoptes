@@ -1,0 +1,18 @@
+id: weatherford-public
+name: Weatherford Public Library
+vendor: polaris
+region: Parker County
+catalogUrl: https://catalog.mypcla.com/polaris/
+enabled: false  # Polaris (Parker County Library Assoc.) — needs HMAC API keys
+
+branches:
+  - id: "weatherford-public:main"
+    name: Weatherford Public Library
+    code: main
+    city: Weatherford
+
+adapters:
+  - protocol: polaris_papi
+    baseUrl: https://catalog.mypcla.com
+    timeoutMs: 10000
+    maxConcurrency: 2

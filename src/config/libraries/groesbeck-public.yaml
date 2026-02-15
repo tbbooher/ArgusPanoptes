@@ -1,0 +1,18 @@
+id: groesbeck-public
+name: "Groesbeck Public Library"
+vendor: apollo
+region: Limestone County
+catalogUrl: https://maffett.biblionix.com
+enabled: true
+
+branches:
+  - id: "groesbeck-public:main"
+    name: "Groesbeck Public Library"
+    code: main
+    city: Groesbeck
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://maffett.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -2,7 +2,7 @@ id: san-antonio-public
 name: San Antonio Public Library
 vendor: bibliocommons
 region: Bexar County
-catalogUrl: https://sanantonio.bibliocommons.com/
+catalogUrl: https://mysapl.bibliocommons.com/
 enabled: true
 
 branches:
@@ -21,6 +21,6 @@ branches:
 
 adapters:
   - protocol: bibliocommons_scrape
-    baseUrl: https://sanantonio.bibliocommons.com
+    baseUrl: https://mysapl.bibliocommons.com
     timeoutMs: 10000
     maxConcurrency: 2

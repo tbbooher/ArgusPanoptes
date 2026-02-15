@@ -1,0 +1,18 @@
+id: mcculloch-county
+name: "McCulloch County Library"
+vendor: apollo
+region: McCulloch County
+catalogUrl: https://mccullochcountylib.biblionix.com
+enabled: true
+
+branches:
+  - id: "mcculloch-county:main"
+    name: "McCulloch County Library"
+    code: main
+    city: Brady
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://mccullochcountylib.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

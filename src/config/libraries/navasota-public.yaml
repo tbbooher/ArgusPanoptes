@@ -1,0 +1,18 @@
+id: navasota-public
+name: "Navasota Public Library"
+vendor: apollo
+region: Grimes County
+catalogUrl: https://navasota.biblionix.com
+enabled: true
+
+branches:
+  - id: "navasota-public:main"
+    name: "Navasota Public Library"
+    code: main
+    city: Navasota
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://navasota.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

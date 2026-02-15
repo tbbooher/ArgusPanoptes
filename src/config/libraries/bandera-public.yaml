@@ -1,0 +1,18 @@
+id: bandera-public
+name: "Bandera Kronkosky Public Library"
+vendor: apollo
+region: Bandera County
+catalogUrl: https://bandera.biblionix.com
+enabled: true
+
+branches:
+  - id: "bandera-public:main"
+    name: "Bandera Kronkosky Public Library"
+    code: main
+    city: Bandera
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://bandera.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

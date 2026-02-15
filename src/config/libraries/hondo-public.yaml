@@ -1,0 +1,18 @@
+id: hondo-public
+name: "Hondo Public Library"
+vendor: apollo
+region: Medina County
+catalogUrl: https://hondo.biblionix.com
+enabled: true
+
+branches:
+  - id: "hondo-public:main"
+    name: "Hondo Public Library"
+    code: main
+    city: Hondo
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://hondo.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

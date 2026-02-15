@@ -1,0 +1,18 @@
+id: gonzales-public
+name: "Robert Lee Brothers Jr. Memorial Library"
+vendor: apollo
+region: Gonzales County
+catalogUrl: https://gonzales.biblionix.com
+enabled: true
+
+branches:
+  - id: "gonzales-public:main"
+    name: "Robert Lee Brothers Jr. Memorial Library"
+    code: main
+    city: Gonzales
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://gonzales.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

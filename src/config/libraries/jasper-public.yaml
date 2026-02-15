@@ -1,0 +1,18 @@
+id: jasper-public
+name: "Jasper Public Library"
+vendor: apollo
+region: Jasper County
+catalogUrl: https://jasper.biblionix.com
+enabled: true
+
+branches:
+  - id: "jasper-public:main"
+    name: "Jasper Public Library"
+    code: main
+    city: Jasper
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://jasper.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

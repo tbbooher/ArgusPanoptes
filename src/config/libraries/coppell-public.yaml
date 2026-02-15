@@ -1,0 +1,18 @@
+id: coppell-public
+name: Cozby Library & Community Commons
+vendor: polaris
+region: Dallas County
+catalogUrl: https://catalog.coppelltx.gov/polaris/
+enabled: false  # Polaris — needs HMAC API keys
+
+branches:
+  - id: "coppell-public:main"
+    name: Cozby Library & Community Commons
+    code: main
+    city: Coppell
+
+adapters:
+  - protocol: polaris_papi
+    baseUrl: https://catalog.coppelltx.gov
+    timeoutMs: 10000
+    maxConcurrency: 2

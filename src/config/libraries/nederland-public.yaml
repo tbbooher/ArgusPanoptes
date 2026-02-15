@@ -1,0 +1,18 @@
+id: nederland-public
+name: Marion and Ed Hughes Public Library
+vendor: sirsi_dynix
+region: Jefferson County
+catalogUrl: https://ptn.ent.sirsi.net/client/en_US/ned/
+enabled: true
+
+branches:
+  - id: "nederland-public:main"
+    name: Marion and Ed Hughes Public Library
+    code: main
+    city: Nederland
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://ptn.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

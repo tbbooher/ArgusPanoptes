@@ -1,0 +1,18 @@
+id: austin-county
+name: "Austin County Library System"
+vendor: apollo
+region: Austin County
+catalogUrl: https://austincounty.biblionix.com
+enabled: true
+
+branches:
+  - id: "austin-county:main"
+    name: "Austin County Library System"
+    code: main
+    city: Wallis
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://austincounty.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

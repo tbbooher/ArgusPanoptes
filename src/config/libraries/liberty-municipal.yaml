@@ -1,0 +1,18 @@
+id: liberty-municipal
+name: Liberty Municipal Library
+vendor: apollo
+region: Liberty County
+catalogUrl: https://liberty.biblionix.com
+enabled: true
+
+branches:
+  - id: "liberty-municipal:main"
+    name: Liberty Municipal Library
+    code: main
+    city: Liberty
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://liberty.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

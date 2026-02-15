@@ -1,0 +1,18 @@
+id: boerne-public
+name: "Patrick Heath Public Library"
+vendor: apollo
+region: Kendall County
+catalogUrl: https://boerne.biblionix.com
+enabled: true
+
+branches:
+  - id: "boerne-public:main"
+    name: "Patrick Heath Public Library"
+    code: main
+    city: Boerne
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://boerne.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

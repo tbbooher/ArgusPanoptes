@@ -1,0 +1,18 @@
+id: nacogdoches-public
+name: "Nacogdoches Public Library"
+vendor: apollo
+region: Nacogdoches County
+catalogUrl: https://nacogdoches.biblionix.com
+enabled: true
+
+branches:
+  - id: "nacogdoches-public:main"
+    name: "Nacogdoches Public Library"
+    code: main
+    city: Nacogdoches
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://nacogdoches.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

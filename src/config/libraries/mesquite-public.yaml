@@ -1,0 +1,22 @@
+id: mesquite-public
+name: Mesquite Public Library System
+vendor: sirsi_dynix
+region: Dallas County
+catalogUrl: https://mepl.ent.sirsi.net/client/en_US/default/
+enabled: true
+
+branches:
+  - id: "mesquite-public:main"
+    name: Main Library
+    code: main
+    city: Mesquite
+  - id: "mesquite-public:north"
+    name: North Branch Library
+    code: north
+    city: Mesquite
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://mepl.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

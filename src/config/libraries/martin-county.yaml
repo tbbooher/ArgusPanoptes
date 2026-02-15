@@ -1,0 +1,18 @@
+id: martin-county
+name: "Martin County Library"
+vendor: apollo
+region: Martin County
+catalogUrl: https://martin.biblionix.com
+enabled: true
+
+branches:
+  - id: "martin-county:main"
+    name: "Martin County Library"
+    code: main
+    city: Stanton
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://martin.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

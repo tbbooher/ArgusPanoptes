@@ -1,0 +1,18 @@
+id: richardson-public
+name: Richardson Public Library
+vendor: sirsi_dynix
+region: Dallas County
+catalogUrl: https://rson.ent.sirsi.net/client/en_US/default/
+enabled: true
+
+branches:
+  - id: "richardson-public:main"
+    name: Richardson Public Library
+    code: main
+    city: Richardson
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://rson.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

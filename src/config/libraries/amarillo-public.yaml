@@ -1,0 +1,34 @@
+id: amarillo-public
+name: Amarillo Public Library
+vendor: sirsi_dynix
+region: Potter County
+catalogUrl: https://hrlc.ent.sirsi.net/client/en_US/apl
+enabled: true
+
+branches:
+  - id: "amarillo-public:downtown"
+    name: Downtown Library
+    code: downtown
+    city: Amarillo
+  - id: "amarillo-public:northwest"
+    name: Northwest Branch Library
+    code: northwest
+    city: Amarillo
+  - id: "amarillo-public:north"
+    name: North Branch Library
+    code: north
+    city: Amarillo
+  - id: "amarillo-public:southwest"
+    name: Southwest Branch Library
+    code: southwest
+    city: Amarillo
+  - id: "amarillo-public:southeast"
+    name: Southeast Branch Library
+    code: southeast
+    city: Amarillo
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://hrlc.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

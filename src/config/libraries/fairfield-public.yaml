@@ -1,0 +1,18 @@
+id: fairfield-public
+name: "Fairfield Library Association"
+vendor: apollo
+region: Freestone County
+catalogUrl: https://fairfield.biblionix.com
+enabled: true
+
+branches:
+  - id: "fairfield-public:main"
+    name: "Fairfield Library Association"
+    code: main
+    city: Fairfield
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://fairfield.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

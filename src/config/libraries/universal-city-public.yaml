@@ -1,0 +1,18 @@
+id: universal-city-public
+name: "Universal City Public Library"
+vendor: apollo
+region: Bexar County
+catalogUrl: https://universalcity.biblionix.com
+enabled: true
+
+branches:
+  - id: "universal-city-public:main"
+    name: "Universal City Public Library"
+    code: main
+    city: Universal City
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://universalcity.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

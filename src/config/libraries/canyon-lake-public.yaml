@@ -1,0 +1,18 @@
+id: canyon-lake-public
+name: "Tye Preston Memorial Library"
+vendor: apollo
+region: Comal County
+catalogUrl: https://tyepreston.biblionix.com
+enabled: true
+
+branches:
+  - id: "canyon-lake-public:main"
+    name: "Tye Preston Memorial Library"
+    code: main
+    city: Canyon Lake
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://tyepreston.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

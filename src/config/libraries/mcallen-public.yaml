@@ -3,7 +3,7 @@ name: McAllen Public Library
 vendor: tlc
 region: Hidalgo County
 catalogUrl: https://mpl.tlcdelivers.com/
-enabled: false
+enabled: true
 
 branches:
   - id: "mcallen-public:main"
@@ -16,7 +16,7 @@ branches:
     city: McAllen
 
 adapters:
-  - protocol: web_scrape
+  - protocol: tlc_api
     baseUrl: https://mpl.tlcdelivers.com
     timeoutMs: 10000
     maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: cherokee-public
+name: "Cherokee City-County Library"
+vendor: apollo
+region: Cherokee County
+catalogUrl: https://cherokee.biblionix.com
+enabled: true
+
+branches:
+  - id: "cherokee-public:main"
+    name: "Cherokee City-County Library"
+    code: main
+    city: Rusk
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://cherokee.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

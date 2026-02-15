@@ -1,0 +1,22 @@
+id: new-braunfels-public
+name: New Braunfels Public Library
+vendor: tlc
+region: Comal County
+catalogUrl: https://nbpl.tlcdelivers.com/
+enabled: true
+
+branches:
+  - id: "new-braunfels-public:main"
+    name: Main Library
+    code: main
+    city: New Braunfels
+  - id: "new-braunfels-public:westside"
+    name: Westside Library Branch
+    code: westside
+    city: New Braunfels
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: https://nbpl.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2

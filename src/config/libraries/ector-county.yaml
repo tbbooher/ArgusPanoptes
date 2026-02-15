@@ -1,0 +1,18 @@
+id: ector-county
+name: Ector County Library
+vendor: sirsi_dynix
+region: Ector County
+catalogUrl: https://ecpl.ent.sirsi.net/client/en_US/default/
+enabled: true
+
+branches:
+  - id: "ector-county:main"
+    name: Ector County Library
+    code: main
+    city: Odessa
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://ecpl.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

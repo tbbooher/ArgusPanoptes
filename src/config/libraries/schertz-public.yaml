@@ -1,0 +1,18 @@
+id: schertz-public
+name: Schertz Public Library
+vendor: polaris
+region: Guadalupe County
+catalogUrl: https://schertz.polarislibrary.com/polaris/
+enabled: false  # Polaris — needs HMAC API keys. Also has III Vega discovery at schertz.na5.iiivega.com
+
+branches:
+  - id: "schertz-public:main"
+    name: Schertz Public Library
+    code: main
+    city: Schertz
+
+adapters:
+  - protocol: polaris_papi
+    baseUrl: https://schertz.polarislibrary.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: buda-public
+name: "Buda Public Library"
+vendor: apollo
+region: Hays County
+catalogUrl: https://buda.biblionix.com
+enabled: true
+
+branches:
+  - id: "buda-public:main"
+    name: "Buda Public Library"
+    code: main
+    city: Buda
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://buda.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

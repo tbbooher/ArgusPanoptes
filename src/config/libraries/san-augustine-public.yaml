@@ -1,0 +1,18 @@
+id: san-augustine-public
+name: "San Augustine Public Library"
+vendor: apollo
+region: San Augustine County
+catalogUrl: https://salibrary.biblionix.com
+enabled: true
+
+branches:
+  - id: "san-augustine-public:main"
+    name: "San Augustine Public Library"
+    code: main
+    city: San Augustine
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://salibrary.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

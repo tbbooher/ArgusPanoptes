@@ -1,0 +1,18 @@
+id: aubrey-public
+name: "Aubrey Area Library"
+vendor: apollo
+region: Denton County
+catalogUrl: https://aubrey.biblionix.com
+enabled: true
+
+branches:
+  - id: "aubrey-public:main"
+    name: "Aubrey Area Library"
+    code: main
+    city: Aubrey
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://aubrey.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

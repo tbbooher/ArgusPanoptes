@@ -1,0 +1,18 @@
+id: brenham-public
+name: "Nancy Carol Roberts Memorial Library"
+vendor: apollo
+region: Washington County
+catalogUrl: https://brenham.biblionix.com
+enabled: true
+
+branches:
+  - id: "brenham-public:main"
+    name: "Nancy Carol Roberts Memorial Library"
+    code: main
+    city: Brenham
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://brenham.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

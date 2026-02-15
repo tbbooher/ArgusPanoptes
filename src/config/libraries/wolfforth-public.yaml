@@ -1,0 +1,18 @@
+id: wolfforth-public
+name: "City of Wolfforth Library"
+vendor: apollo
+region: Lubbock County
+catalogUrl: https://wolfforth.biblionix.com
+enabled: true
+
+branches:
+  - id: "wolfforth-public:main"
+    name: "City of Wolfforth Library"
+    code: main
+    city: Wolfforth
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://wolfforth.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: clyde-public
+name: "Clyde Public Library"
+vendor: apollo
+region: Callahan County
+catalogUrl: https://clyde.biblionix.com
+enabled: true
+
+branches:
+  - id: "clyde-public:main"
+    name: "Clyde Public Library"
+    code: main
+    city: Clyde
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://clyde.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

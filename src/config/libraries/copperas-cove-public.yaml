@@ -1,0 +1,18 @@
+id: copperas-cove-public
+name: "Copperas Cove Public Library"
+vendor: apollo
+region: Coryell County
+catalogUrl: https://copperascove.biblionix.com
+enabled: true
+
+branches:
+  - id: "copperas-cove-public:main"
+    name: "Copperas Cove Public Library"
+    code: main
+    city: Copperas Cove
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://copperascove.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

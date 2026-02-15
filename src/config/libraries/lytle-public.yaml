@@ -1,0 +1,18 @@
+id: lytle-public
+name: "Lytle Public Library"
+vendor: apollo
+region: Atascosa County
+catalogUrl: https://lytle.biblionix.com
+enabled: true
+
+branches:
+  - id: "lytle-public:main"
+    name: "Lytle Public Library"
+    code: main
+    city: Lytle
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://lytle.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

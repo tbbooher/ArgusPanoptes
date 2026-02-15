@@ -1,0 +1,18 @@
+id: orange-public
+name: "Orange Public Library"
+vendor: apollo
+region: Orange County
+catalogUrl: https://orange.biblionix.com
+enabled: true
+
+branches:
+  - id: "orange-public:main"
+    name: "Orange Public Library"
+    code: main
+    city: Orange
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://orange.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

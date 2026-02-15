@@ -1,0 +1,18 @@
+id: athens-public
+name: Clyde Wells Memorial Library
+vendor: koha
+region: Henderson County
+catalogUrl: https://athens.aspendiscovery.org/
+enabled: false  # Aspen Discovery front-end blocked by Cloudflare WAF
+
+branches:
+  - id: "athens-public:main"
+    name: Clyde Wells Memorial Library
+    code: main
+    city: Athens
+
+adapters:
+  - protocol: aspen_discovery_api
+    baseUrl: https://athens.aspendiscovery.org
+    timeoutMs: 15000
+    maxConcurrency: 2

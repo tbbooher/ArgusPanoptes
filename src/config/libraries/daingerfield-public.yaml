@@ -1,0 +1,18 @@
+id: daingerfield-public
+name: "Daingerfield Public Library"
+vendor: apollo
+region: Morris County
+catalogUrl: https://daingerfield.biblionix.com
+enabled: true
+
+branches:
+  - id: "daingerfield-public:main"
+    name: "Daingerfield Public Library"
+    code: main
+    city: Daingerfield
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://daingerfield.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: livingston-public
+name: "Livingston Municipal Library"
+vendor: apollo
+region: Polk County
+catalogUrl: https://murphymemorial.biblionix.com
+enabled: true
+
+branches:
+  - id: "livingston-public:main"
+    name: "Livingston Municipal Library"
+    code: main
+    city: Livingston
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://murphymemorial.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

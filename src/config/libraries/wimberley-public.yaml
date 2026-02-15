@@ -1,0 +1,18 @@
+id: wimberley-public
+name: "Wimberley Village Library"
+vendor: apollo
+region: Hays County
+catalogUrl: https://wimberley.biblionix.com
+enabled: true
+
+branches:
+  - id: "wimberley-public:main"
+    name: "Wimberley Village Library"
+    code: main
+    city: Wimberley
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://wimberley.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

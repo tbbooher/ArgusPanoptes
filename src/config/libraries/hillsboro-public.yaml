@@ -1,0 +1,18 @@
+id: hillsboro-public
+name: "Hillsboro City Library"
+vendor: apollo
+region: Hill County
+catalogUrl: https://hillsboro.biblionix.com
+enabled: true
+
+branches:
+  - id: "hillsboro-public:main"
+    name: "Hillsboro City Library"
+    code: main
+    city: Hillsboro
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://hillsboro.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

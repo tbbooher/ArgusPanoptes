@@ -1,0 +1,18 @@
+id: tom-bean-public
+name: "Lucile Teague Library"
+vendor: apollo
+region: Grayson County
+catalogUrl: https://tombean.biblionix.com
+enabled: true
+
+branches:
+  - id: "tom-bean-public:main"
+    name: "Lucile Teague Library"
+    code: main
+    city: Tom Bean
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://tombean.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

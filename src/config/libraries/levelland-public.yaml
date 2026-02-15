@@ -1,0 +1,18 @@
+id: levelland-public
+name: "Hockley County Memorial Library"
+vendor: apollo
+region: Hockley County
+catalogUrl: https://hockleylvl.biblionix.com
+enabled: true
+
+branches:
+  - id: "levelland-public:main"
+    name: "Hockley County Memorial Library"
+    code: main
+    city: Levelland
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://hockleylvl.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

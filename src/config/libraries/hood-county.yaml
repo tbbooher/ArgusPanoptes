@@ -1,0 +1,18 @@
+id: hood-county
+name: Hood County Library
+vendor: tlc
+region: Hood County
+catalogUrl: https://hood.tlcdelivers.com/
+enabled: true
+
+branches:
+  - id: "hood-county:main"
+    name: Hood County Library
+    code: main
+    city: Granbury
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: https://hood.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2

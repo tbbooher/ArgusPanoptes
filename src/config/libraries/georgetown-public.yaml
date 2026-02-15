@@ -1,0 +1,18 @@
+id: georgetown-public
+name: Georgetown Public Library
+vendor: apollo
+region: Williamson County
+catalogUrl: https://georgetowntx.biblionix.com
+enabled: false  # georgetowntx.biblionix.com NXDOMAIN — library migrated away from Biblionix
+
+branches:
+  - id: "georgetown-public:main"
+    name: Georgetown Public Library
+    code: main
+    city: Georgetown
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://georgetowntx.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: coke-county
+name: "Coke County Library"
+vendor: apollo
+region: Coke County
+catalogUrl: https://coke.biblionix.com
+enabled: true
+
+branches:
+  - id: "coke-county:main"
+    name: "Coke County Library"
+    code: main
+    city: Robert Lee
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://coke.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

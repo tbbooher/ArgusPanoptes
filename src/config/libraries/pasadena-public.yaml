@@ -1,0 +1,22 @@
+id: pasadena-public
+name: Pasadena Public Library
+vendor: sirsi_dynix
+region: Harris County
+catalogUrl: https://hcpl2.ent.sirsi.net/client/en_US/pas/
+enabled: true
+
+branches:
+  - id: "pasadena-public:central"
+    name: Pasadena Central Library
+    code: central
+    city: Pasadena
+  - id: "pasadena-public:fairmont"
+    name: Fairmont Branch Library
+    code: fairmont
+    city: Pasadena
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://hcpl2.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

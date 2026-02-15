@@ -3,7 +3,7 @@ name: Cedar Park Public Library
 vendor: koha
 region: Williamson County
 catalogUrl: https://library.cedarparktexas.gov/
-enabled: true
+enabled: false
 
 branches:
   - id: "koha-cedar-park:main"

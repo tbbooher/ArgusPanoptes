@@ -1,0 +1,18 @@
+id: delta-county
+name: Delta County Public Library
+vendor: atriuum
+region: Delta County
+catalogUrl: https://deltacountytx.booksys.net/opac/dcpl/
+enabled: true
+
+branches:
+  - id: "delta-county:main"
+    name: Delta County Public Library
+    code: dcpl
+    city: Cooper
+
+adapters:
+  - protocol: atriuum_scrape
+    baseUrl: https://deltacountytx.booksys.net/opac/dcpl
+    timeoutMs: 15000
+    maxConcurrency: 2

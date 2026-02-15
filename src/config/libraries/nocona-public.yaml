@@ -1,0 +1,18 @@
+id: nocona-public
+name: "Nocona Public Library"
+vendor: apollo
+region: Montague County
+catalogUrl: https://nocona.biblionix.com
+enabled: true
+
+branches:
+  - id: "nocona-public:main"
+    name: "Nocona Public Library"
+    code: main
+    city: Nocona
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://nocona.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

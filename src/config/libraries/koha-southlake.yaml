@@ -1,0 +1,18 @@
+id: koha-southlake
+name: Southlake Public Library
+vendor: koha
+region: Tarrant County
+catalogUrl: https://catalog.southlake.lib.tx.us/
+enabled: false
+
+branches:
+  - id: "koha-southlake:main"
+    name: Southlake Public Library
+    code: main
+    city: Southlake
+
+adapters:
+  - protocol: koha_sru
+    baseUrl: https://catalog.southlake.lib.tx.us
+    timeoutMs: 10000
+    maxConcurrency: 2

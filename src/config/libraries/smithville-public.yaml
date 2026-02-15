@@ -1,0 +1,18 @@
+id: smithville-public
+name: "Smithville Public Library"
+vendor: apollo
+region: Bastrop County
+catalogUrl: https://smithville.biblionix.com
+enabled: true
+
+branches:
+  - id: "smithville-public:main"
+    name: "Smithville Public Library"
+    code: main
+    city: Smithville
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://smithville.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

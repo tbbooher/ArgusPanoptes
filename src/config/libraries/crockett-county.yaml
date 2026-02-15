@@ -1,0 +1,18 @@
+id: crockett-county
+name: "Crockett County Public Library"
+vendor: apollo
+region: Crockett County
+catalogUrl: https://crockett.biblionix.com
+enabled: true
+
+branches:
+  - id: "crockett-county:main"
+    name: "Crockett County Public Library"
+    code: main
+    city: Ozona
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://crockett.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

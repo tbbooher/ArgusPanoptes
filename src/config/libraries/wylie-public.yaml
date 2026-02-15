@@ -1,0 +1,18 @@
+id: wylie-public
+name: Rita & Truett Smith Public Library
+vendor: tlc
+region: Collin County
+catalogUrl: http://catalog.wylietexas.gov/
+enabled: true
+
+branches:
+  - id: "wylie-public:main"
+    name: Rita & Truett Smith Public Library
+    code: main
+    city: Wylie
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: http://catalog.wylietexas.gov
+    timeoutMs: 10000
+    maxConcurrency: 2

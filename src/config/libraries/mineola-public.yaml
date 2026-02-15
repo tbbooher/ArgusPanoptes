@@ -1,0 +1,18 @@
+id: mineola-public
+name: "Mineola Memorial Library"
+vendor: apollo
+region: Wood County
+catalogUrl: https://mineola.biblionix.com
+enabled: true
+
+branches:
+  - id: "mineola-public:main"
+    name: "Mineola Memorial Library"
+    code: main
+    city: Mineola
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://mineola.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

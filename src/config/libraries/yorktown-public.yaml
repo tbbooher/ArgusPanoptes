@@ -1,0 +1,18 @@
+id: yorktown-public
+name: "Yorktown Public Library"
+vendor: apollo
+region: DeWitt County
+catalogUrl: https://yorktownlib.biblionix.com
+enabled: true
+
+branches:
+  - id: "yorktown-public:main"
+    name: "Yorktown Public Library"
+    code: main
+    city: Yorktown
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://yorktownlib.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

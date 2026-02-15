@@ -1,0 +1,18 @@
+id: vidor-public
+name: "Vidor Public Library"
+vendor: apollo
+region: Orange County
+catalogUrl: https://vidor.biblionix.com
+enabled: true
+
+branches:
+  - id: "vidor-public:main"
+    name: "Vidor Public Library"
+    code: main
+    city: Vidor
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://vidor.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

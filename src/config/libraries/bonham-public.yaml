@@ -1,0 +1,18 @@
+id: bonham-public
+name: "Bonham Public Library"
+vendor: apollo
+region: Fannin County
+catalogUrl: https://bonham.biblionix.com
+enabled: true
+
+branches:
+  - id: "bonham-public:main"
+    name: "Bonham Public Library"
+    code: main
+    city: Bonham
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://bonham.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

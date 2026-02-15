@@ -1,0 +1,18 @@
+id: red-river-county
+name: Red River County Public Library
+vendor: atriuum
+region: Red River County
+catalogUrl: https://rrlibrary.booksys.net/opac/rrlibrary/
+enabled: true
+
+branches:
+  - id: "red-river-county:main"
+    name: Red River County Public Library
+    code: rrlibrary
+    city: Clarksville
+
+adapters:
+  - protocol: atriuum_scrape
+    baseUrl: https://rrlibrary.booksys.net/opac/rrlibrary
+    timeoutMs: 15000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: pflugerville-public
+name: Pflugerville Public Library
+vendor: apollo
+region: Travis County
+catalogUrl: https://pflugerville.biblionix.com
+enabled: true
+
+branches:
+  - id: "pflugerville-public:main"
+    name: Pflugerville Public Library
+    code: main
+    city: Pflugerville
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://pflugerville.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

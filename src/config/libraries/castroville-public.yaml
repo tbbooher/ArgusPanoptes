@@ -1,0 +1,18 @@
+id: castroville-public
+name: "Castroville Public Library"
+vendor: apollo
+region: Medina County
+catalogUrl: https://castroville.biblionix.com
+enabled: true
+
+branches:
+  - id: "castroville-public:main"
+    name: "Castroville Public Library"
+    code: main
+    city: Castroville
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://castroville.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

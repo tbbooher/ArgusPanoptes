@@ -1,0 +1,18 @@
+id: mart-public
+name: "Nancy Nail Memorial Library"
+vendor: apollo
+region: McLennan County
+catalogUrl: https://mart.biblionix.com
+enabled: true
+
+branches:
+  - id: "mart-public:main"
+    name: "Nancy Nail Memorial Library"
+    code: main
+    city: Mart
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://mart.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

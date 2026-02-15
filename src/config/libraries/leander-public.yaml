@@ -1,0 +1,18 @@
+id: leander-public
+name: Leander Public Library
+vendor: tlc
+region: Williamson County
+catalogUrl: https://leandertx.tlcdelivers.com/
+enabled: true
+
+branches:
+  - id: "leander-public:main"
+    name: Leander Public
+    code: "1"
+    city: Leander
+
+adapters:
+  - protocol: tlc_api
+    baseUrl: https://leandertx.tlcdelivers.com
+    timeoutMs: 10000
+    maxConcurrency: 2

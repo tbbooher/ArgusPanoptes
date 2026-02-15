@@ -1,0 +1,22 @@
+id: midland-county
+name: Midland County Library System
+vendor: sirsi_dynix
+region: Midland County
+catalogUrl: https://merl.ent.sirsi.net/client/en_US/mcl
+enabled: true
+
+branches:
+  - id: "midland-county:downtown"
+    name: Downtown Library
+    code: downtown
+    city: Midland
+  - id: "midland-county:centennial"
+    name: Centennial Library
+    code: centennial
+    city: Midland
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://merl.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

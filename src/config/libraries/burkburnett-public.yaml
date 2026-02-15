@@ -1,0 +1,18 @@
+id: burkburnett-public
+name: Burkburnett Public Library
+vendor: atriuum
+region: Wichita County
+catalogUrl: https://burkburnett.booksys.net/opac/bblib/
+enabled: true
+
+branches:
+  - id: "burkburnett-public:main"
+    name: Burkburnett Public Library
+    code: main
+    city: Burkburnett
+
+adapters:
+  - protocol: atriuum_scrape
+    baseUrl: https://burkburnett.booksys.net/opac/bblib
+    timeoutMs: 15000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: campwood-public
+name: "Camp Wood Public Library"
+vendor: apollo
+region: Real County
+catalogUrl: https://campwood.biblionix.com
+enabled: true
+
+branches:
+  - id: "campwood-public:main"
+    name: "Camp Wood Public Library"
+    code: main
+    city: Camp Wood
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://campwood.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

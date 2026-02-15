@@ -1,0 +1,18 @@
+id: lockhart-public
+name: "Dr. Eugene Clark Library"
+vendor: apollo
+region: Caldwell County
+catalogUrl: https://clarklibrary.biblionix.com
+enabled: true
+
+branches:
+  - id: "lockhart-public:main"
+    name: "Dr. Eugene Clark Library"
+    code: main
+    city: Lockhart
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://clarklibrary.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

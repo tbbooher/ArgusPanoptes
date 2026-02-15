@@ -1,0 +1,18 @@
+id: justin-public
+name: "Mary Emma Tate Community Library"
+vendor: apollo
+region: Denton County
+catalogUrl: https://justin.biblionix.com
+enabled: true
+
+branches:
+  - id: "justin-public:main"
+    name: "Mary Emma Tate Community Library"
+    code: main
+    city: Justin
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://justin.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

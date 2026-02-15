@@ -1,0 +1,18 @@
+id: charlotte-public
+name: "Charlotte Public Library"
+vendor: apollo
+region: Atascosa County
+catalogUrl: https://charlotte.biblionix.com
+enabled: true
+
+branches:
+  - id: "charlotte-public:main"
+    name: "Charlotte Public Library"
+    code: main
+    city: Charlotte
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://charlotte.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

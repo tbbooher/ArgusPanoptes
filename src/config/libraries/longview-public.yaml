@@ -1,0 +1,20 @@
+id: longview-public
+name: Longview Public Library
+vendor: polaris
+region: Gregg County
+catalogUrl: https://catalog.longviewtexas.gov/
+enabled: false
+
+branches:
+  - id: "longview-public:main"
+    name: Longview Public Library
+    code: main
+    city: Longview
+
+adapters:
+  - protocol: polaris_papi
+    baseUrl: https://catalog.longviewtexas.gov
+    timeoutMs: 10000
+    maxConcurrency: 2
+    clientKeyEnvVar: POLARIS_LONGVIEW_KEY
+    clientSecretEnvVar: POLARIS_LONGVIEW_SECRET

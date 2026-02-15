@@ -1,0 +1,18 @@
+id: rankin-public
+name: "Rankin Public Library"
+vendor: apollo
+region: Upton County
+catalogUrl: https://rankin.biblionix.com
+enabled: true
+
+branches:
+  - id: "rankin-public:main"
+    name: "Rankin Public Library"
+    code: main
+    city: Rankin
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://rankin.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

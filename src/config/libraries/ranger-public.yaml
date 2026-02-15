@@ -1,0 +1,18 @@
+id: ranger-public
+name: "Ranger City Library"
+vendor: apollo
+region: Eastland County
+catalogUrl: https://ranger.biblionix.com
+enabled: true
+
+branches:
+  - id: "ranger-public:main"
+    name: "Ranger City Library"
+    code: main
+    city: Ranger
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://ranger.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

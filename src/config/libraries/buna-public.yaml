@@ -1,0 +1,18 @@
+id: buna-public
+name: "Buna Public Library"
+vendor: apollo
+region: Jasper County
+catalogUrl: https://buna.biblionix.com
+enabled: true
+
+branches:
+  - id: "buna-public:main"
+    name: "Buna Public Library"
+    code: main
+    city: Buna
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://buna.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

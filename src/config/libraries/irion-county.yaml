@@ -1,0 +1,18 @@
+id: irion-county
+name: "MB Noelke Jr Memorial Library"
+vendor: apollo
+region: Irion County
+catalogUrl: https://irion.biblionix.com
+enabled: true
+
+branches:
+  - id: "irion-county:main"
+    name: "MB Noelke Jr Memorial Library"
+    code: main
+    city: Mertzon
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://irion.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

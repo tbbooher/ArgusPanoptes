@@ -1,0 +1,18 @@
+id: blanco-public
+name: "Blanco Library"
+vendor: apollo
+region: Blanco County
+catalogUrl: https://blanco.biblionix.com
+enabled: true
+
+branches:
+  - id: "blanco-public:main"
+    name: "Blanco Library"
+    code: main
+    city: Blanco
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://blanco.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

@@ -1,0 +1,18 @@
+id: taylor-public
+name: "Taylor Public Library"
+vendor: apollo
+region: Williamson County
+catalogUrl: https://taylor.biblionix.com
+enabled: true
+
+branches:
+  - id: "taylor-public:main"
+    name: "Taylor Public Library"
+    code: main
+    city: Taylor
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://taylor.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

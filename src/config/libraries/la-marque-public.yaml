@@ -1,0 +1,18 @@
+id: la-marque-public
+name: "La Marque Public Library"
+vendor: apollo
+region: Galveston County
+catalogUrl: https://lamarque.biblionix.com
+enabled: true
+
+branches:
+  - id: "la-marque-public:main"
+    name: "La Marque Public Library"
+    code: main
+    city: La Marque
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://lamarque.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

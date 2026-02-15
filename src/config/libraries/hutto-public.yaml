@@ -1,0 +1,18 @@
+id: hutto-public
+name: "Hutto Public Library"
+vendor: apollo
+region: Williamson County
+catalogUrl: https://hutto.biblionix.com
+enabled: true
+
+branches:
+  - id: "hutto-public:main"
+    name: "Hutto Public Library"
+    code: main
+    city: Hutto
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://hutto.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

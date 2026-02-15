@@ -1,0 +1,18 @@
+id: comfort-public
+name: "Comfort Public Library"
+vendor: apollo
+region: Kendall County
+catalogUrl: https://comfort.biblionix.com
+enabled: true
+
+branches:
+  - id: "comfort-public:main"
+    name: "Comfort Public Library"
+    code: main
+    city: Comfort
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://comfort.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

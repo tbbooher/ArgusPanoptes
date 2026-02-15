@@ -1,0 +1,18 @@
+id: west-public
+name: "West Public Library"
+vendor: apollo
+region: McLennan County
+catalogUrl: https://west.biblionix.com
+enabled: true
+
+branches:
+  - id: "west-public:main"
+    name: "West Public Library"
+    code: main
+    city: West
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://west.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

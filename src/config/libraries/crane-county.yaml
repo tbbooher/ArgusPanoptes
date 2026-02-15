@@ -1,0 +1,18 @@
+id: crane-county
+name: "Crane County Library"
+vendor: apollo
+region: Crane County
+catalogUrl: https://crane.biblionix.com
+enabled: true
+
+branches:
+  - id: "crane-county:main"
+    name: "Crane County Library"
+    code: main
+    city: Crane
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://crane.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

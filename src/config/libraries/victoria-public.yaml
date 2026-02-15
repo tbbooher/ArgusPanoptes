@@ -1,0 +1,18 @@
+id: victoria-public
+name: "Victoria Public Library"
+vendor: apollo
+region: Victoria County
+catalogUrl: https://victoria.biblionix.com
+enabled: true
+
+branches:
+  - id: "victoria-public:main"
+    name: "Victoria Public Library"
+    code: main
+    city: Victoria
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://victoria.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

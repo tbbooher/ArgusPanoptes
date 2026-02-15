@@ -1,0 +1,18 @@
+id: breckenridge-public
+name: "Breckenridge Library"
+vendor: apollo
+region: Stephens County
+catalogUrl: https://breckenridge.biblionix.com
+enabled: true
+
+branches:
+  - id: "breckenridge-public:main"
+    name: "Breckenridge Library"
+    code: main
+    city: Breckenridge
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://breckenridge.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

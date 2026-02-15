@@ -1,0 +1,18 @@
+id: jarrell-public
+name: "Jarrell Community Library and Resource Center"
+vendor: apollo
+region: Williamson County
+catalogUrl: https://jarrell.biblionix.com
+enabled: true
+
+branches:
+  - id: "jarrell-public:main"
+    name: "Jarrell Community Library and Resource Center"
+    code: main
+    city: Jarrell
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://jarrell.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

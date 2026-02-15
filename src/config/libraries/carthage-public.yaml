@@ -1,0 +1,18 @@
+id: carthage-public
+name: "Sammy Brown Library"
+vendor: apollo
+region: Panola County
+catalogUrl: https://sammybrown.biblionix.com
+enabled: true
+
+branches:
+  - id: "carthage-public:main"
+    name: "Sammy Brown Library"
+    code: main
+    city: Carthage
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://sammybrown.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

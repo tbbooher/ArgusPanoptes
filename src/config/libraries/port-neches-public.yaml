@@ -1,0 +1,18 @@
+id: port-neches-public
+name: Effie & Wilton Hebert Public Library
+vendor: sirsi_dynix
+region: Jefferson County
+catalogUrl: https://ptn.ent.sirsi.net/client/en_US/ptn/
+enabled: true
+
+branches:
+  - id: "port-neches-public:main"
+    name: Effie & Wilton Hebert Public Library
+    code: main
+    city: Port Neches
+
+adapters:
+  - protocol: sirsi_enterprise_scrape
+    baseUrl: https://ptn.ent.sirsi.net
+    timeoutMs: 10000
+    maxConcurrency: 2

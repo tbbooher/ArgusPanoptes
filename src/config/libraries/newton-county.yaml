@@ -1,0 +1,18 @@
+id: newton-county
+name: "Newton County Library"
+vendor: apollo
+region: Newton County
+catalogUrl: https://newton.biblionix.com
+enabled: true
+
+branches:
+  - id: "newton-county:main"
+    name: "Newton County Library"
+    code: main
+    city: Newton
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://newton.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

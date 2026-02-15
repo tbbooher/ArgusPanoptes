@@ -1,0 +1,18 @@
+id: post-public
+name: "Post Public Library"
+vendor: apollo
+region: Garza County
+catalogUrl: https://post.biblionix.com
+enabled: true
+
+branches:
+  - id: "post-public:main"
+    name: "Post Public Library"
+    code: main
+    city: Post
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://post.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

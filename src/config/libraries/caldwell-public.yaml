@@ -1,0 +1,18 @@
+id: caldwell-public
+name: "Harrie P. Woodson Memorial Library"
+vendor: apollo
+region: Burleson County
+catalogUrl: https://caldwell.biblionix.com
+enabled: true
+
+branches:
+  - id: "caldwell-public:main"
+    name: "Harrie P. Woodson Memorial Library"
+    code: main
+    city: Caldwell
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://caldwell.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

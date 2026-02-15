@@ -1,0 +1,26 @@
+id: brownsville-public
+name: Brownsville Public Library System
+vendor: apollo
+region: Cameron County
+catalogUrl: https://brownsville.biblionix.com
+enabled: true
+
+branches:
+  - id: "brownsville-public:main"
+    name: Brownsville Public Library
+    code: main
+    city: Brownsville
+  - id: "brownsville-public:southmost"
+    name: Southmost Branch Library
+    code: southmost
+    city: Brownsville
+  - id: "brownsville-public:west"
+    name: West Brownsville Branch Library
+    code: west
+    city: Brownsville
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://brownsville.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

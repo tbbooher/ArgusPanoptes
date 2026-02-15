@@ -1,0 +1,18 @@
+id: brooks-county
+name: "Ed Rachal Memorial Library"
+vendor: apollo
+region: Brooks County
+catalogUrl: https://brookscounty.biblionix.com
+enabled: true
+
+branches:
+  - id: "brooks-county:main"
+    name: "Ed Rachal Memorial Library"
+    code: main
+    city: Falfurrias
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://brookscounty.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

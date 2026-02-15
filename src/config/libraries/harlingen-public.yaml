@@ -1,0 +1,18 @@
+id: harlingen-public
+name: "Harlingen Public Library"
+vendor: apollo
+region: Cameron County
+catalogUrl: https://harlingen.biblionix.com
+enabled: true
+
+branches:
+  - id: "harlingen-public:main"
+    name: "Harlingen Public Library"
+    code: main
+    city: Harlingen
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://harlingen.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

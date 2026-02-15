@@ -1,0 +1,18 @@
+id: westbank-public
+name: "Westbank Libraries"
+vendor: apollo
+region: Travis County
+catalogUrl: https://westbank.biblionix.com
+enabled: true
+
+branches:
+  - id: "westbank-public:main"
+    name: "Westbank Libraries"
+    code: main
+    city: Austin
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://westbank.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2

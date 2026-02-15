@@ -1,0 +1,18 @@
+id: poteet-public
+name: "Poteet Public Library"
+vendor: apollo
+region: Atascosa County
+catalogUrl: https://poteet.biblionix.com
+enabled: true
+
+branches:
+  - id: "poteet-public:main"
+    name: "Poteet Public Library"
+    code: main
+    city: Poteet
+
+adapters:
+  - protocol: apollo_api
+    baseUrl: https://poteet.biblionix.com
+    timeoutMs: 10000
+    maxConcurrency: 2
